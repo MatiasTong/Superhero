@@ -76,7 +76,6 @@ public class HeroDaoImpl implements Dao<Hero> {
         jdbc.update(DELETE_HERO, id);
     }
 
-
     public static final class HeroMapper implements RowMapper<Hero> {
 
         @Override
