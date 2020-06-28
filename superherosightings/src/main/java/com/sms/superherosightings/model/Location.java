@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sms.superhero.model;
+package com.sms.superherosightings.model;
 
 import java.math.BigDecimal;
 

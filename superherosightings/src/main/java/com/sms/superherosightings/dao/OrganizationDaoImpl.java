@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sms.superhero.dao;
+package com.sms.superherosightings.dao;
 
-import com.sms.superhero.model.Hero;
-import com.sms.superhero.model.Organization;
+import com.sms.superherosightings.model.Hero;
+import com.sms.superherosightings.model.Organization;
 import java.util.List;
 
 public class OrganizationDaoImpl implements Dao<Organization> {

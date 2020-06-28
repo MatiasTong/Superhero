@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sms.superhero.dao;
+package com.sms.superherosightings.dao;
 
-import com.sms.superhero.model.Location;
+
+import com.sms.superherosightings.model.Location;
 import java.util.List;
 
 

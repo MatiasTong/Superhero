@@ -3,32 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sms.superhero.dao;
+package com.sms.superherosightings.dao;
 
-import com.sms.superhero.model.Hero;
-import com.sms.superhero.model.Organization;
+import com.sms.superherosightings.model.Hero;
+import com.sms.superherosightings.model.Location;
+import com.sms.superherosightings.model.Sighting;
 import java.util.List;
 
 
-public class HeroDaoImpl implements Dao<Hero> {
+public class SightingDaoImpl implements Dao<Sighting> {
 
     @Override
-    public Hero Create(Hero model) {
+    public Sighting Create(Sighting model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Hero> ReadAll() {
+    public List<Sighting> ReadAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Hero ReadById(int id) {
+    public Sighting ReadById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void Update(Hero model) {
+    public void Update(Sighting model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -36,15 +37,18 @@ public class HeroDaoImpl implements Dao<Hero> {
     public void Delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    private List<Organization> getOrganizationsByHero(int heroId){
-    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    private void associateOrganizations(int heroId, List<Organization> organization){
+   
+    private List <Hero> getHeroForSighting(int sightingId){
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    private List <Location> getLocationForSighting(int sightingId){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    } 
 
-
+    private void associateHeroLocation(int locationId, List<Hero> heroes){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
     
 }
