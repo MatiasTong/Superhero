@@ -8,10 +8,16 @@ package com.sms.superherosightings.dao;
 
 import com.sms.superherosightings.model.Location;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-
+@Repository
 public class LocationDaoImpl implements Dao<Location> {
 
+    @Autowired
+    JdbcTemplate jdbc;
+    
     @Override
     public Location Create(Location model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

@@ -8,9 +8,16 @@ package com.sms.superherosightings.dao;
 import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Organization;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class OrganizationDaoImpl implements Dao<Organization> {
 
+    @Autowired
+    JdbcTemplate jdbc;
+    
     @Override
     public Organization Create(Organization model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

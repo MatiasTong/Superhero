@@ -9,10 +9,17 @@ import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
 import com.sms.superherosightings.model.Sighting;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 
+@Repository
 public class SightingDaoImpl implements Dao<Sighting> {
 
+    @Autowired
+    JdbcTemplate jdbc;
+    
     @Override
     public Sighting Create(Sighting model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
