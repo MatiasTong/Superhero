@@ -21,8 +21,14 @@ public class HeroDaoImpl implements Dao<Hero> {
     
     @Override
     public Hero Create(Hero model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       final String INSERT_HERO = "INSERT INTO Hero(HeroId, `Name`,`Description`,Specialty,`Type) VALUES (?,?,?,?,?);";
+       jdbc.update(INSERT_HERO, model.getHeroId(),model.getName(),model.getDescription(),model.getSuperpower(), model.getType());
+       int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
+       model.setHeroId(newId);
+       return model;
     }
+    
+    private void insertHeroOrganization()
 
     @Override
     public List<Hero> ReadAll() {
