@@ -34,7 +34,15 @@ public class SightingDaoImpl implements Dao<Sighting> {
 
     @Override
     public Sighting create(Sighting model) {
-             throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    final String INSERT_SIGHTING = "INSERT INTO Sighting(LocationId, HeroId) VALUES (?,?,?)";
+    int locationId = model.getLocation().getLocationId();
+    int heroId = model.getHero().getHeroId();
+    jdbc.update(INSERT_SIGHTING, locationId, heroId);
+    
+    int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+    model.setSightingId(newId);
+    
+    return model;
     }
 
     @Override
