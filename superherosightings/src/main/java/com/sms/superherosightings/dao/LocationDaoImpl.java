@@ -17,29 +17,29 @@ public class LocationDaoImpl implements Dao<Location> {
 
     @Autowired
     JdbcTemplate jdbc;
-    
+
     @Override
-    public Location Create(Location model) {
+    public Location create(Location model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Location> ReadAll() {
+    public List<Location> readAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Location ReadById(int id) {
+    public Location readById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void Update(Location model) {
+    public void update(Location model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void Delete(int id) {
+    public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

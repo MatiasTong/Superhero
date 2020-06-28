@@ -13,14 +13,14 @@ import java.util.List;
  */
 public interface Dao<T> {
 
-    public T Create(T model);
+    public T create(T model);
 
-    public List<T> ReadAll();
+    public List<T> readAll();
 
-    public T ReadById(int id);
+    public T readById(int id);
 
-    public void Update(T model);
+    public void update(T model);
 
-    public void Delete(int id);
+    public void delete(int id);
 
 }

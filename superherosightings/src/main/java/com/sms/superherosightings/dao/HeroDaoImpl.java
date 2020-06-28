@@ -20,7 +20,7 @@ public class HeroDaoImpl implements Dao<Hero> {
     JdbcTemplate jdbc;
     
     @Override
-    public Hero Create(Hero model) {
+    public Hero create(Hero model) {
        final String INSERT_HERO = "INSERT INTO Hero(HeroId, `Name`,`Description`,Specialty,`Type) VALUES (?,?,?,?,?);";
        jdbc.update(INSERT_HERO, model.getHeroId(),model.getName(),model.getDescription(),model.getSuperpower(), model.getType());
        int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
@@ -31,22 +31,22 @@ public class HeroDaoImpl implements Dao<Hero> {
     private void insertHeroOrganization()
 
     @Override
-    public List<Hero> ReadAll() {
+    public List<Hero> readAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Hero ReadById(int id) {
+    public Hero readById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void Update(Hero model) {
+    public void update(Hero model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void Delete(int id) {
+    public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
