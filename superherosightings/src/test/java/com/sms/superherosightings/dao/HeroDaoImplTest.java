@@ -12,6 +12,7 @@ import com.sms.superherosightings.model.Sighting;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -84,8 +85,19 @@ public class HeroDaoImplTest {
      */
     @Test
     public void testCreateAndReadHeroByID() {
+        setUp();
         
+        Hero hero = new Hero();
+        hero.setName("hero name");
+        hero.setSuperpower("Super Strength");
+        hero.setType("Superhero");
+        hero.setDescription("Test Description");
         
+        hero = heroDao.create(hero);
+        
+        Hero fromDao = heroDao.readById(hero.getHeroId());
+        
+        assertEquals(hero, fromDao);
     }
 
     /**

@@ -7,7 +7,6 @@ package com.sms.superherosightings.dao;
 
 import com.sms.superherosightings.dao.HeroDaoImpl.HeroMapper;
 import com.sms.superherosightings.model.Hero;
-import com.sms.superherosightings.model.Organization;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -33,15 +32,6 @@ public class HeroDaoImpl implements Dao<Hero> {
         model.setHeroId(newId);
         return model;
     }
-
-//    private void insertHeroOrganization(Organization model) {
-//        List<Hero> heroes = model.getHeroes();
-//        for (Hero hero: heroes) {
-//            final String INSERT_HERO_ORGANIZATION = "INSERT INTO HeroOrganization(HeroId, OrganizationId) VALUES (?,?);";
-//            jdbc.update(INSERT_HERO_ORGANIZATION, hero.getHeroId(), model.getOrganizationId());
-//        }
-//
-//    }
 
     @Override
     public List<Hero> readAll() {
