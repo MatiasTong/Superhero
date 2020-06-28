@@ -23,7 +23,7 @@ public class OrganizationDaoImpl implements Dao<Organization> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    private void associateHeros(int organizationId, List<Hero> heroes){
+    private void associateHeros(List<Organization> organizations){
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
