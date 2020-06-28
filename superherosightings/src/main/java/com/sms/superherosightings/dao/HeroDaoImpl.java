@@ -88,10 +88,11 @@ public class HeroDaoImpl implements Dao<Hero> {
     }
 
     private List<Organization> getOrganizationsByHero(int heroId) {
-        final String sql = "SELECT o.* FROM Organization o JOIN HeroOrganization ho ON o.OrganizationId "
-                + "= ho.OrganizationId WHERE ho.HeroId = ?";
-        List<Organization> organizations = jdbc.query(sql, new OrganizationMapper(), heroId);
-        return organizations;
+        return null;
+//        final String sql = "SELECT o.* FROM Organization o JOIN HeroOrganization ho ON o.OrganizationId "
+//                + "= ho.OrganizationId WHERE ho.HeroId = ?";
+//        List<Organization> organizations = jdbc.query(sql, new OrganizationMapper(), heroId);
+//        return organizations;
     }
 
     private void associateOrganizations(List<Hero> heroes) {
