@@ -83,7 +83,9 @@ public class HeroDaoImplTest {
      * Test of create method, of class HeroDaoImpl.
      */
     @Test
-    public void testCreate() {
+    public void testCreateAndReadHeroByID() {
+        
+        
     }
 
     /**

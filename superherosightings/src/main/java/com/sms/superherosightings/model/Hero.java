@@ -16,7 +16,6 @@ public class Hero {
    private String name;
    private String description; 
    private String superpower; 
-   private List<Organization> organization;  
    private String type;
 
     public int getHeroId() {
@@ -49,14 +48,6 @@ public class Hero {
 
     public void setSuperpower(String superpower) {
         this.superpower = superpower;
-    }
-
-    public List<Organization> getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(List<Organization> organization) {
-        this.organization = organization;
     }
 
     public String getType() {

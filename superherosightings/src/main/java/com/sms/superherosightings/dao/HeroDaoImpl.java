@@ -31,24 +31,22 @@ public class HeroDaoImpl implements Dao<Hero> {
         jdbc.update(INSERT_HERO, model.getHeroId(), model.getName(), model.getDescription(), model.getSuperpower(), model.getType());
         int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
         model.setHeroId(newId);
-        insertHeroOrganization(model);
         return model;
     }
 
-    private void insertHeroOrganization(Hero model) {
-        List<Organization> organizations = model.getOrganization();
-        for (Organization organization : organizations) {
-            final String INSERT_HERO_ORGANIZATION = "INSERT INTO HeroOrganization(HeroId, OrganizationId) VALUES (?,?);";
-            jdbc.update(INSERT_HERO_ORGANIZATION, model.getHeroId(), organization.getOrganizationId());
-        }
-
-    }
+//    private void insertHeroOrganization(Organization model) {
+//        List<Hero> heroes = model.getHeroes();
+//        for (Hero hero: heroes) {
+//            final String INSERT_HERO_ORGANIZATION = "INSERT INTO HeroOrganization(HeroId, OrganizationId) VALUES (?,?);";
+//            jdbc.update(INSERT_HERO_ORGANIZATION, hero.getHeroId(), model.getOrganizationId());
+//        }
+//
+//    }
 
     @Override
     public List<Hero> readAll() {
         final String SELECT_ALL_HEROES = "SELECT * FROM Hero";
         List<Hero> heroes = jdbc.query(SELECT_ALL_HEROES, new HeroMapper());
-        associateOrganizations(heroes);
         return heroes;
     }
 
@@ -57,7 +55,6 @@ public class HeroDaoImpl implements Dao<Hero> {
         try {
             final String SELECT_HERO = "SELECT * FROM Hero WHERE HeroId = ?";
             Hero hero = jdbc.queryForObject(SELECT_HERO, new HeroMapper(), id);
-            hero.setOrganization(getOrganizationsByHero(id));
             return hero;
             
         } catch (DataAccessException e) {
@@ -69,10 +66,6 @@ public class HeroDaoImpl implements Dao<Hero> {
     public void update(Hero model) {
         final String UPDATE_HERO = "UPDATE Hero SET `Name`= ?,`Description`= ?,Specialty`= ?, Type= ? WHERE HeroId = ?;";
         jdbc.update(UPDATE_HERO, model.getName(), model.getDescription(), model.getSuperpower(), model.getType(), model.getHeroId());
-        
-        final String DELETE_HERO_ORGANIZATION = "DELETE From HeroOrganization WHERE HeroId = ?";
-        jdbc.update(DELETE_HERO_ORGANIZATION, model.getHeroId());
-        insertHeroOrganization(model);
     }
 
     @Override
@@ -87,19 +80,6 @@ public class HeroDaoImpl implements Dao<Hero> {
         jdbc.update(DELETE_HERO, id);
     }
 
-    private List<Organization> getOrganizationsByHero(int heroId) {
-        final String sql = "SELECT o.* FROM Organization o JOIN HeroOrganization ho ON o.OrganizationId "
-                + "= ho.OrganizationId WHERE ho.HeroId = ?";
-        List<Organization> organizations = jdbc.query(sql, new OrganizationMapper(), heroId);
-        return organizations;
-    }
-
-    private void associateOrganizations(List<Hero> heroes) {
-        for (Hero hero : heroes) {
-            List<Organization> organizations = getOrganizationsByHero(hero.getHeroId());
-            hero.setOrganization(organizations);
-        }
-    }
 
     public static final class HeroMapper implements RowMapper<Hero> {
 
