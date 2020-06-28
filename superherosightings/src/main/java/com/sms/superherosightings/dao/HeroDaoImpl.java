@@ -71,9 +71,11 @@ public class HeroDaoImpl implements Dao<Hero> {
     return organizations;
     }
     
-    private void associateOrganizations(List ){
-    List<Organization> organizations = getOrganizationsByHero(heroId);
-    
+    private void associateOrganizations(List<Hero> heroes){
+    for(Hero hero: heroes){    
+    List<Organization> organizations = getOrganizationsByHero(hero.getHeroId());
+    hero.setOrganization(organizations);
+    }
     }
     
     public static final class HeroMapper implements RowMapper<Hero>{
