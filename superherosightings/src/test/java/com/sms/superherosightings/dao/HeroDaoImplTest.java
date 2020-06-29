@@ -6,9 +6,6 @@
 package com.sms.superherosightings.dao;
 
 import com.sms.superherosightings.model.Hero;
-import com.sms.superherosightings.model.Location;
-import com.sms.superherosightings.model.Organization;
-import com.sms.superherosightings.model.Sighting;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -20,7 +17,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import static org.junit.runners.model.MultipleFailureException.assertEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;

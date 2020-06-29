@@ -42,6 +42,7 @@ CREATE TABLE HeroOrganization(
 
 CREATE TABLE Sighting(
 	SightingId INT PRIMARY KEY AUTO_INCREMENT,
+    `Date` DATETIME,
     LocationId INT,
     HeroId INT,
     FOREIGN KEY FK_Sighting_Location_LocationId(LocationId) references Location(LocationId),
