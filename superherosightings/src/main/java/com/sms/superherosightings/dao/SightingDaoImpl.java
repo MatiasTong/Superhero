@@ -108,7 +108,7 @@ public class SightingDaoImpl implements Dao<Sighting> {
         final String UPDATE_SIGHTING = "UPDATE Sighting SET DateTime = ?, LocationId = ?, HeroId =? WHERE SightingId = ?";
         int locationId = model.getLocation().getLocationId();
         int heroId = model.getHero().getHeroId();
-        jdbc.update(UPDATE_SIGHTING, model.getDateTime(), locationId, heroId, model.getSightingId());
+        jdbc.update(UPDATE_SIGHTING, model.getDateTime, locationId, heroId, model.getSightingId());
     }
 
     @Override
