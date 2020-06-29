@@ -12,13 +12,22 @@ import java.util.List;
  * @author matiastong
  */
 public class Organization {
-    
+
     private int organizationId;
-  private String name; 
-  private String description;
-  private Location location;
-  private  String email;
-  private List<Hero> Heroes;
+    private String name;
+    private String description;
+    private Location location;
+    private String email;
+    private List<Hero> Heroes;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public int getOrganizationId() {
         return organizationId;
@@ -67,8 +76,5 @@ public class Organization {
     public void setHeroes(List<Hero> Heroes) {
         this.Heroes = Heroes;
     }
- 
-    
-    
-    
+
 }
