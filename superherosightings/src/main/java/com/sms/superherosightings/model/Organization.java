@@ -13,13 +13,22 @@ import java.util.Objects;
  * @author matiastong
  */
 public class Organization {
-    
+
     private int organizationId;
-  private String name; 
-  private String description;
-  private Location location;
-  private  String email;
-  private List<Hero> Heroes;
+    private String name;
+    private String description;
+    private Location location;
+    private String email;
+    private List<Hero> Heroes;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public int getOrganizationId() {
         return organizationId;
@@ -69,6 +78,7 @@ public class Organization {
         this.Heroes = Heroes;
     }
 
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -117,4 +127,5 @@ public class Organization {
     
     
     
+
 }
