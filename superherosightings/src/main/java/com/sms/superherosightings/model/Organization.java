@@ -10,11 +10,11 @@ import java.util.Objects;
 
 /**
  *
- * @author matiastong
+ * @author Shirley Sosa, Sangay Yolmo, Matias Tong 
  */
 public class Organization {
     
-    private int organizationId;
+  private int organizationId;
   private String name; 
   private String description;
   private Location location;
