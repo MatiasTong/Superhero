@@ -1,18 +1,19 @@
+
+import com.sms.superherosightings.model.Hero;
+import com.sms.superherosightings.model.Location;
+import java.time.LocalDateTime;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sms.superherosightings.model;
-
-import java.time.LocalDateTime;
 
 /**
  *
- * @author Shirley Sosa, Sangay Yolmo, Matias Tong 
+ * @author matiastong
  */
 public class Sighting {
-
     private int sightingId;
     private LocalDateTime dateTime;
     private Hero hero;
@@ -53,10 +54,10 @@ public class Sighting {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 41 * hash + this.sightingId;
-        hash = 41 * hash + (this.dateTime != null ? this.dateTime.hashCode() : 0);
-        hash = 41 * hash + (this.hero != null ? this.hero.hashCode() : 0);
-        hash = 41 * hash + (this.location != null ? this.location.hashCode() : 0);
+        hash = 67 * hash + this.sightingId;
+        hash = 67 * hash + (this.dateTime != null ? this.dateTime.hashCode() : 0);
+        hash = 67 * hash + (this.hero != null ? this.hero.hashCode() : 0);
+        hash = 67 * hash + (this.location != null ? this.location.hashCode() : 0);
         return hash;
     }
 
@@ -86,6 +87,6 @@ public class Sighting {
         }
         return true;
     }
-
-   
+    
+    
 }

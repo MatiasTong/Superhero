@@ -103,7 +103,7 @@ public class SightingDaoImplTest {
         Sighting sighting = new Sighting();
         
         sighting.setHero(hero);
-        sighting.setDate(LocalDate.MAX);
+        
         
                 
         
