@@ -34,7 +34,7 @@ public class OrganizationDaoImpl implements Dao<Organization> {
         int id = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
 
         model.setOrganizationId(id);
-
+        
         insertHeroOrganization(model);
 
         return model;
@@ -50,7 +50,7 @@ public class OrganizationDaoImpl implements Dao<Organization> {
     public List<Organization> readAll() {
         final String SELECT_ALL_ORGS = "SELECT * FROM Organization";
         List<Organization> orgs = jdbc.query(SELECT_ALL_ORGS, new OrgMapper());
-       
+        //helper method get location for the org - for each loop to take in a list
         return orgs;
     }
 
@@ -67,6 +67,7 @@ public class OrganizationDaoImpl implements Dao<Organization> {
         try {
             final String SELECT_ORG_BY_ID = "SELECT * FROM Organization WHERE OrganizationId = ?";
             return jdbc.queryForObject(SELECT_ORG_BY_ID, new OrgMapper(), id);
+            //helper method here
         } catch (DataAccessException ex) {
             return null;
         }
@@ -77,8 +78,8 @@ public class OrganizationDaoImpl implements Dao<Organization> {
     public void update(Organization model) {
         //double check locationid
         final String UPDATE_ORG = "UPDATE Organization SET Name = ?,"
-                + " Description = ?, Email = ?, Type = ? WHERE OrganizationId =?";
-        jdbc.update(UPDATE_ORG, model.getName(), model.getDescription(), model.getEmail(), model.getType());
+                + " Description = ?, LocationId = ?, Email = ?, Type = ? WHERE OrganizationId =?";
+        jdbc.update(UPDATE_ORG, model.getName(), model.getDescription(),model.getLocation().getLocationId(), model.getEmail(), model.getType());
 
         final String DELETE_HERO_ORGANIZATION = "DELETE From HeroOrganization WHERE OrganizationId = ?";
         jdbc.update(DELETE_HERO_ORGANIZATION, model.getOrganizationId());
@@ -122,7 +123,7 @@ public class OrganizationDaoImpl implements Dao<Organization> {
 
     /*Rowmapper(Interface) used to implement in a mapper class for the specified
     object we want to process. Job: Take one row of the ResultSet and return
-    an object(Game) built from that row.*/
+    an object(Organization) built from that row.*/
     public static final class OrgMapper implements RowMapper<Organization> {
 
         @Override
