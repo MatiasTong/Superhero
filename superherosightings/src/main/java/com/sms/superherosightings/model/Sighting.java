@@ -1,3 +1,5 @@
+package com.sms.superherosightings.model;
+
 
 import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;

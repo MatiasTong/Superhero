@@ -46,7 +46,8 @@ public class SightingDaoImpl implements Dao<Sighting> {
         try {
             //see comments for getHeroForSighting()
             final String SELECT_LOCATION = "SELECT l.* FROM Sighting s JOIN Location l ON s.LocationId = l.LocationId WHERE SightingId=?";
-            Location location = jdbc.queryForObject(SELECT_LOCATION, new LocationMapper(), sightingId);
+          Location location = null ;
+//          jdbc.queryForObject(SELECT_LOCATION, new LocationMapper(), sightingId)
             return location;
         } catch (DataAccessException e) {
             return null;
@@ -108,7 +109,7 @@ public class SightingDaoImpl implements Dao<Sighting> {
         final String UPDATE_SIGHTING = "UPDATE Sighting SET DateTime = ?, LocationId = ?, HeroId =? WHERE SightingId = ?";
         int locationId = model.getLocation().getLocationId();
         int heroId = model.getHero().getHeroId();
-        jdbc.update(UPDATE_SIGHTING, model.getDateTime, locationId, heroId, model.getSightingId());
+        jdbc.update(UPDATE_SIGHTING, model.getDateTime(), locationId, heroId, model.getSightingId());
     }
 
     @Override

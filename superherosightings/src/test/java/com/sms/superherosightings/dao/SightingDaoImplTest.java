@@ -103,6 +103,7 @@ public class SightingDaoImplTest {
         Sighting sighting = new Sighting();
         
         sighting.setHero(hero);
+        sighting.setDateTime(LocalDateTime.MIN);
         
         
                 
