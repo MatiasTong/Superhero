@@ -50,7 +50,7 @@ public class OrganizationDaoImpl implements Dao<Organization> {
     public List<Organization> readAll() {
         final String SELECT_ALL_ORGS = "SELECT * FROM Organization";
         List<Organization> orgs = jdbc.query(SELECT_ALL_ORGS, new OrgMapper());
-        associateHeroes(orgs);
+       
         return orgs;
     }
 
@@ -78,8 +78,8 @@ public class OrganizationDaoImpl implements Dao<Organization> {
         //double check locationid
         final String UPDATE_ORG = "UPDATE Organization SET Name = ?,"
                 + " Description = ?, Email = ?, Type = ? WHERE OrganizationId =?";
-        jdbc.update(UPDATE_ORG, model.getName(),model.getDescription(),model.getEmail(),model.getType());
-        
+        jdbc.update(UPDATE_ORG, model.getName(), model.getDescription(), model.getEmail(), model.getType());
+
         final String DELETE_HERO_ORGANIZATION = "DELETE From HeroOrganization WHERE OrganizationId = ?";
         jdbc.update(DELETE_HERO_ORGANIZATION, model.getOrganizationId());
         insertHeroOrganization(model);
@@ -94,10 +94,12 @@ public class OrganizationDaoImpl implements Dao<Organization> {
         jdbc.update(DELETE_ORG, id);
     }
 
-    private List<Organization> getOrganizationsByHeroId(int heroId) {
-        final String sql = "SELECT o.* FROM Organization o JOIN HeroOrganization ho ON o.OrganizationId "
+    private List<Organization> getOrganizationsForHero(Hero hero) {
+        final String SELECT_ORG_FOR_HERO = "SELECT o.* FROM Organization o "
+                + "JOIN HeroOrganization ho ON o.OrganizationId "
                 + "= ho.OrganizationId WHERE ho.HeroId = ?";
-        List<Organization> organizations = jdbc.query(sql, new OrgMapper(), heroId);
+        List<Organization> organizations = jdbc.query(SELECT_ORG_FOR_HERO,
+                new OrgMapper(), hero.getHeroId());
         return organizations;
     }
 
@@ -112,9 +114,11 @@ public class OrganizationDaoImpl implements Dao<Organization> {
 //    private List<Hero> getHerosForOrganization(int organizationId) {
 //        final String SELECT_HEROES_FOR_ORG = "SELECT "
 //    }
-    private void associateHeroes(List<Organization> organizations) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    private void associateHeroes(List<Organization> organizations) {
+//        for(Organization org : organizations) {
+//            org.setHeroes(Heroes);
+//        }
+//    }
 
     /*Rowmapper(Interface) used to implement in a mapper class for the specified
     object we want to process. Job: Take one row of the ResultSet and return
