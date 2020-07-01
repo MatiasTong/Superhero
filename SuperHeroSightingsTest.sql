@@ -18,8 +18,8 @@ CREATE TABLE Location(
     City VARCHAR(30) NOT NULL,
     State CHAR(2) NOT NULL,
     ZipCode CHAR(5) NOT NULL,
-    Lat VARCHAR(10) NOT NULL,
-    `Long` VARCHAR(10) NOT NULL
+    Lat float(10) NOT NULL,
+    `Long` float(10) NOT NULL
 );
 
 CREATE TABLE Organization(
@@ -48,3 +48,4 @@ CREATE TABLE Sighting(
     FOREIGN KEY FK_Sighting_Location_LocationId(LocationId) references Location(LocationId),
     FOREIGN KEY FK_Sighting5_Hero_HeroId(HeroId) references Hero(HeroId)
 );
+

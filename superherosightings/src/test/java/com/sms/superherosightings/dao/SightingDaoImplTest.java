@@ -7,22 +7,20 @@ package com.sms.superherosightings.dao;
 
 import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
-import com.sms.superherosightings.model.Sighting;
 import com.sms.superherosightings.model.Organization;
-import java.math.BigDecimal;
+import com.sms.superherosightings.model.Sighting;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
 /**
  *
  * @author matiastong
@@ -91,8 +89,8 @@ public class SightingDaoImplTest {
         location.setAddress("test address");
         location.setCity("test city");
         location.setDescription("test description");
-        location.setLatitude(new BigDecimal("40.718464"));
-        location.setLongitude(new BigDecimal("-73.928017"));
+        location.setLatitude(40.718464);
+        location.setLongitude(-73.928017);
         location.setName("test name");
         location.setState("test state");
         location.setZip(99999);
@@ -126,8 +124,8 @@ public class SightingDaoImplTest {
         location.setAddress("test address");
         location.setCity("test city");
         location.setDescription("test description");
-        location.setLatitude(new BigDecimal("40.718464"));
-        location.setLongitude(new BigDecimal("-73.928017"));
+        location.setLatitude(40.718464);
+        location.setLongitude(-73.928017);
         location.setName("test name");
         location.setState("test state");
         location.setZip(99999);
@@ -169,8 +167,8 @@ public class SightingDaoImplTest {
         location.setAddress("test address");
         location.setCity("test city");
         location.setDescription("test description");
-        location.setLatitude(new BigDecimal("40.718464"));
-        location.setLongitude(new BigDecimal("-73.928017"));
+        location.setLatitude(40.718464);
+        location.setLongitude(-73.928017);
         location.setName("test name");
         location.setState("test state");
         location.setZip(99999);
@@ -221,8 +219,8 @@ public class SightingDaoImplTest {
         location.setAddress("test address");
         location.setCity("test city");
         location.setDescription("test description");
-        location.setLatitude(new BigDecimal("40.718464"));
-        location.setLongitude(new BigDecimal("-73.928017"));
+        location.setLatitude(40.718464);
+        location.setLongitude(-73.928017);
         location.setName("test name");
         location.setState("test state");
         location.setZip(99999);

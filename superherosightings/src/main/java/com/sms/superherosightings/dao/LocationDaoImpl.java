@@ -19,21 +19,18 @@ public class LocationDaoImpl implements Dao<Location> {
 
     @Autowired
     JdbcTemplate jdbc;
-    @Autowired
-    HeroDaoImpl heroDao;
-
-    @Autowired
-    LocationDaoImpl locationDao;
-
-    @Autowired
-    OrganizationDaoImpl organizationDao;
-
-    @Autowired
-    SightingDaoImpl sightingDao;
 
     @Override
     public Location create(Location model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        final String INSERT_LOCATION = "INSERT INTO Location(Name, Description, Address, City, State, ZipCode, Lat , `Long`) VALUES (?,?,?,?,?,?,?,?); ";
+
+        jdbc.update(INSERT_LOCATION, model.getName(), model.getDescription(), model.getAddress(), model.getCity(), model.getState(), model.getZip(), model.getLatitude(), model.getLongitude());
+
+        int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
+
+        model.setLocationId(newId);
+
+        return model;
     }
 
     @Override
@@ -60,9 +57,18 @@ public class LocationDaoImpl implements Dao<Location> {
 
         @Override
         public Location mapRow(ResultSet rs, int index) throws SQLException {
-            Location loc = new Location();
+            Location location = new Location();
+            location.setLocationId(rs.getInt("LocationId"));
+            location.setName(rs.getString("Name"));
+            location.setDescription(rs.getString("Description"));
+            location.setAddress(rs.getString("Address"));
+            location.setCity(rs.getString("City"));
+            location.setState(rs.getString("State"));
+            location.setZip(rs.getInt("ZipCode"));
+            location.setLatitude(rs.getDouble("Lat"));
+            location.setLongitude(rs.getDouble("Long"));
 
-            return loc;
+            return location;
         }
     }
 }

@@ -20,8 +20,8 @@ public class Location {
   private String city;
   private String state;
   private int zip; 
-  private BigDecimal latitude; 
-  private BigDecimal longitude; 
+  private double latitude; 
+  private double longitude; 
 
     public int getLocationId() {
         return locationId;
@@ -79,34 +79,34 @@ public class Location {
         this.zip = zip;
     }
 
-    public BigDecimal getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
 
-    public BigDecimal getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + this.locationId;
-        hash = 59 * hash + Objects.hashCode(this.name);
-        hash = 59 * hash + Objects.hashCode(this.description);
-        hash = 59 * hash + Objects.hashCode(this.address);
-        hash = 59 * hash + Objects.hashCode(this.city);
-        hash = 59 * hash + Objects.hashCode(this.state);
-        hash = 59 * hash + this.zip;
-        hash = 59 * hash + Objects.hashCode(this.latitude);
-        hash = 59 * hash + Objects.hashCode(this.longitude);
+        hash = 89 * hash + this.locationId;
+        hash = 89 * hash + Objects.hashCode(this.name);
+        hash = 89 * hash + Objects.hashCode(this.description);
+        hash = 89 * hash + Objects.hashCode(this.address);
+        hash = 89 * hash + Objects.hashCode(this.city);
+        hash = 89 * hash + Objects.hashCode(this.state);
+        hash = 89 * hash + this.zip;
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
         return hash;
     }
 
@@ -128,6 +128,12 @@ public class Location {
         if (this.zip != other.zip) {
             return false;
         }
+        if (Double.doubleToLongBits(this.latitude) != Double.doubleToLongBits(other.latitude)) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.longitude) != Double.doubleToLongBits(other.longitude)) {
+            return false;
+        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -143,15 +149,12 @@ public class Location {
         if (!Objects.equals(this.state, other.state)) {
             return false;
         }
-        if (!Objects.equals(this.latitude, other.latitude)) {
-            return false;
-        }
-        if (!Objects.equals(this.longitude, other.longitude)) {
-            return false;
-        }
         return true;
     }
-  
+
+    
+
+    
   
   
   
