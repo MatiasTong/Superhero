@@ -5,7 +5,6 @@
  */
 package com.sms.superherosightings.dao;
 
-
 import com.sms.superherosightings.model.Location;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +21,17 @@ public class LocationDaoImpl implements Dao<Location> {
 
     @Autowired
     JdbcTemplate jdbc;
+    @Autowired
+    HeroDaoImpl heroDao;
+
+    @Autowired
+    LocationDaoImpl locationDao;
+
+    @Autowired
+    OrganizationDaoImpl organizationDao;
+
+    @Autowired
+    SightingDaoImpl sightingDao;
 
     @Override
     @Transactional
@@ -87,7 +97,6 @@ public class LocationDaoImpl implements Dao<Location> {
             return location;
         }
 
-        
-    }
-    
+
+}
 }

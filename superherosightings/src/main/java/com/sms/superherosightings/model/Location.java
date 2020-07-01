@@ -6,10 +6,11 @@
 package com.sms.superherosightings.model;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  *
- * @author matiastong
+ * @author Shirley Sosa, Sangay Yolmo, Matias Tong 
  */
 public class Location {
   private int LocationId ; 
@@ -92,6 +93,63 @@ public class Location {
 
     public void setLongitude(BigDecimal longitude) {
         this.Longitude = Longitude;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + this.locationId;
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.description);
+        hash = 59 * hash + Objects.hashCode(this.address);
+        hash = 59 * hash + Objects.hashCode(this.city);
+        hash = 59 * hash + Objects.hashCode(this.state);
+        hash = 59 * hash + this.zip;
+        hash = 59 * hash + Objects.hashCode(this.latitude);
+        hash = 59 * hash + Objects.hashCode(this.longitude);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Location other = (Location) obj;
+        if (this.locationId != other.locationId) {
+            return false;
+        }
+        if (this.zip != other.zip) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.address, other.address)) {
+            return false;
+        }
+        if (!Objects.equals(this.city, other.city)) {
+            return false;
+        }
+        if (!Objects.equals(this.state, other.state)) {
+            return false;
+        }
+        if (!Objects.equals(this.latitude, other.latitude)) {
+            return false;
+        }
+        if (!Objects.equals(this.longitude, other.longitude)) {
+            return false;
+        }
+        return true;
     }
   
   

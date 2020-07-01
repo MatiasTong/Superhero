@@ -1,20 +1,23 @@
+package com.sms.superherosightings.model;
+
+
+import com.sms.superherosightings.model.Hero;
+import com.sms.superherosightings.model.Location;
+import java.time.LocalDateTime;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sms.superherosightings.model;
-
-import java.time.LocalDate;
 
 /**
  *
  * @author matiastong
  */
 public class Sighting {
-
     private int sightingId;
-    private LocalDate date;
+    private LocalDateTime dateTime;
     private Hero hero;
     private Location location;
 
@@ -26,12 +29,12 @@ public class Sighting {
         this.sightingId = sightingId;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public Hero getHero() {
@@ -49,6 +52,43 @@ public class Sighting {
     public void setLocation(Location location) {
         this.location = location;
     }
-    
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + this.sightingId;
+        hash = 67 * hash + (this.dateTime != null ? this.dateTime.hashCode() : 0);
+        hash = 67 * hash + (this.hero != null ? this.hero.hashCode() : 0);
+        hash = 67 * hash + (this.location != null ? this.location.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Sighting other = (Sighting) obj;
+        if (this.sightingId != other.sightingId) {
+            return false;
+        }
+        if (this.dateTime != other.dateTime && (this.dateTime == null || !this.dateTime.equals(other.dateTime))) {
+            return false;
+        }
+        if (this.hero != other.hero && (this.hero == null || !this.hero.equals(other.hero))) {
+            return false;
+        }
+        if (this.location != other.location && (this.location == null || !this.location.equals(other.location))) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

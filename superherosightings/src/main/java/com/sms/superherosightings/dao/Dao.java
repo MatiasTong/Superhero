@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author matiastong
+ * @author Shirley Sosa, Sangay Yolmo, Matias Tong 
  */
 public interface Dao<T> {
 

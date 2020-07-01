@@ -6,17 +6,17 @@
 package com.sms.superherosightings.model;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
- * @author matiastong
+ * @author Shirley Sosa, Sangay Yolmo, Matias Tong 
  */
 public class Hero {
    private int heroId;
    private String name;
    private String description; 
    private String superpower; 
-   private List<Organization> organization;  
    private String type;
 
     public int getHeroId() {
@@ -51,14 +51,6 @@ public class Hero {
         this.superpower = superpower;
     }
 
-    public List<Organization> getOrganization() {
-        return organization;
-    }
-
-    public void setOrganization(List<Organization> organization) {
-        this.organization = organization;
-    }
-
     public String getType() {
         return type;
     }
@@ -66,7 +58,44 @@ public class Hero {
     public void setType(String type) {
         this.type = type;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Hero other = (Hero) obj;
+        if (this.heroId != other.heroId) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
+            return false;
+        }
+        if (!Objects.equals(this.superpower, other.superpower)) {
+            return false;
+        }
+        if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
+        return true;
+    }
            
+    
            
 
 }
