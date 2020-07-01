@@ -6,7 +6,6 @@
 package com.sms.superherosightings.dao;
 
 import com.sms.superherosightings.model.Hero;
-import com.sms.superherosightings.model.Location;
 import com.sms.superherosightings.model.Sighting;
 import com.sms.superherosightings.model.Organization;
 import java.util.List;
@@ -62,11 +61,6 @@ public class HeroDaoImplTest {
         List<Hero> heroes = heroDao.readAll();
         for (Hero hero : heroes) {
             heroDao.delete(hero.getHeroId());
-        }
-
-        List<Location> locations = locationDao.readAll();
-        for (Location location : locations) {
-            locationDao.delete(location.getLocationId());
         }
 
         List<Organization> organizations = organizationDao.readAll();

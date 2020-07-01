@@ -11,12 +11,12 @@ import com.sms.superherosightings.model.Organization;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.AfterAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,9 +40,6 @@ public class OrganizationDaoImplTest {
     @Autowired
     OrganizationDaoImpl organizationDao;
 
-    @Autowired
-    SightingDaoImpl sightingDao;
-
     public OrganizationDaoImplTest() {
     }
 
@@ -59,11 +56,6 @@ public class OrganizationDaoImplTest {
         List<Hero> heroes = heroDao.readAll();
         for (Hero hero : heroes) {
             heroDao.delete(hero.getHeroId());
-        }
-
-        List<Location> locations = locationDao.readAll();
-        for (Location location : locations) {
-            locationDao.delete(location.getLocationId());
         }
 
         List<Organization> organizations = organizationDao.readAll();
@@ -85,14 +77,16 @@ public class OrganizationDaoImplTest {
         /* ARRANGE - setting up my heroes list to then later be added to my 
         organization
          */
+        setUp();
         List<Hero> heroes = new ArrayList<>();
 
         Hero superHero = new Hero();
         superHero.setName("Spiderman");
         superHero.setDescription("classic");
+        superHero.setSuperpower("speed");
         superHero.setType("hero");
-        heroDao.create(superHero);
-
+        superHero = heroDao.create(superHero);
+        
         heroes.add(superHero);
 
         Location location = new Location();
@@ -102,8 +96,9 @@ public class OrganizationDaoImplTest {
         location.setCity("NYC");
         location.setState("NY");
         location.setZip(11104);
-        location.setLatitude(new BigDecimal("0.0"));
-        location.setLongitude(new BigDecimal("0.0"));
+        location.setLatitude(0.0);
+        location.setLongitude(0.0);
+        location = locationDao.create(location);
         //ACT
         Organization org1 = new Organization();
 
@@ -114,11 +109,11 @@ public class OrganizationDaoImplTest {
         org1.setDescription("the best group");
         org1.setLocation(location);
 
-        organizationDao.create(org1);
+        org1 = organizationDao.create(org1);
 
         Organization fromDao = organizationDao.readById(org1.getOrganizationId());
         //ASSERT
-        assertEquals(fromDao, org1);
+        assertEquals(org1,fromDao);
 
     }
 

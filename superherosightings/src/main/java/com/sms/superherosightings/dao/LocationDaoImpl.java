@@ -21,25 +21,18 @@ public class LocationDaoImpl implements Dao<Location> {
 
     @Autowired
     JdbcTemplate jdbc;
-    @Autowired
-    HeroDaoImpl heroDao;
-
-    @Autowired
-    LocationDaoImpl locationDao;
-
-    @Autowired
-    OrganizationDaoImpl organizationDao;
-
-    @Autowired
-    SightingDaoImpl sightingDao;
 
     @Override
-    @Transactional
     public Location create(Location model) {
-        final String INSERT_LOCATION = "INSERT INTO Location(locationId, `Name`, `Description`, Address, City, State, Zip, Latitude , Longitude) VALUES (?,?,?,?,?,?,?,?,?); ";
-        jdbc.update(INSERT_LOCATION, model.getLocationId(), model.getName(), model.getDescription(), model.getAddress(), model.getCity(), model.getState(), model.getZip(), model.getLatitude(), model.getLongitude());
+        final String INSERT_LOCATION = "INSERT INTO Location(Name, Description, Address, City, State, ZipCode, Lat , `Long`) VALUES (?,?,?,?,?,?,?,?); ";
+
+        jdbc.update(INSERT_LOCATION, model.getName(), model.getDescription(), model.getAddress(), model.getCity(), model.getState(), model.getZip(), model.getLatitude(), model.getLongitude());
+
         int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
+
+
         model.setLocationId(newId);
+
         return model;
     }
 
@@ -83,17 +76,19 @@ public class LocationDaoImpl implements Dao<Location> {
     public static final class LocationMapper implements RowMapper<Location>{
         
         @Override
-        public Location mapRow(ResultSet rs, int arg1) throws SQLException {
-            Location location = new Location ();
+
+        public Location mapRow(ResultSet rs, int index) throws SQLException {
+            Location location = new Location();
             location.setLocationId(rs.getInt("LocationId"));
-            location.setName(rs.getString("`Name`"));
-            location.setDescription(rs.getString("`Description`"));
+            location.setName(rs.getString("Name"));
+            location.setDescription(rs.getString("Description"));
             location.setAddress(rs.getString("Address"));
             location.setCity(rs.getString("City"));
             location.setState(rs.getString("State"));
-            location.setZip(rs.getInt("Zip"));
-            location.setLatitude(rs.getBigDecimal("Latitude"));
-            location.setLongitude(rs.getBigDecimal("Longitude"));
+            location.setZip(rs.getInt("ZipCode"));
+            location.setLatitude(rs.getDouble("Lat"));
+            location.setLongitude(rs.getDouble("Long"));
+
             return location;
         }
 
