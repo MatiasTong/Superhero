@@ -64,20 +64,20 @@ public class HeroDaoImplTest {
             heroDao.delete(hero.getHeroId());
         }
 
-//        List<Location> locations = locationDao.readAll();
-//        for (Location location : locations) {
-//            locationDao.delete(location.getLocationId());
-//        }
-//
-//        List<Organization> organizations = organizationDao.readAll();
-//        for (Organization organization : organizations) {
-//            organizationDao.delete(organization.getOrganizationId());
-//        }
-//
-//        List<Sighting> sightings = sightingDao.readAll();
-//        for (Sighting sighting : sightings) {
-//            sightingDao.delete(sighting.getSightingId());
-//        }
+        List<Location> locations = locationDao.readAll();
+        for (Location location : locations) {
+            locationDao.delete(location.getLocationId());
+        }
+
+        List<Organization> organizations = organizationDao.readAll();
+        for (Organization organization : organizations) {
+            organizationDao.delete(organization.getOrganizationId());
+        }
+
+        List<Sighting> sightings = sightingDao.readAll();
+        for (Sighting sighting : sightings) {
+            sightingDao.delete(sighting.getSightingId());
+        }
     }
 
     @AfterEach
