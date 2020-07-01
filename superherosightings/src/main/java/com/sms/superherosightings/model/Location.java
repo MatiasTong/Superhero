@@ -12,86 +12,86 @@ import java.math.BigDecimal;
  * @author matiastong
  */
 public class Location {
-  private int locationId ; 
-  private String name ; 
-  private String description ; 
-  private String address ; 
-  private String city;
-  private String state;
-  private int zip; 
-  private BigDecimal latitude; 
-  private BigDecimal longitude; 
+  private int LocationId ; 
+  private String Name ; 
+  private String Description ; 
+  private String Address ; 
+  private String City;
+  private String State;
+  private int Zip; 
+  private BigDecimal Latitude; 
+  private BigDecimal Longitude; 
 
     public int getLocationId() {
-        return locationId;
+        return LocationId;
     }
 
     public void setLocationId(int locationId) {
-        this.locationId = locationId;
+        this.LocationId = LocationId;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = Name;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.Description = Description;
     }
 
     public String getAddress() {
-        return address;
+        return Address;
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.Address = Address;
     }
 
     public String getCity() {
-        return city;
+        return City;
     }
 
     public void setCity(String city) {
-        this.city = city;
+        this.City = City;
     }
 
     public String getState() {
-        return state;
+        return State;
     }
 
     public void setState(String state) {
-        this.state = state;
+        this.State = State;
     }
 
     public int getZip() {
-        return zip;
+        return Zip;
     }
 
     public void setZip(int zip) {
-        this.zip = zip;
+        this.Zip = Zip;
     }
 
     public BigDecimal getLatitude() {
-        return latitude;
+        return Latitude;
     }
 
     public void setLatitude(BigDecimal latitude) {
-        this.latitude = latitude;
+        this.Latitude = Latitude;
     }
 
     public BigDecimal getLongitude() {
-        return longitude;
+        return Longitude;
     }
 
     public void setLongitude(BigDecimal longitude) {
-        this.longitude = longitude;
+        this.Longitude = Longitude;
     }
   
   
