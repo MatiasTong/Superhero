@@ -10,7 +10,6 @@ import com.sms.superherosightings.model.Location;
 import com.sms.superherosightings.model.Sighting;
 import com.sms.superherosightings.model.Organization;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.After;
@@ -18,6 +17,10 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -82,6 +85,7 @@ public class SightingDaoImplTest {
      */
     @Test
     public void testCreateAndReadByIdSighting() {
+        //Must create the location and hero objects to add as attributes for the sighting object
         Location location = new Location();
         location.setLocationId(1);
         location.setAddress("test address");
@@ -103,11 +107,13 @@ public class SightingDaoImplTest {
         Sighting sighting = new Sighting();
         
         sighting.setHero(hero);
-        sighting.setDateTime(LocalDateTime.MIN);
+        sighting.setDateTime(LocalDateTime.now());
+        sighting.setLocation(location);
+        sighting = sightingDao.create(sighting);
         
+        Sighting fromDao = sightingDao.readById(sighting.getSightingId());
         
-                
-        
+        assertEquals(fromDao, sighting);
     }
 
     /**
@@ -115,13 +121,42 @@ public class SightingDaoImplTest {
      */
     @Test
     public void testReadAll() {
-    }
-
-    /**
-     * Test of readById method, of class SightingDaoImpl.
-     */
-    @Test
-    public void testReadById() {
+        Location location = new Location();
+        location.setLocationId(1);
+        location.setAddress("test address");
+        location.setCity("test city");
+        location.setDescription("test description");
+        location.setLatitude(new BigDecimal("40.718464"));
+        location.setLongitude(new BigDecimal("-73.928017"));
+        location.setName("test name");
+        location.setState("test state");
+        location.setZip(99999);
+        
+        Hero hero = new Hero();
+        hero.setDescription("test description");
+        hero.setHeroId(1);
+        hero.setName("test name");
+        hero.setSuperpower("test superpower");
+        hero.setType("test type");
+        
+        Sighting sighting = new Sighting();
+        sighting.setHero(hero);
+        sighting.setDateTime(LocalDateTime.now());
+        sighting.setLocation(location);
+        sighting = sightingDao.create(sighting);
+        
+        Sighting sighting2 = new Sighting();
+        sighting2.setHero(hero);
+        sighting2.setDateTime(LocalDateTime.now());
+        sighting2.setLocation(location);
+        sighting2 = sightingDao.create(sighting2);
+        
+        List<Sighting> sightings = sightingDao.readAll();
+        
+        assertEquals(sightings.size(),0);
+        assertTrue(sightings.contains(sighting));
+        assertTrue(sightings.contains(sighting2));
+        
     }
 
     /**
@@ -129,6 +164,51 @@ public class SightingDaoImplTest {
      */
     @Test
     public void testUpdate() {
+        Location location = new Location();
+        location.setLocationId(1);
+        location.setAddress("test address");
+        location.setCity("test city");
+        location.setDescription("test description");
+        location.setLatitude(new BigDecimal("40.718464"));
+        location.setLongitude(new BigDecimal("-73.928017"));
+        location.setName("test name");
+        location.setState("test state");
+        location.setZip(99999);
+        
+        Hero hero = new Hero();
+        hero.setDescription("test description");
+        hero.setHeroId(1);
+        hero.setName("test name");
+        hero.setSuperpower("test superpower");
+        hero.setType("test type");
+        
+        Sighting sighting = new Sighting();
+        
+        //assert the newly created sighting is the one currently in the database
+        sighting.setHero(hero);
+        sighting.setDateTime(LocalDateTime.now());
+        sighting.setLocation(location);
+        sighting = sightingDao.create(sighting);
+        Sighting fromDao = sightingDao.readById(sighting.getSightingId());
+        assertEquals(fromDao, sighting);
+        
+        //Before calling the update function, assert that the sighting with updates 
+        //is different from the one currently in the database
+        Hero hero2 = new Hero();
+        hero2.setDescription("test description 2");
+        hero2.setHeroId(2);
+        hero2.setName("test name 2");
+        hero2.setSuperpower("test superpower 2");
+        hero2.setType("test type 2");
+        
+        sighting.setHero(hero2);
+        assertNotEquals(fromDao, sighting);
+        
+        //After calling update, assert that the sighting 
+        //currently in the database is the updated version/
+        sightingDao.update(sighting);
+        fromDao = sightingDao.readById(sighting.getSightingId());
+        assertEquals(fromDao, sighting);
     }
 
     /**
@@ -136,6 +216,35 @@ public class SightingDaoImplTest {
      */
     @Test
     public void testDelete() {
+        Location location = new Location();
+        location.setLocationId(1);
+        location.setAddress("test address");
+        location.setCity("test city");
+        location.setDescription("test description");
+        location.setLatitude(new BigDecimal("40.718464"));
+        location.setLongitude(new BigDecimal("-73.928017"));
+        location.setName("test name");
+        location.setState("test state");
+        location.setZip(99999);
+        
+        Hero hero = new Hero();
+        hero.setDescription("test description");
+        hero.setHeroId(1);
+        hero.setName("test name");
+        hero.setSuperpower("test superpower");
+        hero.setType("test type");
+        
+        Sighting sighting = new Sighting();
+        sighting.setHero(hero);
+        sighting.setDateTime(LocalDateTime.now());
+        sighting.setLocation(location);
+        sighting = sightingDao.create(sighting);
+        
+        Sighting fromDao = sightingDao.readById(sighting.getSightingId());
+        assertEquals(fromDao, sighting);
+        
+        sightingDao.delete(sighting.getSightingId());
+        assertNull(sightingDao.readById(sighting.getSightingId()));
     }
     
 }

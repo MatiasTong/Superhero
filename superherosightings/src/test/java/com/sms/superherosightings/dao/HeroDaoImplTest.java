@@ -152,10 +152,12 @@ public class HeroDaoImplTest {
         hero.setDescription("Test Description");
         hero = heroDao.create(hero);
         
+        //assert the newly created sighting is the one currently in the database
         Hero fromDao = heroDao.readById(hero.getHeroId());
-        
         assertEquals(hero, fromDao);
         
+        //Before calling the update function, assert that the sighting with updates 
+        //is different from the one currently in the database
         hero.setHeroId(hero.getHeroId());
         hero.setName("hero name updated");
         hero.setSuperpower("Super Strength updated");
@@ -163,9 +165,10 @@ public class HeroDaoImplTest {
         hero.setDescription("Test Description updated");
         
         heroDao.update(hero);
-        
         assertNotEquals(hero, fromDao);
         
+        //After calling update, assert that the sighting 
+        //currently in the database is the updated version/
         fromDao = heroDao.readById(hero.getHeroId());
         assertEquals(hero, fromDao);
         
