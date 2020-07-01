@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  *
- * @author matiastong
+ * @author Shirley Sosa, Sangay Yolmo, Matias Tong 
  */
 public class Organization {
 

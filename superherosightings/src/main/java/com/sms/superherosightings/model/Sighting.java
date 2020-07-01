@@ -1,20 +1,21 @@
+package com.sms.superherosightings.model;
+
+
+import com.sms.superherosightings.model.Hero;
+import com.sms.superherosightings.model.Location;
+import java.time.LocalDateTime;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.sms.superherosightings.model;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  *
  * @author matiastong
  */
 public class Sighting {
-
     private int sightingId;
     private LocalDateTime dateTime;
     private Hero hero;
@@ -54,11 +55,11 @@ public class Sighting {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + this.sightingId;
-        hash = 53 * hash + Objects.hashCode(this.dateTime);
-        hash = 53 * hash + Objects.hashCode(this.hero);
-        hash = 53 * hash + Objects.hashCode(this.location);
+        int hash = 5;
+        hash = 67 * hash + this.sightingId;
+        hash = 67 * hash + (this.dateTime != null ? this.dateTime.hashCode() : 0);
+        hash = 67 * hash + (this.hero != null ? this.hero.hashCode() : 0);
+        hash = 67 * hash + (this.location != null ? this.location.hashCode() : 0);
         return hash;
     }
 
@@ -77,18 +78,17 @@ public class Sighting {
         if (this.sightingId != other.sightingId) {
             return false;
         }
-        if (!Objects.equals(this.dateTime, other.dateTime)) {
+        if (this.dateTime != other.dateTime && (this.dateTime == null || !this.dateTime.equals(other.dateTime))) {
             return false;
         }
-        if (!Objects.equals(this.hero, other.hero)) {
+        if (this.hero != other.hero && (this.hero == null || !this.hero.equals(other.hero))) {
             return false;
         }
-        if (!Objects.equals(this.location, other.location)) {
+        if (this.location != other.location && (this.location == null || !this.location.equals(other.location))) {
             return false;
         }
         return true;
     }
     
     
-
 }
