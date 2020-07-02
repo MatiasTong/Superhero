@@ -32,7 +32,6 @@ public class OrganizationDaoImpl implements Dao<Organization> {
      * @return Org object
      */
     @Override
-    @Transactional
     public Organization create(Organization model) {
         final String INSERT_ORG = "INSERT INTO Organization(Name, "
                 + "Description,LocationId,Email,Type) VALUES (?,?,?,?,?)";
@@ -60,7 +59,7 @@ public class OrganizationDaoImpl implements Dao<Organization> {
         final String SELECT_ALL_ORGS = "SELECT * FROM Organization";
         List<Organization> orgs = jdbc.query(SELECT_ALL_ORGS, new OrgMapper());
         //helper method get location for the org - for each loop to take in a list
-        addHeroesToOrganization(orgs);
+        associateHeroesAndOrg(orgs);
         return orgs;
     }
 
@@ -77,7 +76,7 @@ public class OrganizationDaoImpl implements Dao<Organization> {
         try {
             final String SELECT_ORG_BY_ID = "SELECT * FROM Organization WHERE OrganizationId = ?";
             Organization org = jdbc.queryForObject(SELECT_ORG_BY_ID, new OrgMapper(), id);
-            org.setHeroes(getHeroesForOrg(org));
+            org.setHeroes(getHeroesForOrg(id));
             org.setLocation(getLocationForOrg(org));
             return org;
         } catch (DataAccessException ex) {
@@ -129,18 +128,16 @@ public class OrganizationDaoImpl implements Dao<Organization> {
         }
     }
 
-    private List<Hero> getHeroesForOrg(Organization model) {
+    private List<Hero> getHeroesForOrg(int id) {
         final String SELECT_HEROES_FOR_ORG = "SELECT h.* FROM Hero h "
-                + "JOIN HeroOrganization ho ON h.HeroId "
-                + "= ho.HeroId WHERE ho.OrganizationId = ?";
-        return jdbc.query(SELECT_HEROES_FOR_ORG, new HeroMapper(),
-                model.getOrganizationId());
+                + "JOIN HeroOrganization ho ON ho.HeroId "
+                + "= h.HeroId WHERE ho.OrganizationId = ?";
+        return jdbc.query(SELECT_HEROES_FOR_ORG, new HeroMapper(),id);
     }
 
-    //similar to associate - renamed method 6/30
-    private void addHeroesToOrganization(List<Organization> organizations) {
+    private void associateHeroesAndOrg(List<Organization> organizations) {
         for (Organization org : organizations) {
-            org.setHeroes(getHeroesForOrg(org));
+            org.setHeroes(getHeroesForOrg(org.getOrganizationId()));
         }
     }
 

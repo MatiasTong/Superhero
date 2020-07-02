@@ -14,6 +14,8 @@ import java.util.Objects;
  */
 public class Location {
 
+
+
   private int locationId ; 
   private String name ; 
   private String description ; 
@@ -30,6 +32,10 @@ public class Location {
 
     public void setLocationId(int locationId) {
         this.locationId = locationId;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 936cc9f6b44d88286e72038e50f0df8fc98b8cc8
     }
 
     public String getName() {
@@ -38,38 +44,62 @@ public class Location {
 
     public void setName(String name) {
         this.name = name;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 936cc9f6b44d88286e72038e50f0df8fc98b8cc8
     }
 
     public String getDescription() {
         return description;
     }
 
+
     public void setDescription(String description) {
         this.description = description;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 936cc9f6b44d88286e72038e50f0df8fc98b8cc8
     }
 
     public String getAddress() {
         return address;
     }
 
+
     public void setAddress(String address) {
         this.address = address;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 936cc9f6b44d88286e72038e50f0df8fc98b8cc8
     }
 
     public String getCity() {
         return city;
     }
 
+
     public void setCity(String city) {
         this.city = city;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 936cc9f6b44d88286e72038e50f0df8fc98b8cc8
     }
 
     public String getState() {
         return state;
     }
 
+
     public void setState(String state) {
         this.state = state;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 936cc9f6b44d88286e72038e50f0df8fc98b8cc8
     }
 
     public int getZip() {
@@ -94,6 +124,7 @@ public class Location {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+<<<<<<< HEAD
     }
 
     @Override
@@ -151,16 +182,17 @@ public class Location {
             return false;
         }
         return true;
+=======
+>>>>>>> 936cc9f6b44d88286e72038e50f0df8fc98b8cc8
     }
 
 
   
 
     
+   
 
-    
-  
-  
+
   
 
 }

@@ -119,7 +119,9 @@ public class SightingDaoImplTest {
         location.setCity("test city");
         location.setDescription("test description");
         location.setLatitude(40.718464);
+
         location.setLongitude(-73.928017);
+
         location.setName("test name");
         location.setState("test state");
         location.setZip(99999);
@@ -162,7 +164,9 @@ public class SightingDaoImplTest {
         location.setCity("test city");
         location.setDescription("test description");
         location.setLatitude(40.718464);
+
         location.setLongitude(-73.928017);
+
         location.setName("test name");
         location.setState("test state");
         location.setZip(99999);
@@ -214,7 +218,9 @@ public class SightingDaoImplTest {
         location.setCity("test city");
         location.setDescription("test description");
         location.setLatitude(40.718464);
+
         location.setLongitude(-73.928017);
+
         location.setName("test name");
         location.setState("test state");
         location.setZip(99999);
