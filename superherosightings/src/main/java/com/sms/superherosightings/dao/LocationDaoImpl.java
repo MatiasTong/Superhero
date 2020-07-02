@@ -6,6 +6,7 @@
 package com.sms.superherosightings.dao;
 
 import com.sms.superherosightings.model.Location;
+import com.sms.superherosightings.model.Sighting;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -27,10 +28,7 @@ public class LocationDaoImpl implements Dao<Location> {
         final String INSERT_LOCATION = "INSERT INTO Location(Name, Description, Address, City, State, ZipCode, Lat , `Long`) VALUES (?,?,?,?,?,?,?,?); ";
 
         jdbc.update(INSERT_LOCATION, model.getName(), model.getDescription(), model.getAddress(), model.getCity(), model.getState(), model.getZip(), model.getLatitude(), model.getLongitude());
-
         int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
-
-
         model.setLocationId(newId);
 
         return model;
@@ -73,6 +71,14 @@ public class LocationDaoImpl implements Dao<Location> {
        
     }
     
+    private void insertLocationToSighting(Sighting model) {
+        List<Location> places = (List<Location>) model.getLocation();
+        for (Location place : places) {
+            final String INSERT_LOC_SIGHTING = "INSERT INTO Sighting(LocationId) VALUES (?);";
+            jdbc.update(INSERT_LOC_SIGHTING, place.getLocationId(), model.getSightingId());
+        }
+    }
+
     public static final class LocationMapper implements RowMapper<Location>{
         
         @Override
