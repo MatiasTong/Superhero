@@ -105,15 +105,16 @@ public class Location {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + this.locationId;
-        hash = 83 * hash + Objects.hashCode(this.name);
-        hash = 83 * hash + Objects.hashCode(this.description);
-        hash = 83 * hash + Objects.hashCode(this.address);
-        hash = 83 * hash + Objects.hashCode(this.city);
-        hash = 83 * hash + Objects.hashCode(this.state);
-        hash = 83 * hash + this.zip;
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
-        hash = 83 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
+        hash = 67 * hash + this.locationId;
+        hash = 67 * hash + Objects.hashCode(this.name);
+        hash = 67 * hash + Objects.hashCode(this.description);
+        hash = 67 * hash + Objects.hashCode(this.address);
+        hash = 67 * hash + Objects.hashCode(this.city);
+        hash = 67 * hash + Objects.hashCode(this.state);
+        hash = 67 * hash + this.zip;
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
+
         return hash;
     }
 
