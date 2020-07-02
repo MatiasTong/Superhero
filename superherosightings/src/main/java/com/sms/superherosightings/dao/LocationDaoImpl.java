@@ -23,12 +23,17 @@ public class LocationDaoImpl implements Dao<Location> {
     JdbcTemplate jdbc;
 
     @Override
-    @Transactional
     public Location create(Location model) {
+
         final String INSERT_LOCATION = "INSERT INTO Location(`Name`, `Description`, Address, City, State, ZipCode, Lat , `Long`) VALUES (?,?,?,?,?,?,?,?); ";
         jdbc.update(INSERT_LOCATION, model.getName(), model.getDescription(), model.getAddress(), model.getCity(), model.getState(), model.getZip(), model.getLatitude(), model.getLongitude());
+
+   
         int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
+
+
         model.setLocationId(newId);
+
         return model;
     }
 
@@ -72,8 +77,9 @@ public class LocationDaoImpl implements Dao<Location> {
     public static final class LocationMapper implements RowMapper<Location>{
         
         @Override
-        public Location mapRow(ResultSet rs, int arg1) throws SQLException {
-            Location location = new Location ();
+
+        public Location mapRow(ResultSet rs, int index) throws SQLException {
+            Location location = new Location();
             location.setLocationId(rs.getInt("LocationId"));
             location.setName(rs.getString("Name"));
             location.setDescription(rs.getString("Description"));
@@ -83,6 +89,7 @@ public class LocationDaoImpl implements Dao<Location> {
             location.setZip(rs.getInt("ZipCode"));
             location.setLatitude(rs.getDouble("Lat"));
             location.setLongitude(rs.getDouble("Long"));
+
             return location;
         }
 

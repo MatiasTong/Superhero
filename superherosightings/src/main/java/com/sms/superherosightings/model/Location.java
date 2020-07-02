@@ -13,15 +13,19 @@ import java.util.Objects;
  * @author Shirley Sosa, Sangay Yolmo, Matias Tong 
  */
 public class Location {
-  private int LocationId ; 
-  private String Name ; 
-  private String Description ; 
-  private String Address ; 
-  private String City;
-  private String State;
-  private int Zip; 
-  private double Latitude; 
-  private double Longitude; 
+
+
+
+  private int locationId ; 
+  private String name ; 
+  private String description ; 
+  private String address ; 
+  private String city;
+  private String state;
+  private int zip; 
+  private double latitude; 
+  private double longitude; 
+
 
     public int getLocationId() {
         return LocationId;
@@ -79,34 +83,40 @@ public class Location {
         this.Zip = Zip;
     }
 
+
+
     public double getLatitude() {
-        return Latitude;
+        return latitude;
     }
 
-    public void setLatitude(double Latitude) {
-        this.Latitude = Latitude;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public double getLongitude() {
-        return Longitude;
+        return longitude;
     }
 
-    public void setLongitude(double Longitude) {
-        this.Longitude = Longitude;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+
+
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + this.LocationId;
-        hash = 53 * hash + Objects.hashCode(this.Name);
-        hash = 53 * hash + Objects.hashCode(this.Description);
-        hash = 53 * hash + Objects.hashCode(this.Address);
-        hash = 53 * hash + Objects.hashCode(this.City);
-        hash = 53 * hash + Objects.hashCode(this.State);
-        hash = 53 * hash + this.Zip;
-        hash = 53 * hash + (int) (Double.doubleToLongBits(this.Latitude) ^ (Double.doubleToLongBits(this.Latitude) >>> 32));
-        hash = 53 * hash + (int) (Double.doubleToLongBits(this.Longitude) ^ (Double.doubleToLongBits(this.Longitude) >>> 32));
+
+        hash = 89 * hash + this.locationId;
+        hash = 89 * hash + Objects.hashCode(this.name);
+        hash = 89 * hash + Objects.hashCode(this.description);
+        hash = 89 * hash + Objects.hashCode(this.address);
+        hash = 89 * hash + Objects.hashCode(this.city);
+        hash = 89 * hash + Objects.hashCode(this.state);
+        hash = 89 * hash + this.zip;
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
+
         return hash;
     }
 
@@ -128,7 +138,7 @@ public class Location {
         if (this.Zip != other.Zip) {
             return false;
         }
-        if (Double.doubleToLongBits(this.Latitude) != Double.doubleToLongBits(other.Latitude)) {
+
             return false;
         }
         if (Double.doubleToLongBits(this.Longitude) != Double.doubleToLongBits(other.Longitude)) {
@@ -143,14 +153,13 @@ public class Location {
         if (!Objects.equals(this.Address, other.Address)) {
             return false;
         }
-        if (!Objects.equals(this.City, other.City)) {
-            return false;
-        }
-        if (!Objects.equals(this.State, other.State)) {
-            return false;
-        }
+
         return true;
     }
+
+    
+
+    
 
   
   
