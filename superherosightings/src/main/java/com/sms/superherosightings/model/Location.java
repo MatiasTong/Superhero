@@ -14,6 +14,8 @@ import java.util.Objects;
  */
 public class Location {
 
+
+
   private int locationId ; 
   private String name ; 
   private String description ; 
@@ -154,13 +156,10 @@ public class Location {
     }
 
 
+    
    
 
-    
 
-    
-  
-  
   
 
 }

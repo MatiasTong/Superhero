@@ -37,6 +37,7 @@ public class SightingDaoImpl implements Dao<Sighting> {
             //and retrieve all the hero fields in the hero table to populate our hero object
             final String SELECT_HERO = "SELECT h.* FROM Sighting s JOIN Hero h ON s.HeroId = h.HeroId WHERE SightingId=?";
             Hero hero = jdbc.queryForObject(SELECT_HERO, new HeroMapper(), sightingId);
+            
             return hero;
         } catch (DataAccessException e) {
             return null;
@@ -74,7 +75,7 @@ public class SightingDaoImpl implements Dao<Sighting> {
 
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         model.setSightingId(newId);
-
+        
         return model;
     }
 
@@ -89,7 +90,7 @@ public class SightingDaoImpl implements Dao<Sighting> {
     @Override
     public Sighting readById(int id) {
         try {
-            final String SELECT_SIGHTING = "Select SightingID, DateTime From Sighting WHERE SightingId = ?";
+            final String SELECT_SIGHTING = "Select SightingId, DateTime From Sighting WHERE SightingId = ?";
             Sighting sighting = jdbc.queryForObject(SELECT_SIGHTING, new SightingMapper(), id);
 
             Hero hero = getHeroForSighting(id);
