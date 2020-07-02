@@ -59,15 +59,13 @@ public class Sighting {
         return "Sighting{" + "sightingId=" + sightingId + ", dateTime=" + dateTime + ", hero=" + hero + ", location=" + location + '}';
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + this.sightingId;
-        hash = 97 * hash + Objects.hashCode(this.dateTime);
-        hash = 97 * hash + Objects.hashCode(this.hero);
-        hash = 97 * hash + Objects.hashCode(this.location);
+        hash = 11 * hash + this.sightingId;
+        hash = 11 * hash + Objects.hashCode(this.dateTime);
+        hash = 11 * hash + Objects.hashCode(this.hero);
+        hash = 11 * hash + Objects.hashCode(this.location);
         return hash;
     }
 
@@ -98,6 +96,7 @@ public class Sighting {
         return true;
     }
 
-  
+    
+    
    
 }

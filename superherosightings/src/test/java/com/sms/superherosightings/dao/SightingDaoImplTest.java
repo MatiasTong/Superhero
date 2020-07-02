@@ -14,8 +14,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -26,10 +28,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+
 /**
  *
  * @author matiastong
  */
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SightingDaoImplTest {
@@ -49,6 +53,7 @@ public class SightingDaoImplTest {
     public SightingDaoImplTest() {
     }
 
+
     @BeforeClass
     public static void setUpClass() {
     }
@@ -56,6 +61,7 @@ public class SightingDaoImplTest {
     @AfterClass
     public static void tearDownClass() {
     }
+
 
     @Before
     public void setUp() {
@@ -81,9 +87,11 @@ public class SightingDaoImplTest {
         }
     }
 
+
     @After
     public void tearDown() {
     }
+
 
     /**
      * Test of create method, of class SightingDaoImpl.
@@ -92,6 +100,13 @@ public class SightingDaoImplTest {
     public void testCreateAndReadByIdSighting() {
         setUp();
         //Must create the location and hero objects to add as attributes for the sighting object
+        Hero hero = new Hero();
+        hero.setName("hero name");
+        hero.setSuperpower("Super Strength");
+        hero.setType("Superhero");
+        hero.setDescription("Test Description");
+        hero = heroDao.create(hero);
+
         Location location = new Location();
         location.setAddress("test address");
         location.setCity("test city");
@@ -103,13 +118,6 @@ public class SightingDaoImplTest {
         location.setZip(99999);
         location = locationDao.create(location);
 
-        Hero hero = new Hero();
-        hero.setDescription("test description");
-        hero.setName("test name");
-        hero.setSuperpower("test superpower");
-        hero.setType("test type");
-        hero = heroDao.create(hero);
-
         Sighting sighting = new Sighting();
         sighting.setHero(hero);
         sighting.setDateTime(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
@@ -117,9 +125,11 @@ public class SightingDaoImplTest {
         sighting = sightingDao.create(sighting);
 
         Sighting fromDao = sightingDao.readById(sighting.getSightingId());
+
         assertEquals(fromDao.getDateTime().truncatedTo(ChronoUnit.SECONDS), sighting.getDateTime());
         assertEquals(fromDao.getHero(), sighting.getHero());
         assertEquals(fromDao.getLocation(), sighting.getLocation());
+
         assertEquals(fromDao, sighting);
     }
 
@@ -140,12 +150,15 @@ public class SightingDaoImplTest {
         location.setZip(99999);
         location = locationDao.create(location);
 
+
         Hero hero = new Hero();
         hero.setDescription("test description");
         hero.setName("test name");
         hero.setSuperpower("test superpower");
         hero.setType("test type");
+
         hero = heroDao.create(hero);
+
 
         Sighting sighting = new Sighting();
         sighting.setHero(hero);
@@ -161,7 +174,9 @@ public class SightingDaoImplTest {
 
         List<Sighting> sightings = sightingDao.readAll();
 
+
         assertEquals(sightings.size(), 2);
+
         assertTrue(sightings.contains(sighting));
         assertTrue(sightings.contains(sighting2));
 
@@ -181,14 +196,18 @@ public class SightingDaoImplTest {
         location.setName("test name");
         location.setState("NJ");
         location.setZip(99999);
+
         location = locationDao.create(location);
+
 
         Hero hero = new Hero();
         hero.setDescription("test description");
         hero.setName("test name");
         hero.setSuperpower("test superpower");
         hero.setType("test type");
+
         hero = heroDao.create(hero);
+
 
         Sighting sighting = new Sighting();
 
@@ -207,7 +226,9 @@ public class SightingDaoImplTest {
         hero2.setName("test name 2");
         hero2.setSuperpower("test superpower 2");
         hero2.setType("test type 2");
+
         hero2 = heroDao.create(hero2);
+
 
         sighting.setHero(hero2);
         assertNotEquals(fromDao, sighting);
@@ -233,6 +254,7 @@ public class SightingDaoImplTest {
         location.setName("test name");
         location.setState("NJ");
         location.setZip(99999);
+
         location = locationDao.create(location);
         
         Hero hero = new Hero();
@@ -241,6 +263,7 @@ public class SightingDaoImplTest {
         hero.setSuperpower("test superpower");
         hero.setType("test type");
         hero = heroDao.create(hero);
+
 
         Sighting sighting = new Sighting();
         sighting.setHero(hero);

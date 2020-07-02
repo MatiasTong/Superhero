@@ -105,6 +105,7 @@ public class Location {
 
     @Override
     public int hashCode() {
+
         int hash = 5;
         hash = 97 * hash + this.locationId;
         hash = 97 * hash + Objects.hashCode(this.name);
@@ -115,6 +116,7 @@ public class Location {
         hash = 97 * hash + this.zip;
         hash = 97 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
         hash = 97 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
+
         return hash;
     }
 
@@ -159,11 +161,6 @@ public class Location {
         }
         return true;
     }
-
-  
-
-    
-   
 
 
   
