@@ -18,10 +18,8 @@ CREATE TABLE Location(
     City VARCHAR(30) NOT NULL,
     State CHAR(2) NOT NULL,
     ZipCode CHAR(5) NOT NULL,
-    Lat float NOT NULL,
-    `Long` float NOT NULL
-
-
+    Lat decimal(8,6) NOT NULL,
+    `Long` decimal(9,6) NOT NULL
 );
 
 CREATE TABLE Organization(

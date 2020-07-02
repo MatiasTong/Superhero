@@ -70,46 +70,17 @@ public class OrganizationDaoImplTest {
             locationDao.delete(location.getLocationId());
 
         }
-
     }
 
     @AfterEach
     public void tearDown() {
     }
 
-    @Test
-    public void testAddOrg() {
-
-        Location location = new Location();
-        location.setName("Chase Bank");
-        location.setAddress("234 Main ave");
-        location.setCity("Boston");
-        location.setState("MA");
-        location.setZip(23415);
-        location.setDescription("Hero HQ Underground");
-        location.setLatitude(0.1);
-        location.setLongitude(0.0);
-
-        location = locationDao.create(location);
-
-        Organization org = new Organization();
-        org.setName("Good people");
-        org.setDescription("Classic Heroes");
-        org.setEmail("goodpeople123@gmail.com");
-        org.setType("hero");
-        org.setLocation(location);
-        org = organizationDao.create(org);
-
-        Organization fromDao = organizationDao.readById(org.getOrganizationId());
-
-        assertEquals(fromDao, org);
-    }
-
     /**
      * Test of create method, of class OrganizationDaoImpl.
      */
     @Test
-    public void testAddAndGetOrg() {
+    public void testAddOrg() {
         /* ARRANGE - setting up my heroes list to then later be added to my 
         organization
          */
@@ -132,21 +103,18 @@ public class OrganizationDaoImplTest {
         location.setCity("NYC");
         location.setState("NY");
         location.setZip(11104);
-
         location.setLatitude(0.0);
         location.setLongitude(0.0);
         location = locationDao.create(location);
 
         //ACT
         Organization org1 = new Organization();
-
         org1.setName("Classic Heroes");
         org1.setEmail("classicheroes@gmail.com");
         org1.setType("hero");
         org1.setHeroes(heroes);
         org1.setDescription("the best group");
         org1.setLocation(location);
-
         org1 = organizationDao.create(org1);
 
         Organization fromDao = organizationDao.readById(org1.getOrganizationId());
@@ -191,24 +159,38 @@ public class OrganizationDaoImplTest {
         org1.setLocation(location);
         org1 = organizationDao.create(org1);
 
+        Organization org2 = new Organization();
+        org2.setName("Classic Heroes");
+        org2.setEmail("classicheroes@gmail.com");
+        org2.setType("hero");
+        org2.setHeroes(heroes);
+        org2.setDescription("the best group");
+        org2.setLocation(location);
+        org2 = organizationDao.create(org1);
 
         List<Organization> organizations = organizationDao.readAll();
-        assertEquals(1, organizations.size());
+        assertEquals(2, organizations.size());
         assertTrue(organizations.contains(org1));
-  
+
     }
 
-    /**
-     * Test of readById method, of class OrganizationDaoImpl.
-     */
-//    @Test
-//    public void testReadById() {
-//    }
     /**
      * Test of update method, of class OrganizationDaoImpl.
      */
     @Test
     public void testUpdateOrg() {
+        setUp();
+        Hero superHero = new Hero();
+        superHero.setName("Spiderman");
+        superHero.setDescription("classic");
+        superHero.setSuperpower("speed");
+        superHero.setType("hero");
+        superHero = heroDao.create(superHero);
+
+        List<Hero> heroes = new ArrayList<>();
+        heroes.add(superHero);
+
+        
         Location location = new Location();
         location.setName("City Bank");
         location.setDescription("Busiest bank in the city");
@@ -224,6 +206,7 @@ public class OrganizationDaoImplTest {
         org.setName("Classic Heroes");
         org.setEmail("classicheroes@gmail.com");
         org.setType("hero");
+        org.setHeroes(heroes);
         org.setDescription("the best group");
         org.setLocation(location);
         org = organizationDao.create(org);
@@ -232,7 +215,6 @@ public class OrganizationDaoImplTest {
 
         assertEquals(fromDao, org);
 
-        org.setName("Classic Heroes");
         org.setEmail("classicheroes123@gmail.com");
 
         organizationDao.update(org);
@@ -245,6 +227,7 @@ public class OrganizationDaoImplTest {
      */
     @Test
     public void testDeleteOrgById() {
+        setUp();
         Hero superHero = new Hero();
         superHero.setName("Spiderman");
         superHero.setDescription("classic");
@@ -270,6 +253,7 @@ public class OrganizationDaoImplTest {
         org.setName("Classic Heroes");
         org.setEmail("classicheroes@gmail.com");
         org.setType("hero");
+        org.setHeroes(heroes);
         org.setDescription("the best group");
         org.setLocation(location);
         org = organizationDao.create(org);

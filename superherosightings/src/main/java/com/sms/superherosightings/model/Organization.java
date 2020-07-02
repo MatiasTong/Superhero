@@ -80,14 +80,14 @@ public class Organization {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + this.organizationId;
-        hash = 89 * hash + Objects.hashCode(this.name);
-        hash = 89 * hash + Objects.hashCode(this.description);
-        hash = 89 * hash + Objects.hashCode(this.location);
-        hash = 89 * hash + Objects.hashCode(this.email);
-        hash = 89 * hash + Objects.hashCode(this.Heroes);
-        hash = 89 * hash + Objects.hashCode(this.type);
+        int hash = 7;
+        hash = 47 * hash + this.organizationId;
+        hash = 47 * hash + Objects.hashCode(this.name);
+        hash = 47 * hash + Objects.hashCode(this.description);
+        hash = 47 * hash + Objects.hashCode(this.location);
+        hash = 47 * hash + Objects.hashCode(this.email);
+        hash = 47 * hash + Objects.hashCode(this.Heroes);
+        hash = 47 * hash + Objects.hashCode(this.type);
         return hash;
     }
 

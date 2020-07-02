@@ -60,6 +60,7 @@ public class OrganizationDaoImpl implements Dao<Organization> {
         List<Organization> orgs = jdbc.query(SELECT_ALL_ORGS, new OrgMapper());
         //helper method get location for the org - for each loop to take in a list
         associateHeroesAndOrg(orgs);
+        associateLocationAndOrg(orgs);
         return orgs;
     }
 
@@ -76,7 +77,7 @@ public class OrganizationDaoImpl implements Dao<Organization> {
         try {
             final String SELECT_ORG_BY_ID = "SELECT * FROM Organization WHERE OrganizationId = ?";
             Organization org = jdbc.queryForObject(SELECT_ORG_BY_ID, new OrgMapper(), id);
-            org.setHeroes(getHeroesForOrg(id));
+            org.setHeroes(getHeroesForOrg(org));
             org.setLocation(getLocationForOrg(org));
             return org;
         } catch (DataAccessException ex) {
@@ -89,8 +90,8 @@ public class OrganizationDaoImpl implements Dao<Organization> {
     @Transactional
     public void update(Organization model) {
         final String UPDATE_ORG = "UPDATE Organization SET Name = ?,"
-                + " Description = ?, LocationId = ?, Email = ?, Type = ? WHERE OrganizationId =?";
-        jdbc.update(UPDATE_ORG, model.getName(), model.getDescription(), model.getLocation().getLocationId(), model.getEmail(), model.getType());
+                + " Description = ?, LocationId = ?, Email = ?, Type = ? WHERE OrganizationId = ?";
+        jdbc.update(UPDATE_ORG, model.getName(), model.getDescription(), model.getLocation().getLocationId(), model.getEmail(), model.getType(),model.getOrganizationId());
 
         final String DELETE_HERO_ORGANIZATION = "DELETE From HeroOrganization WHERE OrganizationId = ?";
         jdbc.update(DELETE_HERO_ORGANIZATION, model.getOrganizationId());
@@ -117,6 +118,7 @@ public class OrganizationDaoImpl implements Dao<Organization> {
                 + "= ho.OrganizationId WHERE ho.HeroId = ?";
         List<Organization> organizations = jdbc.query(SELECT_ORG_FOR_HERO,
                 new OrgMapper(), hero.getHeroId());
+        associateHeroesAndOrg(organizations);
         return organizations;
     }
 
@@ -128,24 +130,29 @@ public class OrganizationDaoImpl implements Dao<Organization> {
         }
     }
 
-    private List<Hero> getHeroesForOrg(int id) {
+    private List<Hero> getHeroesForOrg(Organization org) {
         final String SELECT_HEROES_FOR_ORG = "SELECT h.* FROM Hero h "
-                + "JOIN HeroOrganization ho ON ho.HeroId "
-                + "= h.HeroId WHERE ho.OrganizationId = ?";
-        return jdbc.query(SELECT_HEROES_FOR_ORG, new HeroMapper(),id);
+                + "JOIN HeroOrganization ho ON h.HeroId "
+                + "= ho.HeroId WHERE ho.OrganizationId = ?";
+        return jdbc.query(SELECT_HEROES_FOR_ORG, new HeroMapper(), org.getOrganizationId());
     }
 
     private void associateHeroesAndOrg(List<Organization> organizations) {
         for (Organization org : organizations) {
-            org.setHeroes(getHeroesForOrg(org.getOrganizationId()));
+            org.setHeroes(getHeroesForOrg(org));
+        }
+    }
+    
+    private void associateLocationAndOrg(List<Organization> organizations){
+        for (Organization org : organizations){
+            org.setLocation(getLocationForOrg(org));
         }
     }
 
     private Location getLocationForOrg(Organization model) {
         final String SELECT_LOCATION_FOR_ORG = "SELECT l.* FROM Location l JOIN Organization o "
                 + "ON l.LocationId = o.LocationId WHERE o.OrganizationId = ?";
-        Location location = jdbc.queryForObject(SELECT_LOCATION_FOR_ORG, new LocationMapper(),model.getOrganizationId());
-        return location;
+        return jdbc.queryForObject(SELECT_LOCATION_FOR_ORG, new LocationMapper(), model.getOrganizationId());
 
     }
 

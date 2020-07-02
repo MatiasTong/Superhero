@@ -55,12 +55,17 @@ public class Sighting {
     }
 
     @Override
+    public String toString() {
+        return "Sighting{" + "sightingId=" + sightingId + ", dateTime=" + dateTime + ", hero=" + hero + ", location=" + location + '}';
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + this.sightingId;
-        hash = 89 * hash + Objects.hashCode(this.dateTime);
-        hash = 89 * hash + Objects.hashCode(this.hero);
-        hash = 89 * hash + Objects.hashCode(this.location);
+        int hash = 3;
+        hash = 11 * hash + this.sightingId;
+        hash = 11 * hash + Objects.hashCode(this.dateTime);
+        hash = 11 * hash + Objects.hashCode(this.hero);
+        hash = 11 * hash + Objects.hashCode(this.location);
         return hash;
     }
 
@@ -91,6 +96,7 @@ public class Sighting {
         return true;
     }
 
- 
     
+    
+   
 }

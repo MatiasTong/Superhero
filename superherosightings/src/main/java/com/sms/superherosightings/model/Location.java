@@ -46,7 +46,6 @@ public class Location {
         return description;
     }
 
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -54,7 +53,6 @@ public class Location {
     public String getAddress() {
         return address;
     }
-
 
     public void setAddress(String address) {
         this.address = address;
@@ -64,7 +62,6 @@ public class Location {
         return city;
     }
 
-
     public void setCity(String city) {
         this.city = city;
     }
@@ -72,7 +69,6 @@ public class Location {
     public String getState() {
         return state;
     }
-
 
     public void setState(String state) {
         this.state = state;
@@ -103,17 +99,23 @@ public class Location {
     }
 
     @Override
+    public String toString() {
+        return "Location{" + "locationId=" + locationId + ", name=" + name + ", description=" + description + ", address=" + address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", latitude=" + latitude + ", longitude=" + longitude + '}';
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + this.locationId;
-        hash = 67 * hash + Objects.hashCode(this.name);
-        hash = 67 * hash + Objects.hashCode(this.description);
-        hash = 67 * hash + Objects.hashCode(this.address);
-        hash = 67 * hash + Objects.hashCode(this.city);
-        hash = 67 * hash + Objects.hashCode(this.state);
-        hash = 67 * hash + this.zip;
-        hash = 67 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
-        hash = 67 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
+
+        int hash = 5;
+        hash = 97 * hash + this.locationId;
+        hash = 97 * hash + Objects.hashCode(this.name);
+        hash = 97 * hash + Objects.hashCode(this.description);
+        hash = 97 * hash + Objects.hashCode(this.address);
+        hash = 97 * hash + Objects.hashCode(this.city);
+        hash = 97 * hash + Objects.hashCode(this.state);
+        hash = 97 * hash + this.zip;
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
+        hash = 97 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
 
         return hash;
     }
@@ -159,6 +161,7 @@ public class Location {
         }
         return true;
     }
+
 
   
 
