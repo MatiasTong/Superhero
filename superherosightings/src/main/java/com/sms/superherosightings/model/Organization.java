@@ -78,16 +78,16 @@ public class Organization {
         this.Heroes = Heroes;
     }
 
-
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 59 * hash + this.organizationId;
-        hash = 59 * hash + Objects.hashCode(this.name);
-        hash = 59 * hash + Objects.hashCode(this.description);
-        hash = 59 * hash + Objects.hashCode(this.location);
-        hash = 59 * hash + Objects.hashCode(this.email);
-        hash = 59 * hash + Objects.hashCode(this.Heroes);
+        int hash = 7;
+        hash = 47 * hash + this.organizationId;
+        hash = 47 * hash + Objects.hashCode(this.name);
+        hash = 47 * hash + Objects.hashCode(this.description);
+        hash = 47 * hash + Objects.hashCode(this.location);
+        hash = 47 * hash + Objects.hashCode(this.email);
+        hash = 47 * hash + Objects.hashCode(this.Heroes);
+        hash = 47 * hash + Objects.hashCode(this.type);
         return hash;
     }
 
@@ -115,6 +115,9 @@ public class Organization {
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
+        if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
         if (!Objects.equals(this.location, other.location)) {
             return false;
         }
@@ -123,6 +126,9 @@ public class Organization {
         }
         return true;
     }
+
+
+   
  
     
     
