@@ -14,6 +14,8 @@ import java.util.Objects;
  */
 public class Location {
 
+
+
   private int locationId ; 
   private String name ; 
   private String description ; 
@@ -29,7 +31,7 @@ public class Location {
         return LocationId;
     }
 
-    public void setLocationId(int locationId) {
+    public void setLocationId(int LocationId) {
         this.LocationId = LocationId;
     }
 
@@ -37,7 +39,7 @@ public class Location {
         return Name;
     }
 
-    public void setName(String name) {
+    public void setName(String Name) {
         this.Name = Name;
     }
 
@@ -45,7 +47,7 @@ public class Location {
         return Description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String Description) {
         this.Description = Description;
     }
 
@@ -53,7 +55,7 @@ public class Location {
         return Address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String Address) {
         this.Address = Address;
     }
 
@@ -61,7 +63,7 @@ public class Location {
         return City;
     }
 
-    public void setCity(String city) {
+    public void setCity(String City) {
         this.City = City;
     }
 
@@ -69,7 +71,7 @@ public class Location {
         return State;
     }
 
-    public void setState(String state) {
+    public void setState(String State) {
         this.State = State;
     }
 
@@ -77,9 +79,10 @@ public class Location {
         return Zip;
     }
 
-    public void setZip(int zip) {
+    public void setZip(int Zip) {
         this.Zip = Zip;
     }
+
 
 
     public double getLatitude() {
@@ -97,11 +100,13 @@ public class Location {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
 
+
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
+
         hash = 89 * hash + this.locationId;
         hash = 89 * hash + Objects.hashCode(this.name);
         hash = 89 * hash + Objects.hashCode(this.description);
@@ -111,6 +116,7 @@ public class Location {
         hash = 89 * hash + this.zip;
         hash = 89 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
         hash = 89 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
+
         return hash;
     }
 
@@ -126,39 +132,35 @@ public class Location {
             return false;
         }
         final Location other = (Location) obj;
-        if (this.locationId != other.locationId) {
+        if (this.LocationId != other.LocationId) {
             return false;
         }
-        if (this.zip != other.zip) {
+        if (this.Zip != other.Zip) {
             return false;
         }
-        if (Double.doubleToLongBits(this.latitude) != Double.doubleToLongBits(other.latitude)) {
+
             return false;
         }
-        if (Double.doubleToLongBits(this.longitude) != Double.doubleToLongBits(other.longitude)) {
+        if (Double.doubleToLongBits(this.Longitude) != Double.doubleToLongBits(other.Longitude)) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
+        if (!Objects.equals(this.Name, other.Name)) {
             return false;
         }
-        if (!Objects.equals(this.description, other.description)) {
+        if (!Objects.equals(this.Description, other.Description)) {
             return false;
         }
-        if (!Objects.equals(this.address, other.address)) {
+        if (!Objects.equals(this.Address, other.Address)) {
             return false;
         }
-        if (!Objects.equals(this.city, other.city)) {
-            return false;
-        }
-        if (!Objects.equals(this.state, other.state)) {
-            return false;
-        }
+
         return true;
     }
 
     
 
     
+
   
   
   

@@ -96,9 +96,11 @@ public class OrganizationDaoImplTest {
         location.setCity("NYC");
         location.setState("NY");
         location.setZip(11104);
+
         location.setLatitude(0.0);
         location.setLongitude(0.0);
         location = locationDao.create(location);
+
         //ACT
         Organization org1 = new Organization();
 
