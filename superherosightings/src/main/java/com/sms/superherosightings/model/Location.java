@@ -14,6 +14,8 @@ import java.util.Objects;
  */
 public class Location {
 
+
+
   private int locationId ; 
   private String name ; 
   private String description ; 
@@ -44,6 +46,7 @@ public class Location {
         return description;
     }
 
+
     public void setDescription(String description) {
         this.description = description;
     }
@@ -51,6 +54,7 @@ public class Location {
     public String getAddress() {
         return address;
     }
+
 
     public void setAddress(String address) {
         this.address = address;
@@ -60,6 +64,7 @@ public class Location {
         return city;
     }
 
+
     public void setCity(String city) {
         this.city = city;
     }
@@ -67,6 +72,7 @@ public class Location {
     public String getState() {
         return state;
     }
+
 
     public void setState(String state) {
         this.state = state;
@@ -108,6 +114,7 @@ public class Location {
         hash = 67 * hash + this.zip;
         hash = 67 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
         hash = 67 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
+
         return hash;
     }
 
@@ -153,14 +160,6 @@ public class Location {
         return true;
     }
 
-
-   
-
-    
-
-    
-  
-  
   
 
 }

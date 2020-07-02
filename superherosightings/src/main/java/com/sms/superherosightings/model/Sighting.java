@@ -4,6 +4,7 @@ package com.sms.superherosightings.model;
 import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -56,10 +57,10 @@ public class Sighting {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 67 * hash + this.sightingId;
-        hash = 67 * hash + (this.dateTime != null ? this.dateTime.hashCode() : 0);
-        hash = 67 * hash + (this.hero != null ? this.hero.hashCode() : 0);
-        hash = 67 * hash + (this.location != null ? this.location.hashCode() : 0);
+        hash = 89 * hash + this.sightingId;
+        hash = 89 * hash + Objects.hashCode(this.dateTime);
+        hash = 89 * hash + Objects.hashCode(this.hero);
+        hash = 89 * hash + Objects.hashCode(this.location);
         return hash;
     }
 
@@ -78,17 +79,18 @@ public class Sighting {
         if (this.sightingId != other.sightingId) {
             return false;
         }
-        if (this.dateTime != other.dateTime && (this.dateTime == null || !this.dateTime.equals(other.dateTime))) {
+        if (!Objects.equals(this.dateTime, other.dateTime)) {
             return false;
         }
-        if (this.hero != other.hero && (this.hero == null || !this.hero.equals(other.hero))) {
+        if (!Objects.equals(this.hero, other.hero)) {
             return false;
         }
-        if (this.location != other.location && (this.location == null || !this.location.equals(other.location))) {
+        if (!Objects.equals(this.location, other.location)) {
             return false;
         }
         return true;
     }
-    
+
+ 
     
 }

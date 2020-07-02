@@ -18,8 +18,10 @@ CREATE TABLE Location(
     City VARCHAR(30) NOT NULL,
     State CHAR(2) NOT NULL,
     ZipCode CHAR(5) NOT NULL,
-    Lat VARCHAR(10) NOT NULL,
-    `Long` VARCHAR(10) NOT NULL
+    Lat float NOT NULL,
+    `Long` float NOT NULL
+
+
 );
 
 CREATE TABLE Organization(
@@ -27,7 +29,7 @@ CREATE TABLE Organization(
     `Name` VARCHAR(30) NOT NULL,
     `Description` VARCHAR(30) NOT NULL,
      LocationId INT NOT NULL,
-     FOREIGN KEY FK_Organization_Location_LocationId(LocationId) references Location(LocationId),
+     FOREIGN KEY fk_Organization_Location_LocationId(LocationId) references Location(LocationId),
      Email VARCHAR(30) NOT NULL,
     `Type` VARCHAR(30) NOT NULL
 );
@@ -36,17 +38,17 @@ CREATE TABLE HeroOrganization(
 	HeroId INT,
     OrganizationId INT,
     PRIMARY KEY(HeroId, OrganizationId),
-    FOREIGN KEY FK_HeroOrganization_Hero_HeroId(HeroId) references Hero(HeroId),
-	FOREIGN KEY FK_HeroOrganization_Organization_OrganizationId(OrganizationId) references `Organization`(OrganizationId)
+    FOREIGN KEY fk_HeroOrganization_Hero(HeroId) references Hero(HeroId),
+	FOREIGN KEY fk_HeroOrganization_Organization(OrganizationId) references Organization(OrganizationId)
 );
 
 CREATE TABLE Sighting(
 	SightingId INT PRIMARY KEY AUTO_INCREMENT,
-    `Date` DATETIME,
+    DateAndTime DATETIME,
     LocationId INT,
     HeroId INT,
-    FOREIGN KEY FK_Sighting_Location_LocationId(LocationId) references Location(LocationId),
-    FOREIGN KEY FK_Sighting5_Hero_HeroId(HeroId) references Hero(HeroId)
+    FOREIGN KEY fk_Sighting_Location(LocationId) references Location(LocationId),
+    FOREIGN KEY fk_Sighting5_Hero(HeroId) references Hero(HeroId)
 );
 
 
