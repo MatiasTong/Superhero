@@ -61,7 +61,12 @@ public class Hero {
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 5;
+        hash = 67 * hash + this.heroId;
+        hash = 67 * hash + Objects.hashCode(this.name);
+        hash = 67 * hash + Objects.hashCode(this.description);
+        hash = 67 * hash + Objects.hashCode(this.superpower);
+        hash = 67 * hash + Objects.hashCode(this.type);
         return hash;
     }
 
@@ -94,7 +99,8 @@ public class Hero {
         }
         return true;
     }
-           
+
+  
     
            
 

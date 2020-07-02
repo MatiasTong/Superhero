@@ -71,7 +71,7 @@ public class SightingDaoImpl implements Dao<Sighting> {
     @Transactional
     public Sighting create(Sighting model) {
         try{
-        final String INSERT_SIGHTING = "INSERT INTO Sighting(`Date`, LocationId, HeroId) VALUES (?,?,?)";
+        final String INSERT_SIGHTING = "INSERT INTO Sighting(Date, LocationId, HeroId) VALUES (?,?,?)";
         int locationId = model.getLocation().getLocationId();
         int heroId = model.getHero().getHeroId();
         jdbc.update(INSERT_SIGHTING, model.getDateTime(), locationId, heroId);
@@ -97,7 +97,7 @@ public class SightingDaoImpl implements Dao<Sighting> {
     @Override
     public Sighting readById(int id) {
         try {
-            final String SELECT_SIGHTING = "Select SightingId, DateTime From Sighting WHERE SightingId = ?";
+            final String SELECT_SIGHTING = "Select SightingId, DateAndTime From Sighting WHERE SightingId = ?";
             Sighting sighting = jdbc.queryForObject(SELECT_SIGHTING, new SightingMapper(), id);
 
             Hero hero = getHeroForSighting(id);
@@ -114,7 +114,7 @@ public class SightingDaoImpl implements Dao<Sighting> {
 
     @Override
     public void update(Sighting model) {
-        final String UPDATE_SIGHTING = "UPDATE Sighting SET DateTime = ?, LocationId = ?, HeroId =? WHERE SightingId = ?";
+        final String UPDATE_SIGHTING = "UPDATE Sighting SET DateAndTime = ?, LocationId = ?, HeroId =? WHERE SightingId = ?";
         int locationId = model.getLocation().getLocationId();
         int heroId = model.getHero().getHeroId();
         jdbc.update(UPDATE_SIGHTING, model.getDateTime(), locationId, heroId, model.getSightingId());
@@ -140,7 +140,7 @@ public class SightingDaoImpl implements Dao<Sighting> {
         public Sighting mapRow(ResultSet rs, int index) throws SQLException {
             Sighting sighting = new Sighting();
             sighting.setSightingId(rs.getInt("SightingId"));
-            sighting.setDateTime(rs.getObject("Date", LocalDateTime.class));
+            sighting.setDateTime(rs.getObject("DateAndTime", LocalDateTime.class));
             return sighting;
         }
     }

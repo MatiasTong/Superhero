@@ -24,18 +24,7 @@ public class LocationDaoImpl implements Dao<Location> {
     JdbcTemplate jdbc;
 
     @Override
-<<<<<<< HEAD
 
-    public Location create(Location model) {
-        try {
-            final String INSERT_LOCATION = "INSERT INTO Location(`Name`, `Description`, Address, City, State, ZipCode, Lat, `Long`) VALUES (?,?,?,?,?,?,?,?); ";
-
-            jdbc.update(INSERT_LOCATION, model.getName(), model.getDescription(), model.getAddress(), model.getCity(), model.getState(), model.getZip(), model.getLatitude(), model.getLongitude());
-
-            int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
-
-            model.setLocationId(newId);
-=======
     public Location create(Location model) {
 
         final String INSERT_LOCATION = "INSERT INTO Location(`Name`, `Description`, Address, City, State, ZipCode, Lat , `Long`) VALUES (?,?,?,?,?,?,?,?); ";
@@ -43,12 +32,7 @@ public class LocationDaoImpl implements Dao<Location> {
 
         int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
         model.setLocationId(newId);
->>>>>>> 936cc9f6b44d88286e72038e50f0df8fc98b8cc8
-
             return model;
-        } catch (Exception e) {
-            return null;
-        }
     }
 
     @Override
@@ -71,15 +55,10 @@ public class LocationDaoImpl implements Dao<Location> {
 
     @Override
     public void update(Location model) {
-<<<<<<< HEAD
-        final String UPDATE_LOCATION = "UPDATE Location SET `Name` = ?,`Description` = ?, Address = ?, City = ?,State = ?,Zip=?,Latitude=?,Longitude=? WHERE LocationId = ?;";
-        jdbc.update(UPDATE_LOCATION, model.getName(), model.getDescription(), model.getAddress(), model.getCity(), model.getState(), model.getZip(), model.getLatitude(), model.getLongitude());
 
-=======
         final String UPDATE_LOCATION = "UPDATE Location SET `Name` = ?,`Description` = ?, Address = ?, City = ?,State = ?,ZipCode=?,Lat=?,`Long`=? WHERE LocationId = ?;";
         jdbc.update(UPDATE_LOCATION, model.getName(), model.getDescription(), model.getAddress(), model.getCity(), model.getState(), model.getZip(), model.getLatitude(), model.getLongitude(), model.getLocationId());
         
->>>>>>> 936cc9f6b44d88286e72038e50f0df8fc98b8cc8
     }
 
     @Override
@@ -93,23 +72,18 @@ public class LocationDaoImpl implements Dao<Location> {
         jdbc.update(DELETE_LOCATION, id);
 
     }
-<<<<<<< HEAD
 
-    public static final class LocationMapper implements RowMapper<Location> {
-
-=======
-    
-    private void insertLocationToSighting(Sighting model) {
-        List<Location> places = (List<Location>) model.getLocation();
-        for (Location place : places) {
-            final String INSERT_LOC_SIGHTING = "INSERT INTO Sighting(LocationId) VALUES (?);";
-            jdbc.update(INSERT_LOC_SIGHTING, place.getLocationId(), model.getSightingId());
-        }
-    }
+//    
+//    private void insertLocationToSighting(Sighting model) {
+//        List<Location> places = (List<Location>) model.getLocation();
+//        for (Location place : places) {
+//            final String INSERT_LOC_SIGHTING = "INSERT INTO Sighting(LocationId) VALUES (?);";
+//            jdbc.update(INSERT_LOC_SIGHTING, place.getLocationId(), model.getSightingId());
+//        }
+//    }
 
     public static final class LocationMapper implements RowMapper<Location>{
         
->>>>>>> 936cc9f6b44d88286e72038e50f0df8fc98b8cc8
         @Override
 
         public Location mapRow(ResultSet rs, int index) throws SQLException {
