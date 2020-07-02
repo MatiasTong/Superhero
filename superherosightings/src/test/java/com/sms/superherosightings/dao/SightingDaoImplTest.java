@@ -11,10 +11,9 @@ import com.sms.superherosightings.model.Organization;
 import com.sms.superherosightings.model.Sighting;
 import java.time.LocalDateTime;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
+
 import org.junit.Before;
-import org.junit.BeforeClass;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -38,69 +37,64 @@ public class SightingDaoImplTest {
 
     @Autowired
     SightingDaoImpl sightingDao;
-    
-    public SightingDaoImplTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
+        public SightingDaoImplTest() {
     }
     
     @Before
     public void setUp() {
-                //Delete all rows related to Hero, location, oragnization, and sighting
-        List<Hero> heroes = heroDao.readAll();
+        //Delete all rows related to Hero, location, oragnization, and sighting
+      List<Hero> heroes = heroDao.readAll();
         for (Hero hero : heroes) {
             heroDao.delete(hero.getHeroId());
         }
 
-        List<Location> locations = locationDao.readAll();
-        for (Location location : locations) {
-            locationDao.delete(location.getLocationId());
-        }
-
-        List<Organization> organizations = organizationDao.readAll();
-        for (Organization organization : organizations) {
-            organizationDao.delete(organization.getOrganizationId());
-        }
-
-        List<Sighting> sightings = sightingDao.readAll();
-        for (Sighting sighting : sightings) {
-            sightingDao.delete(sighting.getSightingId());
-        }
+//        List<Location> locations = locationDao.readAll();
+//        for (Location location : locations) {
+//            locationDao.delete(location.getLocationId());
+//        }
+//
+//        List<Organization> organizations = organizationDao.readAll();
+//        for (Organization organization : organizations) {
+//            organizationDao.delete(organization.getOrganizationId());
+//        }
+//
+//        List<Sighting> sightings = sightingDao.readAll();
+//        for (Sighting sighting : sightings) {
+//            sightingDao.delete(sighting.getSightingId());
+//        }
     }
     
-    @After
-    public void tearDown() {
-    }
-
     /**
      * Test of create method, of class SightingDaoImpl.
      */
     @Test
     public void testCreateAndReadByIdSighting() {
-        //Must create the location and hero objects to add as attributes for the sighting object
+//       setUp();
+        
+       //Must create the location and hero objects to add as attributes for the sighting object
+        setUp();
+        Hero hero = new Hero();
+        hero.setName("hero name");
+        hero.setSuperpower("Super Strength");
+        hero.setType("Superhero");
+        hero.setDescription("Test Description");
+        
+        //Act
+        hero = heroDao.create(hero);
+       
         Location location = new Location();
-        location.setLocationId(1);
         location.setAddress("test address");
         location.setCity("test city");
         location.setDescription("test description");
-        location.setLatitude(40.718464);
-        location.setLongitude(-73.928017);
+        location.setLatitude(40.7184);
+        location.setLongitude(-73.9280);
         location.setName("test name");
-        location.setState("test state");
+        location.setState("ny");
         location.setZip(99999);
+        location = locationDao.create(location);
+       
         
-        Hero hero = new Hero();
-        hero.setDescription("test description");
-        hero.setHeroId(1);
-        hero.setName("test name");
-        hero.setSuperpower("test superpower");
-        hero.setType("test type");
+        
         
         Sighting sighting = new Sighting();
         

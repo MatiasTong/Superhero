@@ -23,17 +23,21 @@ public class LocationDaoImpl implements Dao<Location> {
     JdbcTemplate jdbc;
 
     @Override
+
     public Location create(Location model) {
-        final String INSERT_LOCATION = "INSERT INTO Location(Name, Description, Address, City, State, ZipCode, Lat , `Long`) VALUES (?,?,?,?,?,?,?,?); ";
+        try {
+            final String INSERT_LOCATION = "INSERT INTO Location(`Name`, `Description`, Address, City, State, ZipCode, Lat, `Long`) VALUES (?,?,?,?,?,?,?,?); ";
 
-        jdbc.update(INSERT_LOCATION, model.getName(), model.getDescription(), model.getAddress(), model.getCity(), model.getState(), model.getZip(), model.getLatitude(), model.getLongitude());
+            jdbc.update(INSERT_LOCATION, model.getName(), model.getDescription(), model.getAddress(), model.getCity(), model.getState(), model.getZip(), model.getLatitude(), model.getLongitude());
 
-        int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
+            int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
 
+            model.setLocationId(newId);
 
-        model.setLocationId(newId);
-
-        return model;
+            return model;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
@@ -45,11 +49,11 @@ public class LocationDaoImpl implements Dao<Location> {
 
     @Override
     public Location readById(int id) {
-        try{
+        try {
             final String SELECT_LOCATION = "SELECT * FROM Location WHERE LocationId= ?";
-            Location location= jdbc.queryForObject(SELECT_LOCATION, new LocationMapper(), id);
+            Location location = jdbc.queryForObject(SELECT_LOCATION, new LocationMapper(), id);
             return location;
-        }catch (DataAccessException e){
+        } catch (DataAccessException e) {
             return null;
         }
     }
@@ -58,23 +62,23 @@ public class LocationDaoImpl implements Dao<Location> {
     public void update(Location model) {
         final String UPDATE_LOCATION = "UPDATE Location SET `Name` = ?,`Description` = ?, Address = ?, City = ?,State = ?,Zip=?,Latitude=?,Longitude=? WHERE LocationId = ?;";
         jdbc.update(UPDATE_LOCATION, model.getName(), model.getDescription(), model.getAddress(), model.getCity(), model.getState(), model.getZip(), model.getLatitude(), model.getLongitude());
-        
+
     }
 
     @Override
     public void delete(int id) {
-       final String DELETE_SIGHTING = "DELETE FROM Sighting WHERE LocationId =?";
-       final String DELETE_ORGANIZATION= "DELETE FROM Organization WHERE LocationId=?";
-       final String DELETE_LOCATION="DELETE FROM Location WHERE LocationId=?";
-       
-       jdbc.update(DELETE_SIGHTING, id);
-       jdbc.update(DELETE_ORGANIZATION, id);
-       jdbc.update(DELETE_LOCATION, id);
-       
+        final String DELETE_SIGHTING = "DELETE FROM Sighting WHERE LocationId =?";
+        final String DELETE_ORGANIZATION = "DELETE FROM Organization WHERE LocationId=?";
+        final String DELETE_LOCATION = "DELETE FROM Location WHERE LocationId=?";
+
+        jdbc.update(DELETE_SIGHTING, id);
+        jdbc.update(DELETE_ORGANIZATION, id);
+        jdbc.update(DELETE_LOCATION, id);
+
     }
-    
-    public static final class LocationMapper implements RowMapper<Location>{
-        
+
+    public static final class LocationMapper implements RowMapper<Location> {
+
         @Override
 
         public Location mapRow(ResultSet rs, int index) throws SQLException {
@@ -92,6 +96,5 @@ public class LocationDaoImpl implements Dao<Location> {
             return location;
         }
 
-
-}
+    }
 }

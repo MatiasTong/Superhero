@@ -24,63 +24,61 @@ public class Location {
   private double latitude; 
   private double longitude; 
 
-
     public int getLocationId() {
-        return LocationId;
+        return locationId;
     }
 
     public void setLocationId(int locationId) {
-        this.LocationId = LocationId;
+        this.locationId = locationId;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        this.Name = Name;
+        this.name = name;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        this.Description = Description;
+        this.description = description;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        this.Address = Address;
+        this.address = address;
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String city) {
-        this.City = City;
+        this.city = city;
     }
 
     public String getState() {
-        return State;
+        return state;
     }
 
     public void setState(String state) {
-        this.State = State;
+        this.state = state;
     }
 
     public int getZip() {
-        return Zip;
+        return zip;
     }
 
     public void setZip(int zip) {
-        this.Zip = Zip;
+        this.zip = zip;
     }
-
 
     public double getLatitude() {
         return latitude;
@@ -96,21 +94,20 @@ public class Location {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
-
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + this.locationId;
-        hash = 89 * hash + Objects.hashCode(this.name);
-        hash = 89 * hash + Objects.hashCode(this.description);
-        hash = 89 * hash + Objects.hashCode(this.address);
-        hash = 89 * hash + Objects.hashCode(this.city);
-        hash = 89 * hash + Objects.hashCode(this.state);
-        hash = 89 * hash + this.zip;
-        hash = 89 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
-        hash = 89 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
+        int hash = 5;
+        hash = 29 * hash + this.locationId;
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.description);
+        hash = 29 * hash + Objects.hashCode(this.address);
+        hash = 29 * hash + Objects.hashCode(this.city);
+        hash = 29 * hash + Objects.hashCode(this.state);
+        hash = 29 * hash + this.zip;
+        hash = 29 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
+        hash = 29 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
         return hash;
     }
 
@@ -155,6 +152,9 @@ public class Location {
         }
         return true;
     }
+
+
+  
 
     
 

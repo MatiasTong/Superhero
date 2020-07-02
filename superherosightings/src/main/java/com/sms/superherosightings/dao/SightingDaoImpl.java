@@ -19,6 +19,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class SightingDaoImpl implements Dao<Sighting> {
@@ -66,16 +67,22 @@ public class SightingDaoImpl implements Dao<Sighting> {
     }
 
     @Override
+    @Transactional
     public Sighting create(Sighting model) {
-        final String INSERT_SIGHTING = "INSERT INTO Sighting(LocationId, HeroId) VALUES (?,?,?)";
+        try{
+        final String INSERT_SIGHTING = "INSERT INTO Sighting(`Date`, LocationId, HeroId) VALUES (?,?,?)";
         int locationId = model.getLocation().getLocationId();
         int heroId = model.getHero().getHeroId();
-        jdbc.update(INSERT_SIGHTING, locationId, heroId);
+        jdbc.update(INSERT_SIGHTING, model.getDateTime(), locationId, heroId);
 
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         model.setSightingId(newId);
 
         return model;
+        } catch(Exception e){
+            return null;
+        }
+     
     }
 
     @Override
@@ -117,6 +124,14 @@ public class SightingDaoImpl implements Dao<Sighting> {
         final String DELETE_SIGHTING = "DELETE FROM Sighting WHERE SightingId = ?";
         jdbc.update(DELETE_SIGHTING, id);
     }
+    
+//    private void insertLocationToSighting(Sighting model) {
+//        List<Location> places = (List<Location>) model.getLocation();
+//        for (Location place : places) {
+//            final String INSERT_LOC_SIGHTING = "INSERT INTO Sighting(LocationId) VALUES (?);";
+//            jdbc.update(INSERT_LOC_SIGHTING, place.getLocationId(), model.getSightingId());
+//        }
+//    }
 
     public static final class SightingMapper implements RowMapper<Sighting> {
 
@@ -124,7 +139,7 @@ public class SightingDaoImpl implements Dao<Sighting> {
         public Sighting mapRow(ResultSet rs, int index) throws SQLException {
             Sighting sighting = new Sighting();
             sighting.setSightingId(rs.getInt("SightingId"));
-            sighting.setDateTime(rs.getObject("DateTime", LocalDateTime.class));
+            sighting.setDateTime(rs.getObject("Date", LocalDateTime.class));
             return sighting;
         }
     }
