@@ -20,14 +20,14 @@ public class Location {
   private String City;
   private String State;
   private int Zip; 
-  private BigDecimal Latitude; 
-  private BigDecimal Longitude; 
+  private double Latitude; 
+  private double Longitude; 
 
     public int getLocationId() {
         return LocationId;
     }
 
-    public void setLocationId(int locationId) {
+    public void setLocationId(int LocationId) {
         this.LocationId = LocationId;
     }
 
@@ -35,7 +35,7 @@ public class Location {
         return Name;
     }
 
-    public void setName(String name) {
+    public void setName(String Name) {
         this.Name = Name;
     }
 
@@ -43,7 +43,7 @@ public class Location {
         return Description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(String Description) {
         this.Description = Description;
     }
 
@@ -51,7 +51,7 @@ public class Location {
         return Address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(String Address) {
         this.Address = Address;
     }
 
@@ -59,7 +59,7 @@ public class Location {
         return City;
     }
 
-    public void setCity(String city) {
+    public void setCity(String City) {
         this.City = City;
     }
 
@@ -67,7 +67,7 @@ public class Location {
         return State;
     }
 
-    public void setState(String state) {
+    public void setState(String State) {
         this.State = State;
     }
 
@@ -75,38 +75,38 @@ public class Location {
         return Zip;
     }
 
-    public void setZip(int zip) {
+    public void setZip(int Zip) {
         this.Zip = Zip;
     }
 
-    public BigDecimal getLatitude() {
+    public double getLatitude() {
         return Latitude;
     }
 
-    public void setLatitude(BigDecimal latitude) {
+    public void setLatitude(double Latitude) {
         this.Latitude = Latitude;
     }
 
-    public BigDecimal getLongitude() {
+    public double getLongitude() {
         return Longitude;
     }
 
-    public void setLongitude(BigDecimal longitude) {
+    public void setLongitude(double Longitude) {
         this.Longitude = Longitude;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + this.locationId;
-        hash = 59 * hash + Objects.hashCode(this.name);
-        hash = 59 * hash + Objects.hashCode(this.description);
-        hash = 59 * hash + Objects.hashCode(this.address);
-        hash = 59 * hash + Objects.hashCode(this.city);
-        hash = 59 * hash + Objects.hashCode(this.state);
-        hash = 59 * hash + this.zip;
-        hash = 59 * hash + Objects.hashCode(this.latitude);
-        hash = 59 * hash + Objects.hashCode(this.longitude);
+        hash = 53 * hash + this.LocationId;
+        hash = 53 * hash + Objects.hashCode(this.Name);
+        hash = 53 * hash + Objects.hashCode(this.Description);
+        hash = 53 * hash + Objects.hashCode(this.Address);
+        hash = 53 * hash + Objects.hashCode(this.City);
+        hash = 53 * hash + Objects.hashCode(this.State);
+        hash = 53 * hash + this.Zip;
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.Latitude) ^ (Double.doubleToLongBits(this.Latitude) >>> 32));
+        hash = 53 * hash + (int) (Double.doubleToLongBits(this.Longitude) ^ (Double.doubleToLongBits(this.Longitude) >>> 32));
         return hash;
     }
 
@@ -122,36 +122,36 @@ public class Location {
             return false;
         }
         final Location other = (Location) obj;
-        if (this.locationId != other.locationId) {
+        if (this.LocationId != other.LocationId) {
             return false;
         }
-        if (this.zip != other.zip) {
+        if (this.Zip != other.Zip) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
+        if (Double.doubleToLongBits(this.Latitude) != Double.doubleToLongBits(other.Latitude)) {
             return false;
         }
-        if (!Objects.equals(this.description, other.description)) {
+        if (Double.doubleToLongBits(this.Longitude) != Double.doubleToLongBits(other.Longitude)) {
             return false;
         }
-        if (!Objects.equals(this.address, other.address)) {
+        if (!Objects.equals(this.Name, other.Name)) {
             return false;
         }
-        if (!Objects.equals(this.city, other.city)) {
+        if (!Objects.equals(this.Description, other.Description)) {
             return false;
         }
-        if (!Objects.equals(this.state, other.state)) {
+        if (!Objects.equals(this.Address, other.Address)) {
             return false;
         }
-        if (!Objects.equals(this.latitude, other.latitude)) {
+        if (!Objects.equals(this.City, other.City)) {
             return false;
         }
-        if (!Objects.equals(this.longitude, other.longitude)) {
+        if (!Objects.equals(this.State, other.State)) {
             return false;
         }
         return true;
     }
-  
+
   
   
   

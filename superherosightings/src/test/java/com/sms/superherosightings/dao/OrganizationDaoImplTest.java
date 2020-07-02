@@ -102,8 +102,9 @@ public class OrganizationDaoImplTest {
         location.setCity("NYC");
         location.setState("NY");
         location.setZip(11104);
-        location.setLatitude(new BigDecimal("0.0"));
-        location.setLongitude(new BigDecimal("0.0"));
+        location.setLatitude(0.1);
+        location.setLongitude(0.0);
+        
         //ACT
         Organization org1 = new Organization();
 
