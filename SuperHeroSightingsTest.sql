@@ -2,11 +2,18 @@ DROP DATABASE IF EXISTS SuperHeroSightingsTest;
 CREATE DATABASE SuperHeroSightingsTest;
 USE SuperHeroSightingsTest;
 
+CREATE TABLE Superpower(
+    SuperpowerId INT PRIMARY KEY AUTO_INCREMENT,
+    Superpower VARCHAR(30) NOT NULL,
+    `Description` VARCHAR(30) NOT NULL
+);
+
 CREATE TABLE Hero(
 	HeroId INT PRIMARY KEY AUTO_INCREMENT,
     `Name` VARCHAR(30) NOT NULL,
     `Description` VARCHAR(30) NOT NULL,
-    Superpower VARCHAR(30) NOT NULL,
+    SuperpowerId INT NOT NULL,
+    FOREIGN KEY fk_Hero_Superpower_SuperpowerId(SuperpowerId) references Superpower(SuperpowerId),
     `Type` VARCHAR(30) NOT NULL
 );
 
@@ -47,10 +54,5 @@ CREATE TABLE Sighting(
     HeroId INT,
     FOREIGN KEY fk_Sighting_Location(LocationId) references Location(LocationId),
     FOREIGN KEY fk_Sighting5_Hero(HeroId) references Hero(HeroId)
-);
-
-CREATE TABLE Superpower(
-	SuperPowerId INT PRIMARY KEY AUTO_INCREMENT,
-    `Description` VARCHAR(30) NOT NULL
 );
 
