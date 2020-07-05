@@ -6,7 +6,7 @@ CREATE TABLE Hero(
 	HeroId INT PRIMARY KEY AUTO_INCREMENT,
     `Name` VARCHAR(30) NOT NULL,
     `Description` VARCHAR(30) NOT NULL,
-    Specialty VARCHAR(30) NOT NULL,
+    Superpower VARCHAR(30) NOT NULL,
     `Type` VARCHAR(30) NOT NULL
 );
 
@@ -42,11 +42,15 @@ CREATE TABLE HeroOrganization(
 
 CREATE TABLE Sighting(
 	SightingId INT PRIMARY KEY AUTO_INCREMENT,
-    DateAndTime DATETIME,
+    DateTime DATETIME,
     LocationId INT,
     HeroId INT,
     FOREIGN KEY fk_Sighting_Location(LocationId) references Location(LocationId),
     FOREIGN KEY fk_Sighting5_Hero(HeroId) references Hero(HeroId)
 );
 
-select * From Sighting;
+CREATE TABLE Superpower(
+	SuperPowerId INT PRIMARY KEY AUTO_INCREMENT,
+    `Description` VARCHAR(30) NOT NULL
+);
+
