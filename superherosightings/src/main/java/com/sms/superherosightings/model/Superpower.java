@@ -16,7 +16,6 @@ public class Superpower {
     private int superpowerId;
      private String superpower;
     private String description;
-    private List<Hero> heroes;
 
     public int getSuperpowerId() {
         return superpowerId;
@@ -42,21 +41,17 @@ public class Superpower {
         this.description = description;
     }
 
-    public List<Hero> getHeroes() {
-        return heroes;
-    }
-
-    public void setHeroes(List<Hero> heroes) {
-        this.heroes = heroes;
+    @Override
+    public String toString() {
+        return "Superpower{" + "superpowerId=" + superpowerId + ", superpower=" + superpower + ", description=" + description + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 71 * hash + this.superpowerId;
-        hash = 71 * hash + Objects.hashCode(this.superpower);
-        hash = 71 * hash + Objects.hashCode(this.description);
-        hash = 71 * hash + Objects.hashCode(this.heroes);
+        int hash = 7;
+        hash = 53 * hash + this.superpowerId;
+        hash = 53 * hash + Objects.hashCode(this.superpower);
+        hash = 53 * hash + Objects.hashCode(this.description);
         return hash;
     }
 
@@ -81,12 +76,8 @@ public class Superpower {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.heroes, other.heroes)) {
-            return false;
-        }
         return true;
     }
 
-    
     
 }

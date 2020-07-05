@@ -4,8 +4,8 @@ USE SuperHeroSightingsTest;
 
 CREATE TABLE Superpower(
     SuperpowerId INT PRIMARY KEY AUTO_INCREMENT,
-    Superpower VARCHAR(30) NOT NULL,
-    `Description` VARCHAR(30) NOT NULL
+    Power VARCHAR(30) NOT NULL,
+    `Description` VARCHAR(60) NOT NULL
 );
 
 CREATE TABLE Hero(
@@ -49,7 +49,7 @@ CREATE TABLE HeroOrganization(
 
 CREATE TABLE Sighting(
 	SightingId INT PRIMARY KEY AUTO_INCREMENT,
-    DateTime DATETIME,
+    Date DATETIME,
     LocationId INT,
     HeroId INT,
     FOREIGN KEY fk_Sighting_Location(LocationId) references Location(LocationId),

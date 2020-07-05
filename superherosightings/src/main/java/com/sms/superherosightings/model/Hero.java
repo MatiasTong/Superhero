@@ -16,7 +16,7 @@ public class Hero {
    private int heroId;
    private String name;
    private String description; 
-   private Superpower superpower; 
+   private int superpowerId; 
    private String type;
 
     public int getHeroId() {
@@ -43,13 +43,15 @@ public class Hero {
         this.description = description;
     }
 
-    public Superpower getSuperpower() {
-        return superpower;
+    public int getSuperpowerId() {
+        return superpowerId;
     }
 
-    public void setSuperpower(Superpower superpower) {
-        this.superpower = superpower;
+    public void setSuperpowerId(int superpowerId) {
+        this.superpowerId = superpowerId;
     }
+
+  
 
     public String getType() {
         return type;
@@ -60,13 +62,18 @@ public class Hero {
     }
 
     @Override
+    public String toString() {
+        return "Hero{" + "heroId=" + heroId + ", name=" + name + ", description=" + description + ", superpowerId=" + superpowerId + ", type=" + type + '}';
+    }
+
+    @Override
     public int hashCode() {
         int hash = 7;
-        hash = 97 * hash + this.heroId;
-        hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + Objects.hashCode(this.description);
-        hash = 97 * hash + Objects.hashCode(this.superpower);
-        hash = 97 * hash + Objects.hashCode(this.type);
+        hash = 71 * hash + this.heroId;
+        hash = 71 * hash + Objects.hashCode(this.name);
+        hash = 71 * hash + Objects.hashCode(this.description);
+        hash = 71 * hash + this.superpowerId;
+        hash = 71 * hash + Objects.hashCode(this.type);
         return hash;
     }
 
@@ -85,6 +92,9 @@ public class Hero {
         if (this.heroId != other.heroId) {
             return false;
         }
+        if (this.superpowerId != other.superpowerId) {
+            return false;
+        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -94,11 +104,8 @@ public class Hero {
         if (!Objects.equals(this.type, other.type)) {
             return false;
         }
-        if (!Objects.equals(this.superpower, other.superpower)) {
-            return false;
-        }
         return true;
     }
 
-  
+   
 }

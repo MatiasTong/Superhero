@@ -8,6 +8,8 @@ package com.sms.superherosightings.dao;
 import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
 import com.sms.superherosightings.model.Organization;
+import com.sms.superherosightings.model.Sighting;
+import com.sms.superherosightings.model.Superpower;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -32,7 +34,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class OrganizationDaoImplTest {
 
-    //dependency injection
     @Autowired
     HeroDaoImpl heroDao;
 
@@ -42,11 +43,18 @@ public class OrganizationDaoImplTest {
     @Autowired
     OrganizationDaoImpl organizationDao;
 
+    @Autowired
+    SightingDaoImpl sightingDao;
+
+    @Autowired
+    SuperpowerDaoImpl superpowerDao;
+
     public OrganizationDaoImplTest() {
     }
 
     @BeforeAll
     public static void setUpClass() {
+
     }
 
     @AfterAll
@@ -55,6 +63,7 @@ public class OrganizationDaoImplTest {
 
     @BeforeEach
     public void setUp() {
+        //Delete all rows related to Hero, location, oragnization, and sighting
         List<Hero> heroes = heroDao.readAll();
         for (Hero hero : heroes) {
             heroDao.delete(hero.getHeroId());
@@ -65,10 +74,19 @@ public class OrganizationDaoImplTest {
             organizationDao.delete(organization.getOrganizationId());
         }
 
+        List<Sighting> sightings = sightingDao.readAll();
+        for (Sighting sighting : sightings) {
+            sightingDao.delete(sighting.getSightingId());
+        }
+
+        List<Superpower> superpowers = superpowerDao.readAll();
+        for (Superpower superpower : superpowers) {
+            superpowerDao.delete(superpower.getSuperpowerId());
+        }
+
         List<Location> locations = locationDao.readAll();
         for (Location location : locations) {
             locationDao.delete(location.getLocationId());
-
         }
     }
 
@@ -85,12 +103,18 @@ public class OrganizationDaoImplTest {
         organization
          */
         setUp();
+
         List<Hero> heroes = new ArrayList<>();
+
+        Superpower superpower = new Superpower();
+        superpower.setSuperpower("Superstrength");
+        superpower.setDescription("The ability to move a ton of things");
+        superpower = superpowerDao.create(superpower);
 
         Hero superHero = new Hero();
         superHero.setName("Spiderman");
         superHero.setDescription("classic");
-        superHero.setSuperpower("speed");
+        superHero.setSuperpowerId(superpower.getSuperpowerId());
         superHero.setType("hero");
         superHero = heroDao.create(superHero);
 
@@ -103,8 +127,8 @@ public class OrganizationDaoImplTest {
         location.setCity("NYC");
         location.setState("NY");
         location.setZip(11104);
-        location.setLatitude(0.0);
-        location.setLongitude(0.0);
+        location.setLatitude(0.01);
+        location.setLongitude(0.01);
         location = locationDao.create(location);
 
         //ACT
@@ -129,10 +153,15 @@ public class OrganizationDaoImplTest {
     @Test
     public void testReadAllOrganizations() {
 
+        Superpower superpower = new Superpower();
+        superpower.setSuperpower("Superstrength");
+        superpower.setDescription("The ability to move a ton of things");
+        superpower = superpowerDao.create(superpower);
+
         Hero superHero = new Hero();
         superHero.setName("Spiderman");
         superHero.setDescription("classic");
-        superHero.setSuperpower("speed");
+        superHero.setSuperpowerId(superpower.getSuperpowerId());
         superHero.setType("hero");
         superHero = heroDao.create(superHero);
 
@@ -146,8 +175,8 @@ public class OrganizationDaoImplTest {
         location.setCity("NYC");
         location.setState("NY");
         location.setZip(11104);
-        location.setLatitude(0.0);
-        location.setLongitude(0.0);
+        location.setLatitude(0.01);
+        location.setLongitude(0.01);
         location = locationDao.create(location);
 
         Organization org1 = new Organization();
@@ -180,17 +209,21 @@ public class OrganizationDaoImplTest {
     @Test
     public void testUpdateOrg() {
         setUp();
+        Superpower superpower = new Superpower();
+        superpower.setSuperpower("Superstrength");
+        superpower.setDescription("The ability to move a ton of things");
+        superpower = superpowerDao.create(superpower);
+
         Hero superHero = new Hero();
         superHero.setName("Spiderman");
         superHero.setDescription("classic");
-        superHero.setSuperpower("speed");
+        superHero.setSuperpowerId(superpower.getSuperpowerId());
         superHero.setType("hero");
         superHero = heroDao.create(superHero);
 
         List<Hero> heroes = new ArrayList<>();
         heroes.add(superHero);
 
-        
         Location location = new Location();
         location.setName("City Bank");
         location.setDescription("Busiest bank in the city");
@@ -198,8 +231,8 @@ public class OrganizationDaoImplTest {
         location.setCity("NYC");
         location.setState("NY");
         location.setZip(11104);
-        location.setLatitude(0.0);
-        location.setLongitude(0.0);
+        location.setLatitude(0.01);
+        location.setLongitude(0.01);
         location = locationDao.create(location);
 
         Organization org = new Organization();
@@ -213,7 +246,7 @@ public class OrganizationDaoImplTest {
 
         Organization fromDao = organizationDao.readById(org.getOrganizationId());
 
-        assertEquals(fromDao, org);
+        assertEquals(org, fromDao);
 
         org.setEmail("classicheroes123@gmail.com");
 
@@ -228,10 +261,16 @@ public class OrganizationDaoImplTest {
     @Test
     public void testDeleteOrgById() {
         setUp();
+
+        Superpower superpower = new Superpower();
+        superpower.setSuperpower("Superstrength");
+        superpower.setDescription("The ability to move a ton of things");
+        superpower = superpowerDao.create(superpower);
+
         Hero superHero = new Hero();
         superHero.setName("Spiderman");
         superHero.setDescription("classic");
-        superHero.setSuperpower("speed");
+        superHero.setSuperpowerId(superpower.getSuperpowerId());
         superHero.setType("hero");
         superHero = heroDao.create(superHero);
 
@@ -245,8 +284,8 @@ public class OrganizationDaoImplTest {
         location.setCity("NYC");
         location.setState("NY");
         location.setZip(11104);
-        location.setLatitude(0.0);
-        location.setLongitude(0.0);
+        location.setLatitude(0.01);
+        location.setLongitude(0.01);
         location = locationDao.create(location);
 
         Organization org = new Organization();

@@ -9,19 +9,19 @@ import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
 import com.sms.superherosightings.model.Organization;
 import com.sms.superherosightings.model.Sighting;
+import com.sms.superherosightings.model.Superpower;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import org.junit.After;
-import org.junit.AfterClass;
-
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,31 +49,28 @@ public class SightingDaoImplTest {
 
     @Autowired
     SightingDaoImpl sightingDao;
+    
+    @Autowired
+    SuperpowerDaoImpl superpowerDao;
 
     public SightingDaoImplTest() {
     }
 
-
-    @BeforeClass
+    @BeforeAll
     public static void setUpClass() {
+
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownClass() {
     }
 
-
-    @Before
+    @BeforeEach
     public void setUp() {
         //Delete all rows related to Hero, location, oragnization, and sighting
         List<Hero> heroes = heroDao.readAll();
         for (Hero hero : heroes) {
             heroDao.delete(hero.getHeroId());
-        }
-
-        List<Location> locations = locationDao.readAll();
-        for (Location location : locations) {
-            locationDao.delete(location.getLocationId());
         }
 
         List<Organization> organizations = organizationDao.readAll();
@@ -84,6 +81,16 @@ public class SightingDaoImplTest {
         List<Sighting> sightings = sightingDao.readAll();
         for (Sighting sighting : sightings) {
             sightingDao.delete(sighting.getSightingId());
+        }
+        
+        List<Superpower> superpowers = superpowerDao.readAll();
+        for(Superpower superpower: superpowers){
+            superpowerDao.delete(superpower.getSuperpowerId());
+        }
+        
+          List<Location> locations = locationDao.readAll();
+        for(Location location: locations){
+            locationDao.delete(location.getLocationId());
         }
     }
 
@@ -99,10 +106,15 @@ public class SightingDaoImplTest {
     @Test
     public void testCreateAndReadByIdSighting() {
         setUp();
-        //Must create the location and hero objects to add as attributes for the sighting object
+        //Must create the superhero, location, and hero objects to add as attributes for the hero and sighting object
+        Superpower superpower = new Superpower();
+        superpower.setSuperpower("Superstrength");
+        superpower.setDescription("The ability to move a ton of things");
+        superpower = superpowerDao.create(superpower);
+        
         Hero hero = new Hero();
         hero.setName("hero name");
-        hero.setSuperpower("Super Strength");
+        hero.setSuperpowerId(superpower.getSuperpowerId());
         hero.setType("Superhero");
         hero.setDescription("Test Description");
         hero = heroDao.create(hero);
@@ -150,11 +162,15 @@ public class SightingDaoImplTest {
         location.setZip(99999);
         location = locationDao.create(location);
 
-
+        Superpower superpower = new Superpower();
+        superpower.setSuperpower("Superstrength");
+        superpower.setDescription("The ability to move a ton of things");
+        superpower = superpowerDao.create(superpower);
+        
         Hero hero = new Hero();
         hero.setDescription("test description");
         hero.setName("test name");
-        hero.setSuperpower("test superpower");
+        hero.setSuperpowerId(superpower.getSuperpowerId());
         hero.setType("test type");
 
         hero = heroDao.create(hero);
@@ -199,11 +215,15 @@ public class SightingDaoImplTest {
 
         location = locationDao.create(location);
 
-
+        Superpower superpower = new Superpower();
+        superpower.setSuperpower("Superstrength");
+        superpower.setDescription("The ability to move a ton of things");
+        superpower = superpowerDao.create(superpower);
+        
         Hero hero = new Hero();
         hero.setDescription("test description");
         hero.setName("test name");
-        hero.setSuperpower("test superpower");
+        hero.setSuperpowerId(superpower.getSuperpowerId());
         hero.setType("test type");
 
         hero = heroDao.create(hero);
@@ -221,10 +241,15 @@ public class SightingDaoImplTest {
 
         //Before calling the update function, assert that the sighting with updates 
         //is different from the one currently in the database
+        Superpower superpower2 = new Superpower();
+        superpower2.setSuperpower("Superstrength");
+        superpower2.setDescription("The ability to move a ton of things");
+        superpower2 = superpowerDao.create(superpower2);
+        
         Hero hero2 = new Hero();
         hero2.setDescription("test description 2");
         hero2.setName("test name 2");
-        hero2.setSuperpower("test superpower 2");
+        hero2.setSuperpowerId(superpower2.getSuperpowerId());
         hero2.setType("test type 2");
 
         hero2 = heroDao.create(hero2);
@@ -257,10 +282,15 @@ public class SightingDaoImplTest {
 
         location = locationDao.create(location);
         
+        Superpower superpower = new Superpower();
+        superpower.setSuperpower("Superstrength");
+        superpower.setDescription("The ability to move a ton of things");
+        superpower = superpowerDao.create(superpower);
+        
         Hero hero = new Hero();
         hero.setDescription("test description");
         hero.setName("test name");
-        hero.setSuperpower("test superpower");
+        hero.setSuperpowerId(superpower.getSuperpowerId());
         hero.setType("test type");
         hero = heroDao.create(hero);
 

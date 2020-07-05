@@ -81,7 +81,7 @@ public class SightingDaoImpl implements Dao<Sighting> {
     public Sighting create(Sighting model) {
 
         try{
-        final String INSERT_SIGHTING = "INSERT INTO Sighting(Date, LocationId, HeroId) VALUES (?,?,?)";
+        final String INSERT_SIGHTING = "INSERT INTO Sighting(`Date`, LocationId, HeroId) VALUES (?,?,?)";
 
         int locationId = model.getLocation().getLocationId();
         int heroId = model.getHero().getHeroId();
