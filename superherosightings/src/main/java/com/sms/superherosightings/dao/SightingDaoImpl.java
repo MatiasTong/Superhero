@@ -89,8 +89,8 @@ public class SightingDaoImpl implements Dao<Sighting> {
 
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         model.setSightingId(newId);
-
         return model;
+        
         } catch(Exception e){
             return null;
         }
@@ -142,7 +142,7 @@ public class SightingDaoImpl implements Dao<Sighting> {
     
 //    private void insertLocationToSighting(Sighting model) {
 //        List<Location> places = (List<Location>) model.getLocation();
-//        for (Location place : places) {
+//        for (Location place : places)  {
 //            final String INSERT_LOC_SIGHTING = "INSERT INTO Sighting(LocationId) VALUES (?);";
 //            jdbc.update(INSERT_LOC_SIGHTING, place.getLocationId(), model.getSightingId());
 //        }

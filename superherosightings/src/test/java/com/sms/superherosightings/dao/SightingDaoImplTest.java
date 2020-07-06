@@ -138,7 +138,7 @@ public class SightingDaoImplTest {
 
         Sighting fromDao = sightingDao.readById(sighting.getSightingId());
 
-        assertEquals(fromDao.getDateTime().truncatedTo(ChronoUnit.SECONDS), sighting.getDateTime());
+        assertEquals(fromDao.getDateTime().truncatedTo(ChronoUnit.SECONDS), sighting.getDateTime().truncatedTo(ChronoUnit.SECONDS));
         assertEquals(fromDao.getHero(), sighting.getHero());
         assertEquals(fromDao.getLocation(), sighting.getLocation());
 
@@ -189,7 +189,6 @@ public class SightingDaoImplTest {
         sighting2 = sightingDao.create(sighting2);
 
         List<Sighting> sightings = sightingDao.readAll();
-
 
         assertEquals(sightings.size(), 2);
 
