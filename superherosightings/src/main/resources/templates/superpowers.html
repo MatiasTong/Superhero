@@ -75,8 +75,8 @@
                             <td th:text="${superpower.superpowerId}">Superpower ID</td>
                             <td th:text="${superpower.superpower}">Superpower</td>
                             <td th:text="${superpower.description}">Description</td>
-                            <td><a href="#" >Edit</a></td>
-                            <td><a href="#" >Delete</a></td>
+                            <td><a href="#" th:href ="@{/editSuperpower(id = ${superpower.superpowerId})}">Edit</a></td>
+                            <td><a href="#" th:href = "@{/delete(id = ${superpower.superpowerId})}">Delete</a></td>
                         </tr>
                     </tbody>
                 </table>

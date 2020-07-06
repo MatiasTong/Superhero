@@ -55,4 +55,25 @@ public class SuperpowerController {
           superpowerDao.create(sp);
           return "redirect:/superpowers";
       }    
+      
+    @GetMapping("delete")
+    public String deleteSuperpower(Integer id){
+        superpowerDao.delete(id);
+        return "redirect:/superpowers";
+        
+    }
+    
+    @GetMapping("editSuperpower")
+    public String editSuperpower(Integer id, Model model) {
+        Superpower sp = superpowerDao.readById(id);
+        model.addAttribute("sp", sp);
+        return "editSuperpower";
+    }
+    
+    @PostMapping("editSuperpower")
+    public String performEditSuperpower(Superpower superpower) {
+        superpowerDao.update(superpower);
+        return "redirect:/superpowers";
+    }
+    
 }

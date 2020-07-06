@@ -5,10 +5,13 @@
  */
 package com.sms.superherosightings.controller;
 
+import org.springframework.stereotype.Controller;
+
 /**
  *
  * @author matiastong
  */
+@Controller
 public class SightingController {
     
 }
