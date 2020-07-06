@@ -118,7 +118,6 @@ public class OrganizationDaoImpl implements Dao<Organization> {
                 + "= ho.OrganizationId WHERE ho.HeroId = ?";
         List<Organization> organizations = jdbc.query(SELECT_ORG_FOR_HERO,
                 new OrgMapper(), hero.getHeroId());
-        associateHeroesAndOrg(organizations);
         return organizations;
     }
 
@@ -135,6 +134,7 @@ public class OrganizationDaoImpl implements Dao<Organization> {
                 + "JOIN HeroOrganization ho ON h.HeroId "
                 + "= ho.HeroId WHERE ho.OrganizationId = ?";
         return jdbc.query(SELECT_HEROES_FOR_ORG, new HeroMapper(), org.getOrganizationId());
+        
     }
 
     private void associateHeroesAndOrg(List<Organization> organizations) {

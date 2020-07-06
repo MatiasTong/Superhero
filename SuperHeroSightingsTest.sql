@@ -2,11 +2,18 @@ DROP DATABASE IF EXISTS SuperHeroSightingsTest;
 CREATE DATABASE SuperHeroSightingsTest;
 USE SuperHeroSightingsTest;
 
+CREATE TABLE Superpower(
+    SuperpowerId INT PRIMARY KEY AUTO_INCREMENT,
+    Power VARCHAR(30) NOT NULL,
+    `Description` VARCHAR(60) NOT NULL
+);
+
 CREATE TABLE Hero(
 	HeroId INT PRIMARY KEY AUTO_INCREMENT,
     `Name` VARCHAR(30) NOT NULL,
     `Description` VARCHAR(30) NOT NULL,
-    Specialty VARCHAR(30) NOT NULL,
+    SuperpowerId INT NOT NULL,
+    FOREIGN KEY fk_Hero_Superpower_SuperpowerId(SuperpowerId) references Superpower(SuperpowerId),
     `Type` VARCHAR(30) NOT NULL
 );
 

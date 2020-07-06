@@ -10,15 +10,16 @@ import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
 import com.sms.superherosightings.model.Sighting;
 import com.sms.superherosightings.model.Organization;
+import com.sms.superherosightings.model.Superpower;
 import java.util.List;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,8 +33,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LocationDaoImplTest {
-
-    @Autowired
+   @Autowired
     HeroDaoImpl heroDao;
 
     @Autowired
@@ -44,27 +44,28 @@ public class LocationDaoImplTest {
 
     @Autowired
     SightingDaoImpl sightingDao;
+    
+    @Autowired
+    SuperpowerDaoImpl superpowerDao;
 
     public LocationDaoImplTest() {
     }
 
-    @BeforeClass
+    @BeforeAll
     public static void setUpClass() {
+
     }
 
-    @AfterClass
+    @AfterAll
     public static void tearDownClass() {
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
+        //Delete all rows related to Hero, location, oragnization, and sighting
         List<Hero> heroes = heroDao.readAll();
         for (Hero hero : heroes) {
             heroDao.delete(hero.getHeroId());
-        }
-        List<Location> locations = locationDao.readAll();
-        for (Location location : locations) {
-            locationDao.delete(location.getLocationId());
         }
 
         List<Organization> organizations = organizationDao.readAll();
@@ -75,6 +76,16 @@ public class LocationDaoImplTest {
         List<Sighting> sightings = sightingDao.readAll();
         for (Sighting sighting : sightings) {
             sightingDao.delete(sighting.getSightingId());
+        }
+        
+        List<Superpower> superpowers = superpowerDao.readAll();
+        for(Superpower superpower: superpowers){
+            superpowerDao.delete(superpower.getSuperpowerId());
+        }
+        
+          List<Location> locations = locationDao.readAll();
+        for(Location location: locations){
+            locationDao.delete(location.getLocationId());
         }
     }
 
@@ -96,7 +107,7 @@ public class LocationDaoImplTest {
         location.setCity("City");
         location.setState("NY");
         location.setZip(11323);
-        location.setLatitude(123.45);
+        location.setLatitude(90.45);
         location.setLongitude(123.45);
 
         //Act
@@ -123,7 +134,7 @@ public class LocationDaoImplTest {
         location.setCity("City");
         location.setState("NY");
         location.setZip(11323);
-        location.setLatitude(123.45);
+        location.setLatitude(90.45);
         location.setLongitude(123.45);
         location = locationDao.create(location);
 
@@ -134,7 +145,7 @@ public class LocationDaoImplTest {
         secondLocation.setCity("Second City");
         secondLocation.setState("NY");
         secondLocation.setZip(11323);
-        secondLocation.setLatitude(123.45);
+        secondLocation.setLatitude(90.45);
         secondLocation.setLongitude(123.45);
         secondLocation = locationDao.create(secondLocation);
 
@@ -163,7 +174,7 @@ public class LocationDaoImplTest {
         location.setCity("City");
         location.setState("NY");
         location.setZip(11323);
-        location.setLatitude(123.45);
+        location.setLatitude(90.45);
         location.setLongitude(123.45);
         location = locationDao.create(location);
 
@@ -177,7 +188,7 @@ public class LocationDaoImplTest {
         location.setCity("City Updated");
         location.setState("NY");
         location.setZip(11323);
-        location.setLatitude(123.45);
+        location.setLatitude(90.45);
         location.setLongitude(123.45);
 
         locationDao.update(location);
@@ -203,7 +214,7 @@ public class LocationDaoImplTest {
         location.setCity("City");
         location.setState("NY");
         location.setZip(11323);
-        location.setLatitude(123.45);
+        location.setLatitude(90.45);
         location.setLongitude(123.45);
         location = locationDao.create(location);
         

@@ -2,11 +2,18 @@ DROP DATABASE IF EXISTS SuperHeroSightings;
 CREATE DATABASE SuperHeroSightings;
 USE SuperHeroSightings;
 
+CREATE TABLE Superpower(
+    SuperpowerId INT PRIMARY KEY AUTO_INCREMENT,
+    Power VARCHAR(30) NOT NULL,
+    `Description` VARCHAR(60) NOT NULL
+);
+
 CREATE TABLE Hero(
 	HeroId INT PRIMARY KEY AUTO_INCREMENT,
     `Name` VARCHAR(30) NOT NULL,
     `Description` VARCHAR(30) NOT NULL,
-    Specialty VARCHAR(30) NOT NULL,
+    SuperpowerId INT NOT NULL,
+    FOREIGN KEY fk_Hero_Superpower_SuperpowerId(SuperpowerId) references Superpower(SuperpowerId),
     `Type` VARCHAR(30) NOT NULL
 );
 
@@ -18,10 +25,8 @@ CREATE TABLE Location(
     City VARCHAR(30) NOT NULL,
     State CHAR(2) NOT NULL,
     ZipCode CHAR(5) NOT NULL,
-    Lat float NOT NULL,
-    `Long` float NOT NULL
-
-
+    Lat decimal(8,6) NOT NULL,
+    `Long` decimal(9,6) NOT NULL
 );
 
 CREATE TABLE Organization(
@@ -44,12 +49,18 @@ CREATE TABLE HeroOrganization(
 
 CREATE TABLE Sighting(
 	SightingId INT PRIMARY KEY AUTO_INCREMENT,
-    DateAndTime DATETIME,
+    Date DATETIME,
     LocationId INT,
     HeroId INT,
     FOREIGN KEY fk_Sighting_Location(LocationId) references Location(LocationId),
     FOREIGN KEY fk_Sighting5_Hero(HeroId) references Hero(HeroId)
 );
+
+insert into Superpower (Superpower,Description) values("strength", "test description");
+select * from Superpower;
+
+
+
 
 
 

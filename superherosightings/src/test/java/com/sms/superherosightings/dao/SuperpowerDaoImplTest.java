@@ -31,7 +31,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class HeroDaoImplTest {
+public class SuperpowerDaoImplTest {
 
     @Autowired
     HeroDaoImpl heroDao;
@@ -44,11 +44,11 @@ public class HeroDaoImplTest {
 
     @Autowired
     SightingDaoImpl sightingDao;
-    
+
     @Autowired
     SuperpowerDaoImpl superpowerDao;
 
-    public HeroDaoImplTest() {
+    public SuperpowerDaoImplTest() {
     }
 
     @BeforeAll
@@ -77,16 +77,17 @@ public class HeroDaoImplTest {
         for (Sighting sighting : sightings) {
             sightingDao.delete(sighting.getSightingId());
         }
-        
+
         List<Superpower> superpowers = superpowerDao.readAll();
-        for(Superpower superpower: superpowers){
+        for (Superpower superpower : superpowers) {
             superpowerDao.delete(superpower.getSuperpowerId());
         }
-        
-          List<Location> locations = locationDao.readAll();
-        for(Location location: locations){
+
+        List<Location> locations = locationDao.readAll();
+        for (Location location : locations) {
             locationDao.delete(location.getLocationId());
         }
+
     }
 
     @AfterEach
@@ -94,144 +95,104 @@ public class HeroDaoImplTest {
     }
 
     /**
-     * Test of create method, of class HeroDaoImpl.
+     * Test of create method, of class LocationDaoImpl.
      */
     @Test
-    public void testCreateAndReadHeroByID() {
+    public void testCreateAndReadSuperpowerById() {
         //Arrange
         setUp();
-        
         Superpower superpower = new Superpower();
         superpower.setSuperpower("Superstrength");
         superpower.setDescription("The ability to move a ton of things");
-        superpower = superpowerDao.create(superpower);
-        
-        Hero hero = new Hero();
-        hero.setName("hero name");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
-        hero.setType("Superhero");
-        hero.setDescription("Test Description");
-        
+
         //Act
-        hero = heroDao.create(hero); 
-        Hero fromDao = heroDao.readById(hero.getHeroId());
-        
+        superpower = superpowerDao.create(superpower);
+        Superpower fromDao = superpowerDao.readById(superpower.getSuperpowerId());
+
         //Assert
-        assertEquals(hero, fromDao);
+        assertEquals(superpower, fromDao);
+
     }
 
     /**
-     * Test of readAll method, of class HeroDaoImpl.
+     * Test of readAll method, of class LocationDaoImpl.
      */
     @Test
     public void testReadAll() {
         //Arrange
         setUp();
-        
+
         Superpower superpower = new Superpower();
         superpower.setSuperpower("Superstrength");
         superpower.setDescription("The ability to move a ton of things");
         superpower = superpowerDao.create(superpower);
-                
-        
-        Hero hero = new Hero();
-        hero.setName("hero name");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
-        hero.setType("Superhero");
-        hero.setDescription("Test Description");
-        hero = heroDao.create(hero);
-        
-        Hero hero2 = new Hero();
-        hero2.setName("hero name 2");
-        hero2.setSuperpowerId(superpower.getSuperpowerId());
-        hero2.setType("Superhero");
-        hero2.setDescription("Test Description2");
-        hero2 = heroDao.create(hero2);
-        
+
+        Superpower superpower2 = new Superpower();
+        superpower2.setSuperpower("Superspeed");
+        superpower2.setDescription("The ability to move fast");
+        superpower2 = superpowerDao.create(superpower2);
+
         //Act
-        List<Hero> heroes = heroDao.readAll();
-        
+        List<Superpower> superpowers = superpowerDao.readAll();
+
         //Assert
-        assertEquals(heroes.size(), 2);
-        assertTrue(heroes.contains(hero));
-        assertTrue(heroes.contains(hero2));
-        
+        assertEquals(superpowers.size(), 2);
+        assertTrue(superpowers.contains(superpower));
+        assertTrue(superpowers.contains(superpower2));
     }
 
     /**
-     * Test of update method, of class HeroDaoImpl.
+     * Test of update method, of class LocationDaoImpl.
      */
     @Test
     public void testUpdate() {
         //Arrange
         setUp();
-        
+
         Superpower superpower = new Superpower();
         superpower.setSuperpower("Superstrength");
         superpower.setDescription("The ability to move a ton of things");
         superpower = superpowerDao.create(superpower);
-        
-        Hero hero = new Hero();
-        hero.setName("hero name");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
-        hero.setType("Superhero");
-        hero.setDescription("Test Description");
-        hero = heroDao.create(hero);
-        
-        //assert the newly created sighting is the one currently in the database
-        Hero fromDao = heroDao.readById(hero.getHeroId());
-        assertEquals(hero, fromDao);
-        
-        //Before calling the update function, assert that the sighting with updates 
-        //is different from the one currently in the database
-        hero.setHeroId(hero.getHeroId());
-        hero.setName("hero name updated");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
-        hero.setType("Superhero updated");
-        hero.setDescription("Test Description updated");
-        
-        heroDao.update(hero);
-        assertNotEquals(hero, fromDao);
-        
-        //After calling update, assert that the sighting 
-        //currently in the database is the updated version/
-        fromDao = heroDao.readById(hero.getHeroId());
-        assertEquals(hero, fromDao);
-        
+
+        //Act
+        Superpower fromDao = superpowerDao.readById(superpower.getSuperpowerId());
+
+        superpower.setSuperpower("Superspeed");
+        superpower.setDescription("The ability to move very a fast");
+
+        superpowerDao.update(superpower);
+        assertNotEquals(superpower, fromDao);
+
+        fromDao = superpowerDao.readById(superpower.getSuperpowerId());
+        assertEquals(superpower, fromDao);
 
     }
 
     /**
-     * Test of delete method, of class HeroDaoImpl.
+     * Test of delete method, of class LocationDaoImpl.
      */
     @Test
     public void testDelete() {
-         //Arrange
+        //Arrange
         setUp();
-        
+
+        //Arrange
+        setUp();
         Superpower superpower = new Superpower();
         superpower.setSuperpower("Superstrength");
         superpower.setDescription("The ability to move a ton of things");
         superpower = superpowerDao.create(superpower);
-        
-        Hero hero = new Hero();
-        hero.setName("hero name");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
-        hero.setType("Superhero");
-        hero.setDescription("Test Description");
-        hero = heroDao.create(hero);
-        
-        Hero fromDao = heroDao.readById(hero.getHeroId());
-        assertEquals(hero, fromDao);
-        
-        heroDao.delete(hero.getHeroId());
-        
-        fromDao = heroDao.readById(hero.getHeroId());
+
+        //Act
+        Superpower fromDao = superpowerDao.readById(superpower.getSuperpowerId());
+
+        superpowerDao.delete(superpower.getSuperpowerId());
+
+        fromDao = superpowerDao.readById(superpower.getSuperpowerId());
         assertNull(fromDao);
-        
-        List<Hero> heroes = heroDao.readAll();
-        assertEquals(heroes.size(), 0);
-                
+
+        List<Superpower> superpowers = superpowerDao.readAll();
+        assertEquals(superpowers.size(), 0);
     }
 
 }
