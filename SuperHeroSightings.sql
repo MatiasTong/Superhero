@@ -56,6 +56,8 @@ CREATE TABLE Sighting(
     FOREIGN KEY fk_Sighting5_Hero(HeroId) references Hero(HeroId)
 );
 
+insert into Superpower (Superpower,Description) values("strength", "test description");
+select * from Superpower;
 
 
 
