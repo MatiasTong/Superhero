@@ -8,7 +8,6 @@ package com.sms.superherosightings.dao;
 import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
 import com.sms.superherosightings.model.Organization;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;

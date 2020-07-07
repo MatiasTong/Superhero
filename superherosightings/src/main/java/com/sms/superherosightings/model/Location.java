@@ -28,59 +28,59 @@ public class Location {
 
 
     public int getLocationId() {
-        return LocationId;
+        return locationId;
     }
 
     public void setLocationId(int LocationId) {
-        this.LocationId = LocationId;
+        this.locationId = LocationId;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String Name) {
-        this.Name = Name;
+        this.name = Name;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String Description) {
-        this.Description = Description;
+        this.description = Description;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String Address) {
-        this.Address = Address;
+        this.address = Address;
     }
 
     public String getCity() {
-        return City;
+        return city;
     }
 
     public void setCity(String City) {
-        this.City = City;
+        this.city = City;
     }
 
     public String getState() {
-        return State;
+        return state;
     }
 
     public void setState(String State) {
-        this.State = State;
+        this.state = State;
     }
 
     public int getZip() {
-        return Zip;
+        return zip;
     }
 
     public void setZip(int Zip) {
-        this.Zip = Zip;
+        this.zip = Zip;
     }
 
 
@@ -106,17 +106,15 @@ public class Location {
     @Override
     public int hashCode() {
         int hash = 7;
-
-        hash = 89 * hash + this.locationId;
-        hash = 89 * hash + Objects.hashCode(this.name);
-        hash = 89 * hash + Objects.hashCode(this.description);
-        hash = 89 * hash + Objects.hashCode(this.address);
-        hash = 89 * hash + Objects.hashCode(this.city);
-        hash = 89 * hash + Objects.hashCode(this.state);
-        hash = 89 * hash + this.zip;
-        hash = 89 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
-        hash = 89 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
-
+        hash = 41 * hash + this.locationId;
+        hash = 41 * hash + Objects.hashCode(this.name);
+        hash = 41 * hash + Objects.hashCode(this.description);
+        hash = 41 * hash + Objects.hashCode(this.address);
+        hash = 41 * hash + Objects.hashCode(this.city);
+        hash = 41 * hash + Objects.hashCode(this.state);
+        hash = 41 * hash + this.zip;
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
+        hash = 41 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
         return hash;
     }
 
@@ -132,33 +130,37 @@ public class Location {
             return false;
         }
         final Location other = (Location) obj;
-        if (this.LocationId != other.LocationId) {
+        if (this.locationId != other.locationId) {
             return false;
         }
-        if (this.Zip != other.Zip) {
+        if (this.zip != other.zip) {
             return false;
         }
-
+        if (Double.doubleToLongBits(this.latitude) != Double.doubleToLongBits(other.latitude)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.Longitude) != Double.doubleToLongBits(other.Longitude)) {
+        if (Double.doubleToLongBits(this.longitude) != Double.doubleToLongBits(other.longitude)) {
             return false;
         }
-        if (!Objects.equals(this.Name, other.Name)) {
+        if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.Description, other.Description)) {
+        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.Address, other.Address)) {
+        if (!Objects.equals(this.address, other.address)) {
             return false;
         }
-
+        if (!Objects.equals(this.city, other.city)) {
+            return false;
+        }
+        if (!Objects.equals(this.state, other.state)) {
+            return false;
+        }
         return true;
     }
 
     
-
     
 
   

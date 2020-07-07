@@ -5,15 +5,15 @@ USE SuperHeroSightings;
 CREATE TABLE Hero(
 	HeroId INT PRIMARY KEY AUTO_INCREMENT,
     `Name` VARCHAR(30) NOT NULL,
-    `Description` VARCHAR(30) NOT NULL,
-    Specialty VARCHAR(30) NOT NULL,
+    `Description` TEXT NOT NULL,
+    Specialty TEXT NOT NULL,
     `Type` VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE Location(
 	LocationId INT PRIMARY KEY AUTO_INCREMENT,
     `Name` VARCHAR(30) NOT NULL,
-    `Description` VARCHAR(30) NOT NULL,
+    `Description` TEXT NOT NULL,
 	Address VARCHAR(30) NOT NULL,
     City VARCHAR(30) NOT NULL,
     State CHAR(2) NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE Location(
 CREATE TABLE Organization(
 	OrganizationId INT PRIMARY KEY AUTO_INCREMENT,
     `Name` VARCHAR(30) NOT NULL,
-    `Description` VARCHAR(30) NOT NULL,
+    `Description` TEXT NOT NULL,
      LocationId INT NOT NULL,
      FOREIGN KEY FK_Organization_Location_LocationId(LocationId) references Location(LocationId),
      Email VARCHAR(30) NOT NULL,
