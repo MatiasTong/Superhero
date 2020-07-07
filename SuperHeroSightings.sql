@@ -56,8 +56,24 @@ CREATE TABLE Sighting(
     FOREIGN KEY fk_Sighting5_Hero(HeroId) references Hero(HeroId)
 );
 
-insert into Superpower (Superpower,Description) values("strength", "test description");
-select * from Superpower;
+insert into Superpower (Power,Description) values("strength", "test description");
+select * from superpower;
+insert into Hero (`Name`,`Description`,SuperpowerId,`Type`) values 
+("batman", "lurks in the dark", 1, "hero"),
+("superman", "flies in the light", 1, "hero");
+select * from hero;
+insert into Location(`Name`,`Description`,Address, City, State, ZipCode,
+Lat, `Long`) values
+("MacDonalds","fast food restaurant", "142-14 26th Ave.", "Flushing","ny", "11111", -30.000000,145.000000 ),
+("Burger King","fast food restaurant", "142-14 26th Ave.", "Flushing","ny", "99999", -50.000000,155.000000 );
+
+select * from location;
+
+insert into Sighting(Date, LocationId, HeroId) values
+("2020-07-30 07:33:20", 1, 1),
+("2020-06-30 06:22:20", 2, 2); 
+
+select * from sighting;
 
 
 

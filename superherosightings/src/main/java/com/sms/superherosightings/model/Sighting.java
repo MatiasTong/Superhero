@@ -5,6 +5,7 @@ import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -30,6 +31,7 @@ public class Sighting {
         this.sightingId = sightingId;
     }
 
+    
     public LocalDateTime getDateTime() {
         return dateTime;
     }
