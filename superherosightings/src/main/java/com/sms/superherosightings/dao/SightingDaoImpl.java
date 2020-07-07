@@ -9,9 +9,11 @@ import com.sms.superherosightings.dao.HeroDaoImpl.HeroMapper;
 import com.sms.superherosightings.dao.LocationDaoImpl.LocationMapper;
 import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
+import com.sms.superherosightings.model.Organization;
 import com.sms.superherosightings.model.Sighting;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +21,20 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class SightingDaoImpl implements Dao<Sighting> {
 
     @Autowired
     JdbcTemplate jdbc;
+
+    public List<Sighting> getSightingsForHero(Hero hero) {
+        final String SELECT_SIGHTINGS_FOR_HERO = "SELECT s.* FROM Sightings s  WHERE h.HeroId = ?";
+        List<Sighting> sightings = jdbc.query(SELECT_SIGHTINGS_FOR_HERO,
+                new SightingMapper(), hero.getHeroId());
+        return sightings;
+    }
 
     //private method to get the hero for each sighting. This assumes that there can be only one hero per sighting which
     //may or may not be the desired approach
@@ -35,19 +45,20 @@ public class SightingDaoImpl implements Dao<Sighting> {
             //Uses the alias for each table to shorten the sql
             //Because the sighting table contains the hero id and none of the other hero attributes - it is necessary to do a join 
             //and retrieve all the hero fields in the hero table to populate our hero object
-            final String SELECT_HERO = "SELECT h.* FROM Sighting s JOIN Hero h ON s.HeroId = h.HeroId WHERE SightingId=?";
+            final String SELECT_HERO = "SELECT h.* FROM Sighting s JOIN Hero h ON s.HeroId = h.HeroId WHERE SightingId= ?";
             Hero hero = jdbc.queryForObject(SELECT_HERO, new HeroMapper(), sightingId);
+
             return hero;
         } catch (DataAccessException e) {
             return null;
         }
     }
 
-    private Location getLocationForSighting(int sightingId) {
+    private Location getLocationForSighting(Sighting model) {
         try {
             //see comments for getHeroForSighting()
-            final String SELECT_LOCATION = "SELECT l.* FROM Sighting s JOIN Location l ON s.LocationId = l.LocationId WHERE SightingId=?";
-            Location location = jdbc.queryForObject(SELECT_LOCATION, new LocationMapper(), sightingId);
+            final String SELECT_LOCATION = "SELECT l.* FROM Location l JOIN Sighting s ON l.LocationId = s.LocationId WHERE s.SightingId = ?";
+            Location location = jdbc.queryForObject(SELECT_LOCATION, new LocationMapper(), model.getSightingId());
             return location;
         } catch (DataAccessException e) {
             return null;
@@ -59,23 +70,31 @@ public class SightingDaoImpl implements Dao<Sighting> {
         for (Sighting sighting : sightings) {
             int sightingId = sighting.getSightingId();
             Hero hero = getHeroForSighting(sightingId);
-            Location location = getLocationForSighting(sightingId);
+            Location location = getLocationForSighting(sighting);
             sighting.setHero(hero);
             sighting.setLocation(location);
         }
     }
 
     @Override
+    @Transactional
     public Sighting create(Sighting model) {
-        final String INSERT_SIGHTING = "INSERT INTO Sighting(LocationId, HeroId) VALUES (?,?,?)";
+
+        try{
+        final String INSERT_SIGHTING = "INSERT INTO Sighting(`Date`, LocationId, HeroId) VALUES (?,?,?)";
+
         int locationId = model.getLocation().getLocationId();
         int heroId = model.getHero().getHeroId();
-        jdbc.update(INSERT_SIGHTING, locationId, heroId);
+        jdbc.update(INSERT_SIGHTING, model.getDateTime(), locationId, heroId);
 
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         model.setSightingId(newId);
-
         return model;
+        
+        } catch(Exception e){
+            return null;
+        }
+     
     }
 
     @Override
@@ -89,11 +108,13 @@ public class SightingDaoImpl implements Dao<Sighting> {
     @Override
     public Sighting readById(int id) {
         try {
-            final String SELECT_SIGHTING = "Select SightingID, DateTime From Sighting WHERE SightingId = ?";
+
+            final String SELECT_SIGHTING = "Select SightingId,Date From Sighting WHERE SightingId = ?";
+
             Sighting sighting = jdbc.queryForObject(SELECT_SIGHTING, new SightingMapper(), id);
 
             Hero hero = getHeroForSighting(id);
-            Location location = getLocationForSighting(id);
+            Location location = getLocationForSighting(sighting);
 
             sighting.setHero(hero);
             sighting.setLocation(location);
@@ -106,7 +127,8 @@ public class SightingDaoImpl implements Dao<Sighting> {
 
     @Override
     public void update(Sighting model) {
-        final String UPDATE_SIGHTING = "UPDATE Sighting SET DateTime = ?, LocationId = ?, HeroId =? WHERE SightingId = ?";
+        final String UPDATE_SIGHTING = "UPDATE Sighting SET Date = ?, LocationId = ?, HeroId =? WHERE SightingId = ?";
+
         int locationId = model.getLocation().getLocationId();
         int heroId = model.getHero().getHeroId();
         jdbc.update(UPDATE_SIGHTING, model.getDateTime(), locationId, heroId, model.getSightingId());
@@ -117,6 +139,14 @@ public class SightingDaoImpl implements Dao<Sighting> {
         final String DELETE_SIGHTING = "DELETE FROM Sighting WHERE SightingId = ?";
         jdbc.update(DELETE_SIGHTING, id);
     }
+    
+//    private void insertLocationToSighting(Sighting model) {
+//        List<Location> places = (List<Location>) model.getLocation();
+//        for (Location place : places)  {
+//            final String INSERT_LOC_SIGHTING = "INSERT INTO Sighting(LocationId) VALUES (?);";
+//            jdbc.update(INSERT_LOC_SIGHTING, place.getLocationId(), model.getSightingId());
+//        }
+//    }
 
     public static final class SightingMapper implements RowMapper<Sighting> {
 
@@ -124,7 +154,8 @@ public class SightingDaoImpl implements Dao<Sighting> {
         public Sighting mapRow(ResultSet rs, int index) throws SQLException {
             Sighting sighting = new Sighting();
             sighting.setSightingId(rs.getInt("SightingId"));
-            sighting.setDateTime(rs.getObject("DateTime", LocalDateTime.class));
+            sighting.setDateTime(rs.getTimestamp("Date").toLocalDateTime());
+
             return sighting;
         }
     }

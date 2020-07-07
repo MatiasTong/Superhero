@@ -6,7 +6,9 @@
 package com.sms.superherosightings.dao;
 
 import com.sms.superherosightings.dao.HeroDaoImpl.HeroMapper;
+import com.sms.superherosightings.dao.SuperpowerDaoImpl.SuperpowerMapper;
 import com.sms.superherosightings.model.Hero;
+import com.sms.superherosightings.model.Superpower;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -28,8 +30,9 @@ public class HeroDaoImpl implements Dao<Hero> {
     to ensure the Last_Insert_Id is that of the hero was just added to our database*/
     @Transactional
     public Hero create(Hero model) {
-        final String INSERT_HERO = "INSERT INTO Hero(Name, Description, Specialty, Type) VALUES (?,?,?,?)";
-        jdbc.update(INSERT_HERO, model.getName(), model.getDescription(), model.getSuperpower(), model.getType());
+        final String INSERT_HERO = "INSERT INTO Hero(Name, Description, SuperpowerId, Type) VALUES (?,?,?,?)";
+        jdbc.update(INSERT_HERO, model.getName(), model.getDescription(), model.getSuperpowerId(),
+                model.getType());
         int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
         model.setHeroId(newId);
         return model;
@@ -39,6 +42,7 @@ public class HeroDaoImpl implements Dao<Hero> {
     public List<Hero> readAll() {
         final String SELECT_ALL_HEROES = "SELECT * FROM Hero";
         List<Hero> heroes = jdbc.query(SELECT_ALL_HEROES, new HeroMapper());
+        associateHeroSuperpower(heroes);
         return heroes;
     }
 
@@ -49,6 +53,8 @@ public class HeroDaoImpl implements Dao<Hero> {
         try {
             final String SELECT_HERO = "SELECT * FROM Hero WHERE HeroId = ?";
             Hero hero = jdbc.queryForObject(SELECT_HERO, new HeroMapper(), id);
+            Superpower superpower = getSuperpowerForHero(hero);
+            hero.setSuperpowerId(superpower.getSuperpowerId());
             return hero;
             
         } catch (DataAccessException e) {
@@ -58,8 +64,9 @@ public class HeroDaoImpl implements Dao<Hero> {
 
     @Override
     public void update(Hero model) {
-        final String UPDATE_HERO = "UPDATE Hero SET Name= ?,Description= ?,Specialty= ?, Type= ? WHERE HeroId = ?;";
-        jdbc.update(UPDATE_HERO, model.getName(), model.getDescription(), model.getSuperpower(), model.getType(), model.getHeroId());
+        final String UPDATE_HERO = "UPDATE Hero SET Name= ?,Description= ?,SuperpowerId= ?, Type= ? WHERE HeroId = ?;";
+        jdbc.update(UPDATE_HERO, model.getName(), model.getDescription(), model.getSuperpowerId(),
+                model.getType(), model.getHeroId());
     }
 
     @Override
@@ -75,6 +82,24 @@ public class HeroDaoImpl implements Dao<Hero> {
         jdbc.update(DELETE_HERO_ORGANIZATION, id);
         jdbc.update(DELETE_HERO, id);
     }
+    
+      private Superpower getSuperpowerForHero(Hero model) {
+        try {
+            //see comments for getHeroForSighting()
+            final String SELECT_LOCATION = "SELECT s.* FROM Superpower s JOIN Hero h ON s.SuperpowerId = h.SuperpowerId WHERE h.HeroId = ?";
+            Superpower superpower  = jdbc.queryForObject(SELECT_LOCATION, new SuperpowerMapper(), model.getHeroId());
+            return superpower;
+        } catch (DataAccessException e) {
+            return null;
+        }
+    }
+      
+       private void associateHeroSuperpower(List<Hero> heroes) {
+        for (Hero hero : heroes) {
+            Superpower superpower = getSuperpowerForHero(hero);
+            hero.setSuperpowerId(superpower.getSuperpowerId());
+        }
+    }
 
 
 
@@ -86,7 +111,7 @@ public class HeroDaoImpl implements Dao<Hero> {
             hero.setHeroId(rs.getInt("HeroId"));
             hero.setName(rs.getString("Name"));
             hero.setDescription(rs.getString("Description"));
-            hero.setSuperpower(rs.getString("Specialty"));
+            hero.setSuperpowerId(rs.getInt("SuperpowerId"));
             hero.setType(rs.getString("Type"));
             return hero;
         }
