@@ -27,10 +27,12 @@ public class Organization {
     @Size(max = 30, message = "Description must be less than 30 characters.")
     private String description;
     private Location location;
+
     @NotBlank(message = "Email must not be empty.")
     @Email
     private String email;
     private List<Hero> Heroes;
+    @NotBlank(message = "Type must not be empty.")
     private String type;
 
     public String getType() {

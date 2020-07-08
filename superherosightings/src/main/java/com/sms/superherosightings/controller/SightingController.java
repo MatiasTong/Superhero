@@ -15,8 +15,13 @@ import com.sms.superherosightings.model.Location;
 import com.sms.superherosightings.model.Sighting;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +34,8 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class SightingController {
+
+    Set<ConstraintViolation<Sighting>> violations = new HashSet<>();
 
     @Autowired
     HeroDaoImpl heroDao;
@@ -53,6 +60,7 @@ public class SightingController {
         model.addAttribute("sightings", sightings);
         model.addAttribute("locations", locations);
         model.addAttribute("heroes", heroes);
+        model.addAttribute("errors", violations);
 
         return "sightings";
     }
@@ -69,7 +77,14 @@ public class SightingController {
         sighting.setDateTime(dateTime);
         sighting.setLocation(locationDao.readById(Integer.parseInt(locationId)));
         sighting.setHero(heroDao.readById(Integer.parseInt(heroId)));
-        sightingDao.create(sighting);
+
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(sighting);
+
+        if (violations.isEmpty()) {
+           sightingDao.create(sighting);
+        }
+        
         return "redirect:/sightings";
     }
 
@@ -84,29 +99,36 @@ public class SightingController {
         Sighting sighting = sightingDao.readById(id);
         List<Location> locations = locationDao.readAll();
         List<Hero> heroes = heroDao.readAll();
-       
+
         model.addAttribute(sighting);
         model.addAttribute("locations", locations);
         model.addAttribute("heroes", heroes);
         return "editSighting";
     }
-    
+
     @PostMapping("editSighting")
-    public String submitEditSighting(HttpServletRequest request){
+    public String submitEditSighting(HttpServletRequest request) {
         String locationId = request.getParameter("locationId");
         String heroId = request.getParameter("heroId");
         String sightingId = request.getParameter("sightingId");
         String dateTimeAsString = request.getParameter("dateTime");
         LocalDateTime dateTime = LocalDateTime.parse(dateTimeAsString);
-        
+
         Sighting sighting = new Sighting();
-        
+
         sighting.setDateTime(dateTime);
         sighting.setSightingId(Integer.parseInt(sightingId));
         sighting.setLocation(locationDao.readById(Integer.parseInt(locationId)));
         sighting.setHero(heroDao.readById(Integer.parseInt(heroId)));
-        sightingDao.update(sighting);
         
+        
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(sighting);
+
+        if (violations.isEmpty()) {
+           sightingDao.update(sighting);
+        }
+
         return "redirect:/sightings";
     }
 
