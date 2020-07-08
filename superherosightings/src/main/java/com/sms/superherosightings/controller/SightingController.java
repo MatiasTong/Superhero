@@ -90,5 +90,24 @@ public class SightingController {
         model.addAttribute("heroes", heroes);
         return "editSighting";
     }
+    
+    @PostMapping("editSighting")
+    public String submitEditSighting(HttpServletRequest request){
+        String locationId = request.getParameter("locationId");
+        String heroId = request.getParameter("heroId");
+        String sightingId = request.getParameter("sightingId");
+        String dateTimeAsString = request.getParameter("dateTime");
+        LocalDateTime dateTime = LocalDateTime.parse(dateTimeAsString);
+        
+        Sighting sighting = new Sighting();
+        
+        sighting.setDateTime(dateTime);
+        sighting.setSightingId(Integer.parseInt(sightingId));
+        sighting.setLocation(locationDao.readById(Integer.parseInt(locationId)));
+        sighting.setHero(heroDao.readById(Integer.parseInt(heroId)));
+        sightingDao.update(sighting);
+        
+        return "redirect:/sightings";
+    }
 
 }

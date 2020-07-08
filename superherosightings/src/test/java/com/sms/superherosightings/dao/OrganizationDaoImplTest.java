@@ -4,12 +4,11 @@
  * and open the template in the editor.
  */
 package com.sms.superherosightings.dao;
-
 import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
+import com.sms.superherosightings.model.Sighting;
 import com.sms.superherosightings.model.Organization;
-
-
+import com.sms.superherosightings.model.Superpower;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;

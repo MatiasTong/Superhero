@@ -19,6 +19,8 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 public class Sighting {
     private int sightingId;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dateTime;
     private Hero hero;
     private Location location;

@@ -37,7 +37,7 @@
         <a class="nav-item nav-link" href="#">Hero/Villain</a>
         <a class="nav-item nav-link" href="superpowers">Superpower</a>
         <a class="nav-item nav-link" href="#">Organization</a>
-        <a class="nav-item nav-link" href="#">Location</a>
+        <a class="nav-item nav-link" href="locations">Location</a>
         <a class="nav-item nav-link" href="sightings">Sighting</a>
       </ul>
     </div>
@@ -107,7 +107,7 @@
                     <tbody>
                         <tr th:each="sighting : ${sightings}">
                             <td th:text="${sighting.sightingId}">Sighting ID</td>
-                            <td th:text="${#temporals.format(sighting.dateTime, 'MMM-dd-yyyy h:mm a')}">Date Time</td>
+                            <td th:text="${#temporals.format(sighting.dateTime, 'MM/dd/yyyy, h:mm a')}">Date Time</td>
                             <td th:text="${sighting.hero.name}">Hero</td>
                             <td th:text="${sighting.location.name + ' ' + sighting.location.address + ' ' 
                                 + sighting.location.city + ' ' + sighting.location.state + ' ' 
