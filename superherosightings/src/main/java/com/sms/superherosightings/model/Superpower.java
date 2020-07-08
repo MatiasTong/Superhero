@@ -14,7 +14,7 @@ import java.util.Objects;
  */
 public class Superpower {
     private int superpowerId;
-     private String superpower;
+    private String superpower;
     private String description;
 
     public int getSuperpowerId() {

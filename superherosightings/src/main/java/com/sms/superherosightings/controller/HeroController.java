@@ -5,7 +5,20 @@
  */
 package com.sms.superherosightings.controller;
 
+import com.sms.superherosightings.dao.HeroDaoImpl;
+import com.sms.superherosightings.dao.LocationDaoImpl;
+import com.sms.superherosightings.dao.OrganizationDaoImpl;
+import com.sms.superherosightings.dao.SightingDaoImpl;
+import com.sms.superherosightings.dao.SuperpowerDaoImpl;
+import com.sms.superherosightings.model.Hero;
+import com.sms.superherosightings.model.Superpower;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -13,5 +26,68 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class HeroController {
-    
+
+    @Autowired
+    HeroDaoImpl heroDao;
+
+    @Autowired
+    LocationDaoImpl locationDao;
+
+    @Autowired
+    OrganizationDaoImpl organizationDao;
+
+    @Autowired
+    SightingDaoImpl sightingDao;
+
+    @Autowired
+    SuperpowerDaoImpl superpowerDao;
+
+    @GetMapping("Heroes")
+    public String displayHeroes(Model model) {
+        List<Hero> heroes = heroDao.readAll();
+        List<Superpower> superpowers = superpowerDao.readAll();
+        model.addAttribute("Superpowers", superpowers);
+        model.addAttribute("Heroes", heroes);
+        return "Heroes";
+    }
+
+    @PostMapping("addHero")
+    public String addHero(HttpServletRequest request) {
+        String name = request.getParameter("name");
+        String description = request.getParameter("description");
+        String superpowerId = request.getParameter("superpowerId");
+        String type = request.getParameter("type");
+
+        Hero hero = new Hero();
+        hero.setName(name);
+        hero.setDescription(description);
+        hero.setSuperpowerId(Integer.parseInt(superpowerId));
+        hero.setType(type);
+        heroDao.create(hero);
+
+        return "redirect:/heroes";
+    }
+
+    @GetMapping("deleteHero")
+    public String deleteHero(Integer id) {
+        heroDao.delete(id);
+        return "redirect:/heroes";
+    }
+
+    @GetMapping("editHero")
+    public String editHero(Integer id, Model model) {
+        Hero hero = heroDao.readById(id);
+        List<Superpower> superpowers = superpowerDao.readAll();
+        model.addAttribute("superpowers", superpowers);
+        model.addAttribute("hero", hero);
+        return "editHero";
+    }
+
+    @PostMapping("editHero")
+    public String performEditHero(Hero hero) {
+        heroDao.update(hero);
+        return "redirect:/heroes";
+        
+    }
+
 }
