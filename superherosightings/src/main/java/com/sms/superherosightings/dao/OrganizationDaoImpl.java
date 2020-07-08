@@ -7,6 +7,7 @@ package com.sms.superherosightings.dao;
 
 import com.sms.superherosightings.dao.HeroDaoImpl.HeroMapper;
 import com.sms.superherosightings.dao.LocationDaoImpl.LocationMapper;
+import com.sms.superherosightings.dao.SuperpowerDaoImpl.SuperpowerMapper;
 import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
 import com.sms.superherosightings.model.Organization;
@@ -25,6 +26,9 @@ public class OrganizationDaoImpl implements Dao<Organization> {
 
     @Autowired
     JdbcTemplate jdbc;
+    
+    @Autowired
+    HeroDaoImpl heroDao;
 
     /**
      * @Transactional to guarantee we get the correct ID out of the database.
@@ -133,9 +137,18 @@ public class OrganizationDaoImpl implements Dao<Organization> {
         final String SELECT_HEROES_FOR_ORG = "SELECT h.* FROM Hero h "
                 + "JOIN HeroOrganization ho ON h.HeroId "
                 + "= ho.HeroId WHERE ho.OrganizationId = ?";
-        return jdbc.query(SELECT_HEROES_FOR_ORG, new HeroMapper(), org.getOrganizationId());
-        
+        List<Hero> heroes = jdbc.query(SELECT_HEROES_FOR_ORG, new HeroMapper(), org.getOrganizationId());
+        heroDao.associateHeroSuperpower(heroes);
+        return heroes;
     }
+    
+//     private List<Superpower> getSuperpowerForHero(Organization org) {
+//        final String SELECT_SUPERPOWER_FOR_HERO = "SELECT s.* FROM Superpower s "
+//                + "JOIN Hero h ON s.superpowerId "
+//                + "= h.superpowerId WHERE h.heroId = ?";
+//        return jdbc.query(SELECT_SUPERPOWER_FOR_HERO, new SuperpowerMapper(), hero.getOrgan());
+//        
+//    }
 
     private void associateHeroesAndOrg(List<Organization> organizations) {
         for (Organization org : organizations) {

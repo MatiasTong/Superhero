@@ -113,7 +113,7 @@ public class OrganizationDaoImplTest {
         Hero superHero = new Hero();
         superHero.setName("Spiderman");
         superHero.setDescription("classic");
-        superHero.setSuperpowerId(superpower.getSuperpowerId());
+        superHero.setSuperpower(superpower);
         superHero.setType("hero");
         superHero = heroDao.create(superHero);
 
@@ -160,7 +160,7 @@ public class OrganizationDaoImplTest {
         Hero superHero = new Hero();
         superHero.setName("Spiderman");
         superHero.setDescription("classic");
-        superHero.setSuperpowerId(superpower.getSuperpowerId());
+        superHero.setSuperpower(superpower);
         superHero.setType("hero");
         superHero = heroDao.create(superHero);
 
@@ -216,7 +216,7 @@ public class OrganizationDaoImplTest {
         Hero superHero = new Hero();
         superHero.setName("Spiderman");
         superHero.setDescription("classic");
-        superHero.setSuperpowerId(superpower.getSuperpowerId());
+        superHero.setSuperpower(superpower);
         superHero.setType("hero");
         superHero = heroDao.create(superHero);
 
@@ -269,7 +269,7 @@ public class OrganizationDaoImplTest {
         Hero superHero = new Hero();
         superHero.setName("Spiderman");
         superHero.setDescription("classic");
-        superHero.setSuperpowerId(superpower.getSuperpowerId());
+        superHero.setSuperpower(superpower);
         superHero.setType("hero");
         superHero = heroDao.create(superHero);
 

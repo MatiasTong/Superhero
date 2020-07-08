@@ -19,10 +19,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class SuperpowerDaoImpl implements Dao<Superpower> {
-
+    
     @Autowired
     JdbcTemplate jdbc;
-
+    
+    @Autowired
+    HeroDaoImpl heroDao;
+    
     @Override
     public Superpower create(Superpower model) {
         final String INSERT_SUPERPOWER = "INSERT INTO Superpower(Power, `Description`) VALUES (?,?)";
@@ -31,14 +34,14 @@ public class SuperpowerDaoImpl implements Dao<Superpower> {
         model.setSuperpowerId(newId);
         return model;
     }
-
+    
     @Override
     public List<Superpower> readAll() {
         final String GET_ALL_SUPERPOWER = "SELECT * FROM Superpower;";
         List<Superpower> superpowers = jdbc.query(GET_ALL_SUPERPOWER, new SuperpowerMapper());
         return superpowers;
     }
-
+    
     @Override
     public Superpower readById(int id) {
         try {
@@ -49,35 +52,41 @@ public class SuperpowerDaoImpl implements Dao<Superpower> {
             return null;
         }
     }
-
+    
     @Override
     public void update(Superpower model) {
         final String UPDATE_SUPERPOWER = "UPDATE Superpower SET Power = ?, `Description` = ? WHERE SuperpowerId = ? ";
         jdbc.update(UPDATE_SUPERPOWER, model.getSuperpower(), model.getDescription(), model.getSuperpowerId());
-
+        
     }
-
+    
     @Override
     public void delete(int id) {
+        final String DELETE_HERO_ORGANIZATION = "DELETE ho FROM HeroOrganization ho JOIN Hero h ON ho.HeroId = h.HeroId WHERE SuperpowerId =?;";
+        final String DELETE_SIGHTING = "DELETE s FROM Sighting s JOIN Hero h ON s.HeroId = h.HeroId WHERE h.SuperpowerId = ?";
         final String DELETE_HERO = "DELETE FROM Hero WHERE SuperpowerId = ?;";
         final String DELETE_SUPERPOWER = "DELETE FROM Superpower WHERE SuperpowerId = ?;";
-
+        
+        jdbc.update(DELETE_HERO_ORGANIZATION, id);
+        jdbc.update(DELETE_SIGHTING, id);
         jdbc.update(DELETE_HERO, id);
         jdbc.update(DELETE_SUPERPOWER, id);
-
     }
-
+    
     public List<Hero> getHeroesForSuperpower(Superpower model) {
         final String SELECT_HEROES_FOR_SUPERPOWER = "SELECT h.* FROM Hero h "
                 + "JOIN Superpower s ON h.SuperpowerId "
                 + "= s.SuperpowerId WHERE s.SuperpowerId = ?";
         List<Hero> heroes = jdbc.query(SELECT_HEROES_FOR_SUPERPOWER,
                 new HeroMapper(), model.getSuperpowerId());
+        
+        heroDao.associateHeroSuperpower(heroes);
+        
         return heroes;
     }
-
+    
     public static final class SuperpowerMapper implements RowMapper<Superpower> {
-
+        
         @Override
         public Superpower mapRow(ResultSet rs, int arg1) throws SQLException {
             Superpower superpower = new Superpower();
@@ -86,7 +95,7 @@ public class SuperpowerDaoImpl implements Dao<Superpower> {
             superpower.setDescription(rs.getString("Description"));
             return superpower;
         }
-
+        
     }
-
+    
 }

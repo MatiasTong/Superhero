@@ -22,9 +22,11 @@
                 <ul class="navbar-nav mx-auto" style="padding-bottom: 4px; font-size: 1.2rem;">
                     <a class="nav-item nav-link" href="heroes">Hero/Villain</a>
                     <a class="nav-item nav-link" href="superpowers">Superpower</a>
+
                     <a class="nav-item nav-link" href="organizations">Organization</a>
                     <a class="nav-item nav-link" href="locations">Location</a>
-                    <a class="nav-item nav-link" href="sighting">Sighting</a>
+                    <a class="nav-item nav-link" href="sightings">Sighting</a>
+
                 </ul>
             </div>
         </nav>
@@ -63,11 +65,11 @@
                             display Hero</span><br/>
                     </span>
                 </div>
-                 <div class="col-6 text-right"><strong>Email</strong></div>
+                <div class="col-6 text-right"><strong>Email</strong></div>
                 <div class="col-6 text-left">
                     <span th:text="${organization.email}">display email</span>
                 </div>
-                 <div class="col-6 text-right"><strong>Type</strong></div>
+                <div class="col-6 text-right"><strong>Type</strong></div>
                 <div class="col-6 text-left">
                     <span th:text="${organization.type}">display type</span>
                 </div>

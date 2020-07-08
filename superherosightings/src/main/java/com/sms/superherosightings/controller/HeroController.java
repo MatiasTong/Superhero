@@ -42,13 +42,14 @@ public class HeroController {
     @Autowired
     SuperpowerDaoImpl superpowerDao;
 
-    @GetMapping("Heroes")
+    @GetMapping("heroes")
     public String displayHeroes(Model model) {
         List<Hero> heroes = heroDao.readAll();
         List<Superpower> superpowers = superpowerDao.readAll();
+        
         model.addAttribute("Superpowers", superpowers);
         model.addAttribute("Heroes", heroes);
-        return "Heroes";
+        return "heroes";
     }
 
     @PostMapping("addHero")
@@ -57,11 +58,13 @@ public class HeroController {
         String description = request.getParameter("description");
         String superpowerId = request.getParameter("superpowerId");
         String type = request.getParameter("type");
+        
+        Superpower superpower = superpowerDao.readById(Integer.parseInt(superpowerId));
 
         Hero hero = new Hero();
         hero.setName(name);
         hero.setDescription(description);
-        hero.setSuperpowerId(Integer.parseInt(superpowerId));
+        hero.setSuperpower(superpower);
         hero.setType(type);
         heroDao.create(hero);
 
@@ -84,7 +87,9 @@ public class HeroController {
     }
 
     @PostMapping("editHero")
-    public String performEditHero(Hero hero) {
+    public String performEditHero(Hero hero, Integer superpowerId) {
+        Superpower superpower = superpowerDao.readById(superpowerId);
+        hero.setSuperpower(superpower);
         heroDao.update(hero);
         return "redirect:/heroes";
         

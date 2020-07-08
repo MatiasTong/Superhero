@@ -31,7 +31,7 @@ public class HeroDaoImpl implements Dao<Hero> {
     @Transactional
     public Hero create(Hero model) {
         final String INSERT_HERO = "INSERT INTO Hero(Name, Description, SuperpowerId, Type) VALUES (?,?,?,?)";
-        jdbc.update(INSERT_HERO, model.getName(), model.getDescription(), model.getSuperpowerId(),
+        jdbc.update(INSERT_HERO, model.getName(), model.getDescription(), model.getSuperpower().getSuperpowerId(),
                 model.getType());
         int newId = jdbc.queryForObject("SELECT Last_Insert_Id()", Integer.class);
         model.setHeroId(newId);
@@ -54,7 +54,7 @@ public class HeroDaoImpl implements Dao<Hero> {
             final String SELECT_HERO = "SELECT * FROM Hero WHERE HeroId = ?";
             Hero hero = jdbc.queryForObject(SELECT_HERO, new HeroMapper(), id);
             Superpower superpower = getSuperpowerForHero(hero);
-            hero.setSuperpowerId(superpower.getSuperpowerId());
+            hero.setSuperpower(superpower);
             return hero;
             
         } catch (DataAccessException e) {
@@ -65,7 +65,7 @@ public class HeroDaoImpl implements Dao<Hero> {
     @Override
     public void update(Hero model) {
         final String UPDATE_HERO = "UPDATE Hero SET Name= ?,Description= ?,SuperpowerId= ?, Type= ? WHERE HeroId = ?;";
-        jdbc.update(UPDATE_HERO, model.getName(), model.getDescription(), model.getSuperpowerId(),
+        jdbc.update(UPDATE_HERO, model.getName(), model.getDescription(), model.getSuperpower().getSuperpowerId(),
                 model.getType(), model.getHeroId());
     }
 
@@ -83,7 +83,7 @@ public class HeroDaoImpl implements Dao<Hero> {
         jdbc.update(DELETE_HERO, id);
     }
     
-      private Superpower getSuperpowerForHero(Hero model) {
+      public Superpower getSuperpowerForHero(Hero model) {
         try {
             //see comments for getHeroForSighting()
             final String SELECT_LOCATION = "SELECT s.* FROM Superpower s JOIN Hero h ON s.SuperpowerId = h.SuperpowerId WHERE h.HeroId = ?";
@@ -94,10 +94,10 @@ public class HeroDaoImpl implements Dao<Hero> {
         }
     }
       
-       private void associateHeroSuperpower(List<Hero> heroes) {
+       public void associateHeroSuperpower(List<Hero> heroes) {
         for (Hero hero : heroes) {
             Superpower superpower = getSuperpowerForHero(hero);
-            hero.setSuperpowerId(superpower.getSuperpowerId());
+            hero.setSuperpower(superpower);
         }
     }
 
@@ -111,7 +111,6 @@ public class HeroDaoImpl implements Dao<Hero> {
             hero.setHeroId(rs.getInt("HeroId"));
             hero.setName(rs.getString("Name"));
             hero.setDescription(rs.getString("Description"));
-            hero.setSuperpowerId(rs.getInt("SuperpowerId"));
             hero.setType(rs.getString("Type"));
             return hero;
         }

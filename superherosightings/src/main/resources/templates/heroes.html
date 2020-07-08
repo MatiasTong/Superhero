@@ -36,9 +36,11 @@
                 <ul class="navbar-nav mx-auto" style="padding-bottom: 4px; font-size: 1.2rem;">
                     <a class="nav-item nav-link" href="heroes">Hero/Villain</a>
                     <a class="nav-item nav-link" href="superpowers">Superpower</a>
-                    <a class="nav-item nav-link" href="#">Organization</a>
-                    <a class="nav-item nav-link" href="#">Location</a>
+
+                    <a class="nav-item nav-link" href="organizations">Organization</a>
+                    <a class="nav-item nav-link" href="locations">Location</a>
                     <a class="nav-item nav-link" href="sightings">Sighting</a>
+
                 </ul>
             </div>
         </nav>
@@ -66,35 +68,34 @@
                             <input type="text" name="description" 
                                    id="description" class="form-control"/>
                         </div>
-
                     </div>
                     <div class = "form-group row">
                         <label for="superpower" class="col-3 col-form-label">
                             Superpower</label>
                         <div class="col-9">
                             <select id ="superpower" name ="superpowerId" class="form-control">
+                                <option selected = "selected" value ="">- select -</option>
                                 <option th:each="superpower : ${Superpowers}"
                                         th:value="${superpower.superpowerId}"
-                                        th:text="${superpower.superpower + ' ' + superpower.description}"> Superpower </option></select>     
+                                        th:text="${superpower.superpower}"> Superpower </option></select>     
                         </div>
                     </div>
-                     <div class = "form-group row">
+                    <div class = "form-group row">
                         <label for="type" class="col-3 col-form-label">
                             Type</label>
-                         
+
                         <div class="col-9">
                             <select id ="type" name ="type" class="form-control">
-                                <option value="SuperHero">SuperHero </option>
-                                <option value="SuperVillian">Supervillain</option>
-                                  
+                                <option selected = "selected" value = "">- select -</option>
+                                <option value="Hero"> Hero </option>
+                                <option value="Villian">Villain</option>
                             </select>        
-                                       
                         </div>
-
+                    </div>
                     <button type="submit" class="btn btn-primary">Add Superpower</button>
                 </form>
             </div>
-        </div>
+        </div> <!--div closing row-->
 
         <div class="row m-4 border border-dark">
             <div class="col text-center m-3">
@@ -115,23 +116,23 @@
                             <td th:text="${hero.heroId}">Hero ID</td>
                             <td th:text="${hero.name}">Name</td>
                             <td th:text="${hero.description}">Description</td>
-                            <td th:text="${hero.superpowerId}">Superpower</td>
+                            <td th:text="${hero.superpower.superpower}">Superpower</td>
                             <td th:text="${hero.type}">Type</td>
-                            <td><a href="#" th:href ="@{/edit(id = ${hero.heroId})}">Edit</a></td>
-                            <td><a href="#" th:href = "@{/delete(id = ${hero.heroId})}">Delete</a></td>
+                            <td><a href="#" th:href ="@{/editHero(id = ${hero.heroId})}">Edit</a></td>
+                            <td><a href="#" th:href = "@{/deleteHero(id = ${hero.heroId})}">Delete</a></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    </div> 
-    <!-- End main body -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</body>
+
+        <!-- End main body -->
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
 </html>
 
 

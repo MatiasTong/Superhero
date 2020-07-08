@@ -26,9 +26,11 @@
                 <ul class="navbar-nav mx-auto" style="padding-bottom: 4px; font-size: 1.2rem;">
                     <a class="nav-item nav-link" href="heroes">Hero/Villain</a>
                     <a class="nav-item nav-link" href="superpowers">Superpower</a>
+
                     <a class="nav-item nav-link" href="organizations">Organization</a>
                     <a class="nav-item nav-link" href="locations">Location</a>
                     <a class="nav-item nav-link" href="sightings">Sighting</a>
+
                 </ul>
             </div>
         </nav>
@@ -66,6 +68,7 @@
                             Location</label>
                         <div class="col-9">
                             <select id="location" name="locationId" class="form-control" >
+                                <option selected = "selected" value ="">- select -</option>
                                 <option th:each="location : ${locations}" 
                                         th:value="${location.locationId}" 
                                         th:text="${location.name + location.address + location.city + location.zip}">
@@ -102,10 +105,11 @@
                             Type</label>
                         <div class="col-9">
                             <select id="types" name="type" class="form-control">
-                                <option  
+                                                      
+                            <option selected = "selected" value ="">- select -</option>
                             <option value="hero">Hero</option>
                             <option value="villain">Villain</option>
-                            </option>
+                           
                         </select>
                     </div>
 

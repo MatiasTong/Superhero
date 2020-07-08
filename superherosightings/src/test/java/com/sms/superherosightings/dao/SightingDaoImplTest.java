@@ -114,7 +114,7 @@ public class SightingDaoImplTest {
         
         Hero hero = new Hero();
         hero.setName("hero name");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
+        hero.setSuperpower(superpower);
         hero.setType("Superhero");
         hero.setDescription("Test Description");
         hero = heroDao.create(hero);
@@ -170,7 +170,7 @@ public class SightingDaoImplTest {
         Hero hero = new Hero();
         hero.setDescription("test description");
         hero.setName("test name");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
+        hero.setSuperpower(superpower);
         hero.setType("test type");
 
         hero = heroDao.create(hero);
@@ -222,7 +222,7 @@ public class SightingDaoImplTest {
         Hero hero = new Hero();
         hero.setDescription("test description");
         hero.setName("test name");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
+        hero.setSuperpower(superpower);
         hero.setType("test type");
 
         hero = heroDao.create(hero);
@@ -248,7 +248,7 @@ public class SightingDaoImplTest {
         Hero hero2 = new Hero();
         hero2.setDescription("test description 2");
         hero2.setName("test name 2");
-        hero2.setSuperpowerId(superpower2.getSuperpowerId());
+        hero2.setSuperpower(superpower2);
         hero2.setType("test type 2");
 
         hero2 = heroDao.create(hero2);
@@ -289,7 +289,7 @@ public class SightingDaoImplTest {
         Hero hero = new Hero();
         hero.setDescription("test description");
         hero.setName("test name");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
+        hero.setSuperpower(superpower);
         hero.setType("test type");
         hero = heroDao.create(hero);
 
