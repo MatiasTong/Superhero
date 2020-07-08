@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <title>Organization Manager</title>
+    </head>
+    <body>
+        <!-- Main Body of Page -->
+        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+            <!--Hamburger button-->
+            <button class="navbar-toggler" data-toggle="collapse" data-target='#navbar-menu'>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <!--nav bar with centered mx-auto links-->
+                <ul class="navbar-nav mx-auto" style="padding-bottom: 4px; font-size: 1.2rem;">
+                    <a class="nav-item nav-link" href="heroes">Hero/Villain</a>
+                    <a class="nav-item nav-link" href="superpowers">Superpower</a>
+                    <a class="nav-item nav-link" href="organizations">Organization</a>
+                    <a class="nav-item nav-link" href="locations">Location</a>
+                    <a class="nav-item nav-link" href="sighting">Sighting</a>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="row m-4">
+                <div class="col text-center border border-dark">
+                    <h1><a href="/" class="text-dark">Organization Details</a></h1>
+                </div>
+            </div>
+
+            <div class="row m-4 border border-dark">
+                <div class="col-6 text-right"><strong>Id</strong></div>
+                <div class="col-6 text-left">
+                    <span th:text="${organization.organizationId}">display id</span>
+                </div>
+
+                <div class="col-6 text-right"><strong>Name</strong></div>
+                <div class="col-6 text-left">
+                    <span th:text="${organization.name}">display name</span>
+                </div>
+
+                <div class="col-6 text-right"><strong>Description</strong></div>
+                <div class="col-6 text-left">
+                    <span th:text="${organization.description}">display description</span>
+                </div>
+                <div class="col-6 text-right"><strong>Location</strong></div>
+                <div class="col-6 text-left">
+                    <span th:text="${organization.location.name + ' ' + 
+                          organization.location.address + ' - ' + 
+                          organization.location.city}">display location</span>
+                </div>
+                <div class="col-6 text-right"><strong>Heroes</strong></div>
+                <div class="col-6 text-left">
+                    <span th:each="hero : ${organization.heroes}">
+                        <span th:text="${hero.name}">
+                            display Hero</span><br/>
+                    </span>
+                </div>
+                 <div class="col-6 text-right"><strong>Email</strong></div>
+                <div class="col-6 text-left">
+                    <span th:text="${organization.email}">display email</span>
+                </div>
+                 <div class="col-6 text-right"><strong>Type</strong></div>
+                <div class="col-6 text-left">
+                    <span th:text="${organization.type}">display type</span>
+                </div>
+            </div>
+        </div>
+        <!-- End main body -->
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
+</html>;

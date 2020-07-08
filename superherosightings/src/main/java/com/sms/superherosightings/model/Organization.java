@@ -7,17 +7,27 @@ package com.sms.superherosightings.model;
 
 import java.util.List;
 import java.util.Objects;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author Shirley Sosa, Sangay Yolmo, Matias Tong 
+ * @author Shirley Sosa, Sangay Yolmo, Matias Tong
  */
 public class Organization {
 
     private int organizationId;
+    
+    @NotBlank(message = "Name must not be empty.")
+    @Size(max = 30, message = "Name must be less than 30 characters.")
     private String name;
+    
+    @NotBlank(message = "Description must not be empty.")
+    @Size(max = 30, message = "Description must be less than 30 characters.")
     private String description;
     private Location location;
+    @Email
     private String email;
     private List<Hero> Heroes;
     private String type;
@@ -82,7 +92,7 @@ public class Organization {
     public String toString() {
         return "Organization{" + "organizationId=" + organizationId + ", name=" + name + ", description=" + description + ", location=" + location + ", email=" + email + ", Heroes=" + Heroes + ", type=" + type + '}';
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -131,12 +141,5 @@ public class Organization {
         }
         return true;
     }
-
-
-   
- 
-    
-    
-    
 
 }
