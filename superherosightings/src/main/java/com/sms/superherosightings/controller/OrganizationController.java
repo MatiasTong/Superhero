@@ -66,7 +66,6 @@ specifically, each one will hold the message of a validation error it found.*/
         return "organizations";
     }
 
-    //double check name
     @PostMapping("addOrganization")
     public String addOrg(Organization organization, HttpServletRequest request) {
         String[] heroIds = request.getParameterValues("heroId");
@@ -80,6 +79,7 @@ specifically, each one will hold the message of a validation error it found.*/
         }
 
         organization.setHeroes(heroes);
+        
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(organization);
 

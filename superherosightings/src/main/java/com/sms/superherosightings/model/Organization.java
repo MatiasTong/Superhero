@@ -18,15 +18,16 @@ import javax.validation.constraints.Size;
 public class Organization {
 
     private int organizationId;
-    
+
     @NotBlank(message = "Name must not be empty.")
     @Size(max = 30, message = "Name must be less than 30 characters.")
     private String name;
-    
+
     @NotBlank(message = "Description must not be empty.")
     @Size(max = 30, message = "Description must be less than 30 characters.")
     private String description;
     private Location location;
+    @NotBlank(message = "Email must not be empty.")
     @Email
     private String email;
     private List<Hero> Heroes;
