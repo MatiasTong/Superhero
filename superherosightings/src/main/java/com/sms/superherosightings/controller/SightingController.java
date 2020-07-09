@@ -61,16 +61,17 @@ public class SightingController {
         model.addAttribute("locations", locations);
         model.addAttribute("heroes", heroes);
         model.addAttribute("errors", violations);
-
+        //Clear errors
+        violations = new HashSet<>();
         return "sightings";
     }
 
     @PostMapping("addSighting")
     public String addSighting(HttpServletRequest request) {
+      
         String locationId = request.getParameter("locationId");
         String heroId = request.getParameter("heroId");
         String dateTimeAsString = request.getParameter("dateTime");
-//      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-ddTHH:mm"); 
         LocalDateTime dateTime = LocalDateTime.parse(dateTimeAsString);
 
         Sighting sighting = new Sighting();
@@ -123,6 +124,7 @@ public class SightingController {
         
         
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        
         violations = validate.validate(sighting);
 
         if (violations.isEmpty()) {

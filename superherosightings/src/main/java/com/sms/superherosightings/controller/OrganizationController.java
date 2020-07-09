@@ -63,12 +63,15 @@ specifically, each one will hold the message of a validation error it found.*/
         model.addAttribute("locations", locations);
         model.addAttribute("heroes", heroes);
 
+        //Clear errors
+        violations = new HashSet<>();
         return "organizations";
     }
 
     //double check name
     @PostMapping("addOrganization")
     public String addOrg(Organization organization, HttpServletRequest request) {
+
         String[] heroIds = request.getParameterValues("heroId");
         String locationId = request.getParameter("locationId");
 
@@ -86,6 +89,7 @@ specifically, each one will hold the message of a validation error it found.*/
         if (violations.isEmpty()) {
             organizationDao.create(organization);
         }
+
         return "redirect:/organizations";
 
     }
@@ -126,7 +130,13 @@ specifically, each one will hold the message of a validation error it found.*/
             heroes.add(heroDao.readById(Integer.parseInt(heroId)));
         }
         organization.setHeroes(heroes);
-        organizationDao.update(organization);
+
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(organization);
+
+        if (violations.isEmpty()) {
+            organizationDao.update(organization);
+        }
 
         return "redirect:/organizations";
     }

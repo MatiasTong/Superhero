@@ -7,16 +7,29 @@ package com.sms.superherosightings.model;
 
 import java.util.List;
 import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  *
  * @author Shirley Sosa, Sangay Yolmo, Matias Tong 
  */
 public class Hero {
+ 
    private int heroId;
+   
+   @NotBlank(message = "Name must not be empty.")
+   @Size(max = 30, message = "Name must be less than 30 characters.")
    private String name;
+   
+   @NotBlank(message = "Name must not be empty.")
+   @Size(max = 30, message = "Name must be less than 30 characters.")
    private String description; 
-   private Superpower superpower; 
+   
+   private Superpower superpower;
+   
+   @NotBlank(message = "Name must not be empty.")
+   @Size(max = 30, message = "Name must be less than 30 characters.")
    private String type;
 
     public int getHeroId() {

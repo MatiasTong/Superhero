@@ -11,9 +11,15 @@ import com.sms.superherosightings.dao.OrganizationDaoImpl;
 import com.sms.superherosightings.dao.SightingDaoImpl;
 import com.sms.superherosightings.dao.SuperpowerDaoImpl;
 import com.sms.superherosightings.model.Hero;
+import com.sms.superherosightings.model.Sighting;
 import com.sms.superherosightings.model.Superpower;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +32,8 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class HeroController {
+
+    Set<ConstraintViolation<Hero>> violations = new HashSet<>();
 
     @Autowired
     HeroDaoImpl heroDao;
@@ -46,9 +54,12 @@ public class HeroController {
     public String displayHeroes(Model model) {
         List<Hero> heroes = heroDao.readAll();
         List<Superpower> superpowers = superpowerDao.readAll();
-        
+
         model.addAttribute("Superpowers", superpowers);
         model.addAttribute("Heroes", heroes);
+        model.addAttribute("errors", violations);
+        //Clear errors
+        violations = new HashSet<>();
         return "heroes";
     }
 
@@ -58,7 +69,7 @@ public class HeroController {
         String description = request.getParameter("description");
         String superpowerId = request.getParameter("superpowerId");
         String type = request.getParameter("type");
-        
+
         Superpower superpower = superpowerDao.readById(Integer.parseInt(superpowerId));
 
         Hero hero = new Hero();
@@ -66,7 +77,13 @@ public class HeroController {
         hero.setDescription(description);
         hero.setSuperpower(superpower);
         hero.setType(type);
-        heroDao.create(hero);
+
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(hero);
+
+        if (violations.isEmpty()) {
+            heroDao.create(hero);
+        }
 
         return "redirect:/heroes";
     }
@@ -90,9 +107,15 @@ public class HeroController {
     public String performEditHero(Hero hero, Integer superpowerId) {
         Superpower superpower = superpowerDao.readById(superpowerId);
         hero.setSuperpower(superpower);
-        heroDao.update(hero);
+
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(hero);
+
+        if (violations.isEmpty()) {
+            heroDao.update(hero);
+        }
         return "redirect:/heroes";
-        
+
     }
 
 }
