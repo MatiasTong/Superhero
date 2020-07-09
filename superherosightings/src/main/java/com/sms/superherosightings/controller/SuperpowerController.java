@@ -85,12 +85,20 @@ specifically, each one will hold the message of a validation error it found.*/
     public String editSuperpower(Integer id, Model model) {
         Superpower sp = superpowerDao.readById(id);
         model.addAttribute("sp", sp);
+        model.addAttribute("errors", violations);
+
         return "editSuperpower";
     }
 
     @PostMapping("editSuperpower")
     public String performEditSuperpower(Superpower superpower) {
-        superpowerDao.update(superpower);
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(superpower);
+
+        if (violations.isEmpty()) {
+            superpowerDao.update(superpower);
+        }
+        
         return "redirect:/superpowers";
     }
 

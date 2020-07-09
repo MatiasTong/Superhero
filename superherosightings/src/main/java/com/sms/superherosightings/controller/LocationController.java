@@ -81,12 +81,20 @@ specifically, each one will hold the message of a validation error it found.*/
     public String editSuperpower(Integer id, Model model) {
         Location location = locationDao.readById(id);
         model.addAttribute("location", location);
+        model.addAttribute("errors", violations);
+
         return "editLocation";
     }
 
     @PostMapping("editLocation")
     public String performEditLocation(Location location) {
-        locationDao.update(location);
+
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(location);
+        if (violations.isEmpty()) {
+
+            locationDao.update(location);
+        }
         return "redirect:/locations";
     }
 

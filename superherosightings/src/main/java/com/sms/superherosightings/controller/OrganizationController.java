@@ -48,9 +48,9 @@ public class OrganizationController {
 
     @Autowired
     SuperpowerDaoImpl superpowerDao;
+
     /*The ConstraintViolation object holds information about the error; 
 specifically, each one will hold the message of a validation error it found.*/
-
     Set<ConstraintViolation<Organization>> violations = new HashSet<>();
 
     @GetMapping("organizations")
@@ -79,7 +79,7 @@ specifically, each one will hold the message of a validation error it found.*/
         }
 
         organization.setHeroes(heroes);
-        
+
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(organization);
 
@@ -109,6 +109,8 @@ specifically, each one will hold the message of a validation error it found.*/
         List<Hero> heroes = heroDao.readAll();
         List<Location> locations = locationDao.readAll();
         model.addAttribute("org", org);
+        //added errors here
+        model.addAttribute("errors", violations);
         model.addAttribute("heroes", heroes);
         model.addAttribute("locations", locations);
         return "editOrganization";
@@ -126,8 +128,14 @@ specifically, each one will hold the message of a validation error it found.*/
             heroes.add(heroDao.readById(Integer.parseInt(heroId)));
         }
         organization.setHeroes(heroes);
-        organizationDao.update(organization);
 
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(organization);
+
+        if (violations.isEmpty()) {
+
+            organizationDao.update(organization);
+        }
         return "redirect:/organizations";
     }
 }
