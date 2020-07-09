@@ -4,18 +4,17 @@
  * and open the template in the editor.
  */
 package com.sms.superherosightings.controller;
-
 import com.sms.superherosightings.dao.HeroDaoImpl;
 import com.sms.superherosightings.dao.LocationDaoImpl;
 import com.sms.superherosightings.dao.OrganizationDaoImpl;
 import com.sms.superherosightings.dao.SightingDaoImpl;
 import com.sms.superherosightings.dao.SuperpowerDaoImpl;
 import com.sms.superherosightings.model.Hero;
-<<<<<<< HEAD
+
 import com.sms.superherosightings.model.Sighting;
-=======
+
 import com.sms.superherosightings.model.Organization;
->>>>>>> 3f67149df33d49ee30d9d6e0592eaf3654e73a14
+
 import com.sms.superherosightings.model.Superpower;
 import java.util.HashSet;
 import java.util.List;
@@ -30,13 +29,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+
 /**
  *
  * @author matiastong
  */
 @Controller
 public class HeroController {
-
+   /*The ConstraintViolation object holds information about the error; 
+specifically, each one will hold the message of a validation error it found.*/
     Set<ConstraintViolation<Hero>> violations = new HashSet<>();
 
     @Autowired
@@ -54,9 +55,8 @@ public class HeroController {
     @Autowired
     SuperpowerDaoImpl superpowerDao;
 
-    /*The ConstraintViolation object holds information about the error; 
-specifically, each one will hold the message of a validation error it found.*/
-    Set<ConstraintViolation<Hero>> violations = new HashSet<>();
+ 
+  
 
     @GetMapping("heroes")
     public String displayHeroes(Model model) {
@@ -66,12 +66,10 @@ specifically, each one will hold the message of a validation error it found.*/
         model.addAttribute("Superpowers", superpowers);
         model.addAttribute("Heroes", heroes);
         model.addAttribute("errors", violations);
-<<<<<<< HEAD
+
         //Clear errors
         violations = new HashSet<>();
-=======
 
->>>>>>> 3f67149df33d49ee30d9d6e0592eaf3654e73a14
         return "heroes";
     }
 
@@ -89,16 +87,6 @@ specifically, each one will hold the message of a validation error it found.*/
         hero.setDescription(description);
         hero.setSuperpower(superpower);
         hero.setType(type);
-<<<<<<< HEAD
-
-        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
-        violations = validate.validate(hero);
-
-        if (violations.isEmpty()) {
-            heroDao.create(hero);
-        }
-=======
->>>>>>> 3f67149df33d49ee30d9d6e0592eaf3654e73a14
 
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(hero);

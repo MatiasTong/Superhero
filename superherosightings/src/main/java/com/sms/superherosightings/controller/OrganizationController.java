@@ -132,16 +132,7 @@ specifically, each one will hold the message of a validation error it found.*/
             heroes.add(heroDao.readById(Integer.parseInt(heroId)));
         }
         organization.setHeroes(heroes);
-<<<<<<< HEAD
 
-        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
-        violations = validate.validate(organization);
-
-        if (violations.isEmpty()) {
-            organizationDao.update(organization);
-        }
-=======
->>>>>>> 3f67149df33d49ee30d9d6e0592eaf3654e73a14
 
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(organization);
