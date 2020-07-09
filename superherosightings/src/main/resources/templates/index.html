@@ -5,6 +5,7 @@
 
         <title>My Webpage</title>
         <style>
+            
             #header-bar1 {
                 background-color: rgb(216, 22, 22);
                 padding: 10px;
@@ -62,6 +63,8 @@
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada&display=swap" rel="stylesheet"> 
     </head>
 
     <body>
@@ -143,22 +146,25 @@
                 <!--right column-->
                 <div class="col-md-2" id="right-column">
                     <div class="border border-dark">
-                        <h6> Feature </h6>
-                        <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #1"
-                                data-content="You can create your own super hero or villain!">Create</button>
-                        <br>
-                        <br>
-                        <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #2"
-                                data-content="Read the latest info on your heroes or villains!">Read</button>
-                        <br>
-                        <br>
-                        <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #3"
-                                data-content="Update your creations and info!">Update</button>
-                        <br>
-                        <br>
+                        <center><h2> Features </h2>
+                            <br>
 
-                        <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #4"
-                                data-content="Delete your creations as needed!">Delete</button>
+                            <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #1"
+                                    data-content="You can create your own super hero or villain!">Create</button>
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #2"
+                                    data-content="Read the latest info on your heroes or villains!">Read</button>
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #3"
+                                    data-content="Update your creations and info!">Update</button>
+                            <br>
+                            <br>
+
+                            <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #4"
+                                    data-content="Delete your creations as needed!">Delete</button>
+                        </center>
                     </div>
 
                 </div>
@@ -216,8 +222,7 @@
         <!--end of index page only-->
         <footer>
             <p> Superhero Spring Boot Web App By: Shirley Sosa | Matias Tong | Sangay Yolmo</p>
-            <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
-                    href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
         </footer>
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
                 integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -230,14 +235,15 @@
         crossorigin="anonymous"></script>
         <script>
             $(function () {
-            $('[data-toggle="popover"]').popover()
+                $('[data-toggle="popover"]').popover()
             })
 
             $(function () {
-            $('.example-popover').popover({
-            container: 'body'
+                $('.example-popover').popover({
+                    container: 'body'
+                })
             })
-            }) 
+            
 
         </script>
 
