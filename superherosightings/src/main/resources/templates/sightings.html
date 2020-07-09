@@ -59,9 +59,13 @@
                 background-size: cover;
                 height: 320px;
             }
+            .nav-link{
+                font-family: 'Press Start 2P', cursive;
+            }
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
     </head>
 
     <body>
@@ -101,7 +105,7 @@
             <p class="alert alert-danger" th:each="error : ${errors}" 
                th:text="${error.message}">Error message</p>
         </div>
-        
+
         <div class="row m-4 border border-dark">
             <div class="col-3 text-center m-3">
                 <span class="h3">Add Sighting</span>
@@ -188,8 +192,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function(){
-        $("#dateTime").attr("value", new Date().toJSON());
+        $(document).ready(function () {
+            $("#dateTime").attr("value", new Date().toJSON());
         });
     </script>
 </body>

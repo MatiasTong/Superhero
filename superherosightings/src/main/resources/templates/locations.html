@@ -59,9 +59,15 @@
                 background-size: cover;
                 height: 320px;
             }
+            .nav-link{
+                font-family: 'Press Start 2P', cursive;
+            }
+
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
+
     </head>
 
     <body>
@@ -102,7 +108,7 @@
             <p class="alert alert-danger" th:each="error : ${errors}" 
                th:text="${error.message}">Error message</p>
         </div>
-        
+
         <div class="row m-4 border border-dark">
             <div class="col-3 text-center m-3">
                 <span class="h3">Add Location</span>
@@ -143,7 +149,7 @@
                         -->                        <div class="col-9">
                             <input type="hidden" name="country" id="countryId" value="US"/>
                             <select name="state" class="states order-alpha form-control" id="stateId">
-                                
+
                                 <option value="">Select State</option>
                             </select>
                         </div>
