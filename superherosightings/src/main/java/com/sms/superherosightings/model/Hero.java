@@ -12,9 +12,10 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Shirley Sosa, Sangay Yolmo, Matias Tong 
+ * @author Shirley Sosa, Sangay Yolmo, Matias Tong
  */
 public class Hero {
+<<<<<<< HEAD
  
    private int heroId;
    
@@ -31,6 +32,22 @@ public class Hero {
    @NotBlank(message = "Name must not be empty.")
    @Size(max = 30, message = "Name must be less than 30 characters.")
    private String type;
+=======
+
+    private int heroId;
+
+    @NotBlank(message = "Name must not be empty.")
+    @Size(max = 30, message = "Name must be less than 30 characters.")
+    private String name;
+    
+    @NotBlank(message = "Description must not be empty.")
+    @Size(max = 30, message = "Description must be less than 30 characters.")
+    private String description;
+    
+    private Superpower superpower;
+    
+    private String type;
+>>>>>>> 3f67149df33d49ee30d9d6e0592eaf3654e73a14
 
     public int getHeroId() {
         return heroId;
@@ -118,5 +135,4 @@ public class Hero {
         return true;
     }
 
-   
 }

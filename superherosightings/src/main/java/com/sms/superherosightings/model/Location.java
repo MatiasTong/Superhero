@@ -7,29 +7,46 @@ package com.sms.superherosightings.model;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author Shirley Sosa, Sangay Yolmo, Matias Tong 
+ * @author Shirley Sosa, Sangay Yolmo, Matias Tong
  */
 public class Location {
 
+    private int locationId;
 
+    @NotBlank(message = "Name must not be empty.")
+    @Size(max = 30, message = "Name must be less than 30 characters.")
+    private String name;
 
-  private int locationId ; 
-  private String name ; 
-  private String description ; 
-  private String address ; 
-  private String city;
-  private String state;
-  private int zip; 
-  private double latitude; 
-  private double longitude; 
+    @NotBlank(message = "Description must not be empty.")
+    @Size(max = 30, message = "Description must be less than 30 characters.")
+    private String description;
+
+    @NotBlank(message = "Address must not be empty.")
+    @Size(max = 30, message = "Address must be less than 30 characters.")
+    private String address;
+
+    @NotBlank(message = "City must not be empty.")
+    @Size(max = 30, message = "City must be less than 30 characters.")
+    private String city;
+
+//    @NotBlank(message = "State must not be empty.")
+//    @Size(min=2,max = 2, message = "State must be less than 2 characters.")
+    private String state;
+
+//    @NotBlank(message = "Zip code must not be empty.")
+//    @Size(min=5, max = 5, message = "Zip code must be at least 5 characters.")
+    private int zip;
+    private double latitude;
+    private double longitude;
 
     public int getLocationId() {
         return locationId;
     }
-
 
     public void setLocationId(int locationId) {
         this.locationId = locationId;
@@ -39,7 +56,6 @@ public class Location {
     public String getName() {
         return name;
     }
-
 
     public void setName(String name) {
         this.name = name;
@@ -59,7 +75,6 @@ public class Location {
         return address;
     }
 
-
     public void setAddress(String address) {
         this.address = address;
 
@@ -68,7 +83,6 @@ public class Location {
     public String getCity() {
         return city;
     }
-
 
     public void setCity(String city) {
         this.city = city;
@@ -79,7 +93,6 @@ public class Location {
         return state;
     }
 
-
     public void setState(String state) {
         this.state = state;
 
@@ -88,7 +101,6 @@ public class Location {
     public int getZip() {
         return zip;
     }
-
 
     public void setZip(int zip) {
         this.zip = zip;
@@ -119,7 +131,6 @@ public class Location {
     @Override
     public int hashCode() {
 
-
         int hash = 5;
         hash = 97 * hash + this.locationId;
         hash = 97 * hash + Objects.hashCode(this.name);
@@ -130,7 +141,6 @@ public class Location {
         hash = 97 * hash + this.zip;
         hash = 97 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
         hash = 97 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
-
 
         return hash;
     }
@@ -176,10 +186,5 @@ public class Location {
         }
         return true;
     }
-
-
-
-
-  
 
 }

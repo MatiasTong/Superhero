@@ -46,6 +46,13 @@
             </div>
         </nav>
 
+
+        <div class="col-12 m-1 text-center" 
+             th:if="${!errors.isEmpty()}">
+            <p class="alert alert-danger" th:each="error : ${errors}" 
+               th:text="${error.message}">Error message</p>
+        </div>
+        
         <div class="row m-4 border border-dark">
             <div class="col-3 text-center m-3">
                 <span class="h3">Add Location</span>
@@ -86,6 +93,7 @@
                         -->                        <div class="col-9">
                             <input type="hidden" name="country" id="countryId" value="US"/>
                             <select name="state" class="states order-alpha form-control" id="stateId">
+                                
                                 <option value="">Select State</option>
                             </select>
                         </div>

@@ -11,7 +11,11 @@ import com.sms.superherosightings.dao.OrganizationDaoImpl;
 import com.sms.superherosightings.dao.SightingDaoImpl;
 import com.sms.superherosightings.dao.SuperpowerDaoImpl;
 import com.sms.superherosightings.model.Hero;
+<<<<<<< HEAD
 import com.sms.superherosightings.model.Sighting;
+=======
+import com.sms.superherosightings.model.Organization;
+>>>>>>> 3f67149df33d49ee30d9d6e0592eaf3654e73a14
 import com.sms.superherosightings.model.Superpower;
 import java.util.HashSet;
 import java.util.List;
@@ -50,6 +54,10 @@ public class HeroController {
     @Autowired
     SuperpowerDaoImpl superpowerDao;
 
+    /*The ConstraintViolation object holds information about the error; 
+specifically, each one will hold the message of a validation error it found.*/
+    Set<ConstraintViolation<Hero>> violations = new HashSet<>();
+
     @GetMapping("heroes")
     public String displayHeroes(Model model) {
         List<Hero> heroes = heroDao.readAll();
@@ -58,8 +66,12 @@ public class HeroController {
         model.addAttribute("Superpowers", superpowers);
         model.addAttribute("Heroes", heroes);
         model.addAttribute("errors", violations);
+<<<<<<< HEAD
         //Clear errors
         violations = new HashSet<>();
+=======
+
+>>>>>>> 3f67149df33d49ee30d9d6e0592eaf3654e73a14
         return "heroes";
     }
 
@@ -77,6 +89,7 @@ public class HeroController {
         hero.setDescription(description);
         hero.setSuperpower(superpower);
         hero.setType(type);
+<<<<<<< HEAD
 
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(hero);
@@ -84,27 +97,40 @@ public class HeroController {
         if (violations.isEmpty()) {
             heroDao.create(hero);
         }
+=======
+>>>>>>> 3f67149df33d49ee30d9d6e0592eaf3654e73a14
 
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(hero);
+
+        if (violations.isEmpty()) {
+            heroDao.create(hero);
+        }
         return "redirect:/heroes";
     }
 
     @GetMapping("deleteHero")
-    public String deleteHero(Integer id) {
+    public String deleteHero(Integer id
+    ) {
         heroDao.delete(id);
         return "redirect:/heroes";
     }
 
     @GetMapping("editHero")
-    public String editHero(Integer id, Model model) {
+    public String editHero(Integer id, Model model
+    ) {
         Hero hero = heroDao.readById(id);
         List<Superpower> superpowers = superpowerDao.readAll();
         model.addAttribute("superpowers", superpowers);
         model.addAttribute("hero", hero);
+        model.addAttribute("errors", violations);
+
         return "editHero";
     }
 
     @PostMapping("editHero")
     public String performEditHero(Hero hero, Integer superpowerId) {
+
         Superpower superpower = superpowerDao.readById(superpowerId);
         hero.setSuperpower(superpower);
 
