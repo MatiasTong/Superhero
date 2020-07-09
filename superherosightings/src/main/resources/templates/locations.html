@@ -62,11 +62,19 @@
             .nav-link{
                 font-family: 'Press Start 2P', cursive;
             }
-             .display-4{
+            .display-4{
 
                 font-family: 'Bangers', cursive;
             }
+            #background{
+                background-image: url('https://thumbs.dreamstime.com/b/halftone-texture-comic-book-style-vector-background-high-quality-print-87246804.jpg');
+                background-size: cover;
 
+            }
+
+            #addHeroForm{
+                background-color: #FFFFFF;
+            }
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -75,7 +83,7 @@
 
     </head>
 
-    <body>
+    <body id = "background">
         <div id="header-bar1"></div>
 
         <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -120,7 +128,7 @@
                th:text="${error.message}">Error message</p>
         </div>
 
-        <div class="row m-4 border border-dark">
+        <div class="row m-4 border border-dark" id ="addHeroForm">
             <div class="col-3 text-center m-3">
                 <span class="h3">Add Location</span>
             </div>
