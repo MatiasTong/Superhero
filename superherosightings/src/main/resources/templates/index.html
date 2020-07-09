@@ -5,7 +5,12 @@
 
         <title>My Webpage</title>
         <style>
-            
+
+            .btn-warning{
+                filter: drop-shadow(0 0 0.50rem yellow);
+                font-family: 'Kulim Park', sans-serif;
+
+            }
             #header-bar1 {
                 background-color: rgb(216, 22, 22);
                 padding: 10px;
@@ -35,6 +40,9 @@
                 background-color: #343a40;
             }
 
+            .card-img-top {
+                filter: drop-shadow(0 0 0.75rem crimson);
+            }            
             .card {
                 margin-right: 2px;
                 margin-left: 2px;
@@ -54,6 +62,10 @@
             #right-column {
                 color: white;
             }
+            .col-3 {
+                filter: drop-shadow(0 0 0.75rem yellow);
+
+            }
 
             .jumbotron {
                 background-image: url('images/wecanbeheroes3.png');
@@ -64,11 +76,23 @@
             th{
                 background-color: #343a40;
             }
+            .nav-link{
+                font-family: 'Press Start 2P', cursive;
+            }
+            .align-top{
+                filter: drop-shadow(0 0 0.1rem yellow);
+
+            }
+            .card-title{
+                  font-weight: bold;
+
+            }
+
         </style>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada&display=swap" rel="stylesheet"> 
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Kulim+Park:wght@600&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
     </head>
 
     <body>
@@ -111,7 +135,7 @@
                 <div class="col-md-5 border border-dark" id="left-column">
                     <!--                    <div class="row m-4 border border-dark">
                                             <div class="col-md-10 text-center m-3">-->
-                    <h6 style="text-align:center;">Latest Sightings</h6>
+                    <h6 style="font-family: 'Press Start 2P'">Latest Sightings</h6>
                     <div style="height:300px;width:100%;border-left:5px solid rgb(240, 204, 0); font-size: 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
                          'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; overflow:auto;">
 
@@ -151,7 +175,7 @@
                 <!--right column-->
                 <div class="col-md-1" id="right-column">
                     <div class="border border-dark">
-                        <center><h2> Features </h2>
+                        <center> <h5 style="font-family: 'Press Start 2P'"> Features </h5>
                             <br>
 
                             <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #1"
@@ -174,20 +198,34 @@
 
                 </div>
                 <!--end of right column-->
+               
             </div>
             <!--row closing div-->
 
             <!--cards-->
             <div class="row justify-content-center">
+                
                 <div class="col-auto mb-3">
                     <div class="card" style="width: 20rem;">
                         <img class="card-img-top" src="images/wonderwoman.png" alt="Card image">
                         <div class="card-body">
                             <h5 class="card-title">Wonderwoman</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Shirley's Pick</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                                content.</p>
+                            <h6 class="card-subtitle mb-2 text-muted">Shirley's Favorite Hero</h6>
+                            <p class="card-text">Bio: Beautiful as Aphrodite, wise as Athena, swifter than Hermes, and stronger than Hercules, Princess Diana of Themyscira fights for peace in Man's World.</p>
                             <!-- <a href="#" class="btn btn-primary stretched-link">Go somewhere</a> -->
+                        </div>
+                    </div>
+                </div>
+                 <div class="col-auto mb-3">
+                    <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="images/luffy2.png" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Luffy</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Matias's Favorite Hero</h6>
+                            <p class="card-text">Bio: He is the founder and captain of the Straw Hat Pirates, 
+                                    as well as one of it's four strongest members alongside Roronoa Zoro, Sanji, and Jinbei.</p>
+                            <!-- <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a> -->
                         </div>
                     </div>
                 </div>
@@ -196,26 +234,14 @@
                         <img class="card-img-top" src="images/batman2.png" alt="Card image">
                         <div class="card-body">
                             <h5 class="card-title">Batman</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Sangay's Pick</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                                content.</p>
+                            <h6 class="card-subtitle mb-2 text-muted">Sangay's Favorite Hero</h6>
+                            <p class="card-text">Bio: After witnessing the murder of his parents Dr. Thomas Wayne and Martha Wayne, 
+                                he swore vengeance against criminals, an oath tempered by a sense of justice.</p> 
                             <!-- <a href="#" class="btn btn-primary stretched-link">Go somewhere</a> -->
                         </div>
                     </div>
                 </div>
-                <div class="col-auto mb-3">
-                    <div class="card" style="width: 20rem;">
-                        <img class="card-img-top" src="images/luffy2.png" alt="Card image">
-                        <div class="card-body">
-                            <h5 class="card-title">Luffy</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">Matias' Pick</h6>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                                content.</p>
-                            <!-- <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a> -->
-                        </div>
-                    </div>
-                </div>
+               
             </div>
             <!--row closing div-->
             <!--end of cards-->
@@ -226,9 +252,12 @@
                 <div class="col-3"><img class="mx-auto d-block" src="images/kapow.png" width=70% /></div>
             </div>
         </div>
+        
         <!--container closing div-->
         <!--end of index page only-->
         <footer>
+            <br>
+            <br>
             <p> Superhero Spring Boot Web App By: Shirley Sosa | Matias Tong | Sangay Yolmo</p>
 
         </footer>
@@ -251,7 +280,7 @@
                     container: 'body'
                 })
             })
-            
+
 
         </script>
 
