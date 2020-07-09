@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <title>My Webpage</title>
+        <style>
+            
+            #header-bar1 {
+                background-color: rgb(216, 22, 22);
+                padding: 10px;
+            }
+
+            #header-bar2 {
+                background-color: rgb(96, 160, 255);
+                padding: 3px;
+            }
+
+            h2,
+            h5, h6 {
+                text-align: center;
+                margin: 20px auto;
+            }
+
+            p {
+                font-size: small;
+                ;
+            }
+
+            body {
+                background-color: #343a40;
+            }
+
+            .container-fluid {
+                background-color: #343a40;
+            }
+
+            .card {
+                margin-right: 2px;
+                margin-left: 2px;
+                margin-top: 5px;
+            }
+
+            footer {
+                background-color: #343a40;
+                padding: 10px;
+                color: white;
+                font-size: 1rem;
+                text-align: center;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            }
+
+            #left-column,
+            #right-column {
+                color: white;
+            }
+
+            .jumbotron {
+                background-image: url('images/wecanbeheroes3.png');
+                background-size: cover;
+                height: 320px;
+            }
+
+            th{
+                background-color: #343a40;
+            }
+        </style>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada&display=swap" rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada&display=swap" rel="stylesheet"> 
+    </head>
+
+    <body>
+        <div id="header-bar1"></div>
+
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">
+                <img src="images/energy.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                Hero Sightings Database
+            </a>
+            <!--Hamburger button-->
+            <button class="navbar-toggler" data-toggle="collapse" data-target='#navbar-menu'>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <!--nav bar with centered mx-auto links-->
+                <span class="navbar-text font-weight-bold">
+                    +
+                </span>
+                <ul class="navbar-nav" style=" font-size: 1 rem;">
+                    <a class="nav-item nav-link" href="heroes">Hero/Villain</a>
+                    <a class="nav-item nav-link" href="superpowers">Superpower</a>
+                    <a class="nav-item nav-link" href="organizations">Organization</a>
+                    <a class="nav-item nav-link" href="locations">Location</a>
+                    <a class="nav-item nav-link" href="sightings">Sighting</a>
+
+                </ul>
+            </div>
+        </nav>
+        <div id="header-bar2" style = "background-color: white;"></div>
+        <div id="header-bar2"></div>
+
+
+
+        <!--index page only-->
+        <div class="container-fluid">
+
+            <!--left side column-->
+            <div class="row pt-3">
+                <div class="col-md-5 border border-dark" id="left-column">
+                    <!--                    <div class="row m-4 border border-dark">
+                                            <div class="col-md-10 text-center m-3">-->
+                    <h6 style="text-align:center;">Latest Sightings</h6>
+                    <div style="height:300px;width:100%;border-left:5px solid rgb(240, 204, 0); font-size: 16px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif,
+                         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; overflow:auto;">
+
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Time</th>
+                                    <th>Hero</th>
+                                    <th>Location</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="sighting : ${sightings}">
+                                    <td th:text="${#temporals.format(sighting.dateTime, 'MM/dd/yyyy, h:mm a')}">Date Time</td>
+                                    <td th:text="${sighting.hero.name}">Hero</td>
+                                    <td th:text="${sighting.location.name + ' '
+                                        + sighting.location.city + ' ' + sighting.location.state}"> Location </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><!--scroll table-->
+                </div>
+                <!--end of left side column-->
+
+                <!--center column-->
+                <div class="col-md-5">
+                    <!--jumbotron-->
+                    <div class="jumbotron">
+                        <div class="container">
+                        </div>
+                    </div>
+                    <!--end of jumbotron-->
+                </div>
+                <!--end of center column-->
+
+                <!--right column-->
+                <div class="col-md-1" id="right-column">
+                    <div class="border border-dark">
+                        <center><h2> Features </h2>
+                            <br>
+
+                            <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #1"
+                                    data-content="You can create your own super hero or villain!">Create</button>
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #2"
+                                    data-content="Read the latest info on your heroes or villains!">Read</button>
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #3"
+                                    data-content="Update your creations and info!">Update</button>
+                            <br>
+                            <br>
+
+                            <button type="button" class="btn btn-lg btn-warning" data-toggle="popover" title="Feature #4"
+                                    data-content="Delete your creations as needed!">Delete</button>
+                        </center>
+                    </div>
+
+                </div>
+                <!--end of right column-->
+            </div>
+            <!--row closing div-->
+
+            <!--cards-->
+            <div class="row justify-content-center">
+                <div class="col-auto mb-3">
+                    <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="images/wonderwoman.png" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Wonderwoman</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Shirley's Pick</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                                content.</p>
+                            <!-- <a href="#" class="btn btn-primary stretched-link">Go somewhere</a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto mb-3">
+                    <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="images/batman2.png" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Batman</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Sangay's Pick</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                                content.</p>
+                            <!-- <a href="#" class="btn btn-primary stretched-link">Go somewhere</a> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-auto mb-3">
+                    <div class="card" style="width: 20rem;">
+                        <img class="card-img-top" src="images/luffy2.png" alt="Card image">
+                        <div class="card-body">
+                            <h5 class="card-title">Luffy</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Matias' Pick</h6>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                                content.</p>
+                            <!-- <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--row closing div-->
+            <!--end of cards-->
+
+            <div class="row justify-content-center">
+                <div class="col-3"><img class="mx-auto d-block" src="images/pow.png" width=70% /></div>
+                <div class="col-3"><img class="mx-auto d-block" src="images/zap.png" width=70% /></div>
+                <div class="col-3"><img class="mx-auto d-block" src="images/kapow.png" width=70% /></div>
+            </div>
+        </div>
+        <!--container closing div-->
+        <!--end of index page only-->
+        <footer>
+            <p> Superhero Spring Boot Web App By: Shirley Sosa | Matias Tong | Sangay Yolmo</p>
+
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+                integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+                integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+        <script>
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            })
+
+            $(function () {
+                $('.example-popover').popover({
+                    container: 'body'
+                })
+            })
+            
+
+        </script>
+
+    </body>
+
+</html>

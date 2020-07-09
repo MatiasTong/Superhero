@@ -7,17 +7,32 @@ package com.sms.superherosightings.model;
 
 import java.util.List;
 import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  *
- * @author Shirley Sosa, Sangay Yolmo, Matias Tong 
+ * @author Shirley Sosa, Sangay Yolmo, Matias Tong
  */
 public class Hero {
+
+ 
    private int heroId;
+   
+   @NotBlank(message = "Name must not be empty.")
+   @Size(max = 30, message = "Name must be less than 30 characters.")
    private String name;
+   
+   @NotBlank(message = "Name must not be empty.")
+   @Size(max = 30, message = "Name must be less than 30 characters.")
    private String description; 
-   private int superpowerId; 
+   
+   private Superpower superpower;
+   
+   @NotBlank(message = "Name must not be empty.")
+   @Size(max = 30, message = "Name must be less than 30 characters.")
    private String type;
+
 
     public int getHeroId() {
         return heroId;
@@ -43,15 +58,13 @@ public class Hero {
         this.description = description;
     }
 
-    public int getSuperpowerId() {
-        return superpowerId;
+    public Superpower getSuperpower() {
+        return superpower;
     }
 
-    public void setSuperpowerId(int superpowerId) {
-        this.superpowerId = superpowerId;
+    public void setSuperpower(Superpower superpower) {
+        this.superpower = superpower;
     }
-
-  
 
     public String getType() {
         return type;
@@ -63,17 +76,17 @@ public class Hero {
 
     @Override
     public String toString() {
-        return "Hero{" + "heroId=" + heroId + ", name=" + name + ", description=" + description + ", superpowerId=" + superpowerId + ", type=" + type + '}';
+        return "Hero{" + "heroId=" + heroId + ", name=" + name + ", description=" + description + ", superpower=" + superpower + ", type=" + type + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + this.heroId;
-        hash = 71 * hash + Objects.hashCode(this.name);
-        hash = 71 * hash + Objects.hashCode(this.description);
-        hash = 71 * hash + this.superpowerId;
-        hash = 71 * hash + Objects.hashCode(this.type);
+        int hash = 3;
+        hash = 53 * hash + this.heroId;
+        hash = 53 * hash + Objects.hashCode(this.name);
+        hash = 53 * hash + Objects.hashCode(this.description);
+        hash = 53 * hash + Objects.hashCode(this.superpower);
+        hash = 53 * hash + Objects.hashCode(this.type);
         return hash;
     }
 
@@ -92,9 +105,6 @@ public class Hero {
         if (this.heroId != other.heroId) {
             return false;
         }
-        if (this.superpowerId != other.superpowerId) {
-            return false;
-        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -104,8 +114,10 @@ public class Hero {
         if (!Objects.equals(this.type, other.type)) {
             return false;
         }
+        if (!Objects.equals(this.superpower, other.superpower)) {
+            return false;
+        }
         return true;
     }
 
-   
 }

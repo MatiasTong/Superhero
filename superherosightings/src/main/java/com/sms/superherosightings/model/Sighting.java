@@ -5,6 +5,8 @@ import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Past;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /*
@@ -20,9 +22,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Sighting {
     private int sightingId;
     
+    @Past(message = "Date cannot be in the future")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime dateTime;
+    
     private Hero hero;
+    
     private Location location;
 
     public int getSightingId() {

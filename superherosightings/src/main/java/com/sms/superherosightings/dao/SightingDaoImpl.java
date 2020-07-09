@@ -11,6 +11,7 @@ import com.sms.superherosightings.model.Hero;
 import com.sms.superherosightings.model.Location;
 import com.sms.superherosightings.model.Organization;
 import com.sms.superherosightings.model.Sighting;
+import com.sms.superherosightings.model.Superpower;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -26,6 +27,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class SightingDaoImpl implements Dao<Sighting> {
 
+    @Autowired
+    HeroDaoImpl heroDao;
+    
     @Autowired
     JdbcTemplate jdbc;
 
@@ -47,7 +51,8 @@ public class SightingDaoImpl implements Dao<Sighting> {
             //and retrieve all the hero fields in the hero table to populate our hero object
             final String SELECT_HERO = "SELECT h.* FROM Sighting s JOIN Hero h ON s.HeroId = h.HeroId WHERE SightingId= ?";
             Hero hero = jdbc.queryForObject(SELECT_HERO, new HeroMapper(), sightingId);
-
+            Superpower superpower = heroDao.getSuperpowerForHero(hero);
+            hero.setSuperpower(superpower);
             return hero;
         } catch (DataAccessException e) {
             return null;

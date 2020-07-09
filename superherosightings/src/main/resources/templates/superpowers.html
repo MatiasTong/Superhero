@@ -1,107 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+    <head>
 
-  <title>My Webpage</title>
-  <style>
-    header,
-    h2,
-    h5 {
-      text-align: center;
-      margin: 20px auto;
-    }
+        <title>My Webpage</title>
+        <style>
+            #header-bar1 {
+                background-color: rgb(216, 22, 22);
+                padding: 10px;
+            }
 
-    p {
-      font-size: small;
-    }
+            #header-bar2 {
+                background-color: rgb(96, 160, 255);
+                padding: 3px;
+            }
 
-  </style>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-</head>
+            h2,
+            h5 {
+                text-align: center;
+                margin: 20px auto;
+            }
 
-<body>
-  <header>
-     <h1><a href="/"> Hero Database Title </a></h1>
-  </header>
+            p {
+                font-size: small;
+                ;
+            }
 
-  <nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
-    <!--Hamburger button-->
-    <button class="navbar-toggler" data-toggle="collapse" data-target='#navbar-menu'>
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbar-menu">
-      <!--nav bar with centered mx-auto links-->
-      <ul class="navbar-nav mx-auto" style="padding-bottom: 4px; font-size: 1.2rem;">
-        <a class="nav-item nav-link" href="#">Hero/Villain</a>
-        <a class="nav-item nav-link" href="superpowers">Superpower</a>
-        <a class="nav-item nav-link" href="#">Organization</a>
-        <a class="nav-item nav-link" href="locations">Location</a>
-        <a class="nav-item nav-link" href="sightings">Sighting</a>
-      </ul>
-    </div>
-  </nav>
+            body {
+                background-color: #343a40;
+            }
 
-        <div class="row m-4 border border-dark">
-            <div class="col-3 text-center m-3">
-                <span class="h3">Add Superpower</span>
+            .container-fluid {
+                background-color: #343a40;
+            }
+
+            .card {
+                margin-right: 2px;
+                margin-left: 2px;
+                margin-top: 5px;
+            }
+
+            footer {
+                background-color: #343a40;
+                padding: 10px;
+                color: white;
+                font-size: 1rem;
+                text-align: center;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            }
+
+            #left-column,
+            #right-column {
+                color: white;
+            }
+
+            .jumbotron {
+                background-image: url('images/wecanbeheroes.png');
+                background-size: cover;
+                height: 320px;
+            }
+        </style>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <div id="header-bar1"></div>
+
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">
+                <img src="images/energy.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                Hero Sightings Database
+            </a>
+            <!--Hamburger button-->
+            <button class="navbar-toggler" data-toggle="collapse" data-target='#navbar-menu'>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <!--nav bar with centered mx-auto links-->
+                <span class="navbar-text font-weight-bold">
+                    +
+                </span>
+                <ul class="navbar-nav" style=" font-size: 1 rem;">
+                    <a class="nav-item nav-link" href="heroes">Hero/Villain</a>
+                    <a class="nav-item nav-link" href="superpowers">Superpower</a>
+                    <a class="nav-item nav-link" href="organizations">Organization</a>
+                    <a class="nav-item nav-link" href="locations">Location</a>
+                    <a class="nav-item nav-link" href="sightings">Sighting</a>
+
+                </ul>
             </div>
-            <div class="col-7 text-center m-3">
-                <form action="addSuperpower" method="POST">
-                    <div class="form-group row">
-                        <label for="superpower" class="col-3 col-form-label">
-                            Superpower</label>
-                        <div class="col-9">
-                            <input type="text" name="superpower" 
-                                   id="superpower" class="form-control"/>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="description" class="col-3 col-form-label">
-                            Description</label>
-                        <div class="col-9">
-                            <input type="text" name="description" 
-                                   id="description" class="form-control"/>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add Superpower</button>
-                </form>
-            </div>
+        </nav>
+        <div id="header-bar2" style = "background-color: white;"></div>
+        <div id="header-bar2"></div>
+
+
+        <div class="col-12 m-1 text-center" 
+             th:if="${!errors.isEmpty()}">
+            <p class="alert alert-danger" th:each="error : ${errors}" 
+               th:text="${error.message}">Error message</p>
         </div>
-
-        <div class="row m-4 border border-dark">
-            <div class="col text-center m-3">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Superpower</th>
-                            <th>Description</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="superpower : ${superpowers}">
-                            <td th:text="${superpower.superpowerId}">Superpower ID</td>
-                            <td th:text="${superpower.superpower}">Superpower</td>
-                            <td th:text="${superpower.description}">Description</td>
-                            <td><a href="#" th:href ="@{/editSuperpower(id = ${superpower.superpowerId})}">Edit</a></td>
-                            <td><a href="#" th:href = "@{/delete(id = ${superpower.superpowerId})}">Delete</a></td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="row m-4 border border-dark">
+                <div class="col-3 text-center m-3">
+                    <span class="h3">Add Superpower</span>
+                </div>
+                <div class="col-7 text-center m-3">
+                    <form action="addSuperpower" method="POST">
+                        <div class="form-group row">
+                            <label for="superpower" class="col-3 col-form-label">
+                                Superpower</label>
+                            <div class="col-9">
+                                <input type="text" name="superpower" 
+                                       id="superpower" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="description" class="col-3 col-form-label">
+                                Description</label>
+                            <div class="col-9">
+                                <input type="text" name="description" 
+                                       id="description" class="form-control"/>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add Superpower</button>
+                    </form>
+                </div>
             </div>
-        </div>
-    </div> 
-    <!-- End main body -->
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-</body>
+
+            <div class="row m-4 border border-dark">
+                <div class="col text-center m-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Superpower</th>
+                                <th>Description</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="superpower : ${superpowers}">
+                                <td th:text="${superpower.superpowerId}">Superpower ID</td>
+                                <td th:text="${superpower.superpower}">Superpower</td>
+                                <td th:text="${superpower.description}">Description</td>
+                                <td><a href="#" th:href ="@{/editSuperpower(id = ${superpower.superpowerId})}">Edit</a></td>
+                                <td><a href="#" th:href = "@{/delete(id = ${superpower.superpowerId})}">Delete</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> 
+        <!-- End main body -->
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    </body>
 </html>
 
 

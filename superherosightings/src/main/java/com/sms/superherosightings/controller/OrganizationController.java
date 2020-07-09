@@ -48,9 +48,9 @@ public class OrganizationController {
 
     @Autowired
     SuperpowerDaoImpl superpowerDao;
+
     /*The ConstraintViolation object holds information about the error; 
 specifically, each one will hold the message of a validation error it found.*/
-
     Set<ConstraintViolation<Organization>> violations = new HashSet<>();
 
     @GetMapping("organizations")
@@ -63,12 +63,14 @@ specifically, each one will hold the message of a validation error it found.*/
         model.addAttribute("locations", locations);
         model.addAttribute("heroes", heroes);
 
+        //Clear errors
+        violations = new HashSet<>();
         return "organizations";
     }
 
-    //double check name
     @PostMapping("addOrganization")
     public String addOrg(Organization organization, HttpServletRequest request) {
+
         String[] heroIds = request.getParameterValues("heroId");
         String locationId = request.getParameter("locationId");
 
@@ -80,12 +82,14 @@ specifically, each one will hold the message of a validation error it found.*/
         }
 
         organization.setHeroes(heroes);
+
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(organization);
 
         if (violations.isEmpty()) {
             organizationDao.create(organization);
         }
+
         return "redirect:/organizations";
 
     }
@@ -109,6 +113,8 @@ specifically, each one will hold the message of a validation error it found.*/
         List<Hero> heroes = heroDao.readAll();
         List<Location> locations = locationDao.readAll();
         model.addAttribute("org", org);
+        //added errors here
+        model.addAttribute("errors", violations);
         model.addAttribute("heroes", heroes);
         model.addAttribute("locations", locations);
         return "editOrganization";
@@ -126,8 +132,15 @@ specifically, each one will hold the message of a validation error it found.*/
             heroes.add(heroDao.readById(Integer.parseInt(heroId)));
         }
         organization.setHeroes(heroes);
-        organizationDao.update(organization);
 
+
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(organization);
+
+        if (violations.isEmpty()) {
+
+            organizationDao.update(organization);
+        }
         return "redirect:/organizations";
     }
 }

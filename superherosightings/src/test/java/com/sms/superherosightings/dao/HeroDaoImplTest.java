@@ -108,7 +108,7 @@ public class HeroDaoImplTest {
         
         Hero hero = new Hero();
         hero.setName("hero name");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
+        hero.setSuperpower(superpower);
         hero.setType("Superhero");
         hero.setDescription("Test Description");
         
@@ -136,14 +136,14 @@ public class HeroDaoImplTest {
         
         Hero hero = new Hero();
         hero.setName("hero name");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
+        hero.setSuperpower(superpower);
         hero.setType("Superhero");
         hero.setDescription("Test Description");
         hero = heroDao.create(hero);
         
         Hero hero2 = new Hero();
         hero2.setName("hero name 2");
-        hero2.setSuperpowerId(superpower.getSuperpowerId());
+        hero2.setSuperpower(superpower);
         hero2.setType("Superhero");
         hero2.setDescription("Test Description2");
         hero2 = heroDao.create(hero2);
@@ -173,7 +173,7 @@ public class HeroDaoImplTest {
         
         Hero hero = new Hero();
         hero.setName("hero name");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
+        hero.setSuperpower(superpower);
         hero.setType("Superhero");
         hero.setDescription("Test Description");
         hero = heroDao.create(hero);
@@ -186,7 +186,7 @@ public class HeroDaoImplTest {
         //is different from the one currently in the database
         hero.setHeroId(hero.getHeroId());
         hero.setName("hero name updated");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
+        hero.setSuperpower(superpower);
         hero.setType("Superhero updated");
         hero.setDescription("Test Description updated");
         
@@ -216,7 +216,7 @@ public class HeroDaoImplTest {
         
         Hero hero = new Hero();
         hero.setName("hero name");
-        hero.setSuperpowerId(superpower.getSuperpowerId());
+        hero.setSuperpower(superpower);
         hero.setType("Superhero");
         hero.setDescription("Test Description");
         hero = heroDao.create(hero);
