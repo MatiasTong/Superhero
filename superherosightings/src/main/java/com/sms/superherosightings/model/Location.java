@@ -34,14 +34,17 @@ public class Location {
     @Size(max = 30, message = "City must be less than 30 characters.")
     private String city;
 
-//    @NotBlank(message = "State must not be empty.")
+    @NotBlank(message = "State must not be empty.")
 //    @Size(min=2,max = 2, message = "State must be less than 2 characters.")
     private String state;
 
-//    @NotBlank(message = "Zip code must not be empty.")
+    @NotBlank(message = "Zip code must not be empty.")
 //    @Size(min=5, max = 5, message = "Zip code must be at least 5 characters.")
     private int zip;
+    
+        @NotBlank(message = "Zip code must not be empty.")
     private double latitude;
+            @NotBlank(message = "Zip code must not be empty.")
     private double longitude;
 
     public int getLocationId() {

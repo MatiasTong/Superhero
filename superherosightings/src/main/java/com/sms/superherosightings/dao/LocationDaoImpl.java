@@ -64,10 +64,12 @@ public class LocationDaoImpl implements Dao<Location> {
 
     @Override
     public void delete(int id) {
+        final String DELETE_HERO_ORGANIZATION = " DELETE FROM HeroOrganization ho JOIN Organization o on ho.OrganizationId = o.OrganizationId WHERE o.LocationId = ?";
         final String DELETE_SIGHTING = "DELETE FROM Sighting WHERE LocationId =?";
         final String DELETE_ORGANIZATION = "DELETE FROM Organization WHERE LocationId=?";
         final String DELETE_LOCATION = "DELETE FROM Location WHERE LocationId=?";
 
+        jdbc.update(DELETE_HERO_ORGANIZATION, id);
         jdbc.update(DELETE_SIGHTING, id);
         jdbc.update(DELETE_ORGANIZATION, id);
         jdbc.update(DELETE_LOCATION, id);
