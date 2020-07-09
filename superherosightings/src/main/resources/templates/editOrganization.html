@@ -1,32 +1,89 @@
-<!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
+
     <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <title>My Webpage</title>
+        <style>
+            #header-bar1 {
+                background-color: rgb(216, 22, 22);
+                padding: 10px;
+            }
 
-        <title>Organization Manager</title>
+            #header-bar2 {
+                background-color: rgb(96, 160, 255);
+                padding: 3px;
+            }
+
+            h2,
+            h5 {
+                text-align: center;
+                margin: 20px auto;
+            }
+
+            p {
+                font-size: small;
+                ;
+            }
+
+            body {
+                background-color: #343a40;
+            }
+
+            .container-fluid {
+                background-color: #343a40;
+            }
+
+            .card {
+                margin-right: 2px;
+                margin-left: 2px;
+                margin-top: 5px;
+            }
+
+            footer {
+                background-color: #343a40;
+                padding: 10px;
+                color: white;
+                font-size: 1rem;
+                text-align: center;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            }
+
+            #left-column,
+            #right-column {
+                color: white;
+            }
+
+            .jumbotron {
+                background-image: url('images/wecanbeheroes.png');
+                background-size: cover;
+                height: 320px;
+            }
+        </style>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </head>
-    <body>
-        <!-- Main Body of Page -->
-        <header>
-            <h1>Hero Database Title</h1>
-        </header>
 
-        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #e3f2fd;">
+    <body>
+        <div id="header-bar1"></div>
+
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">
+                <img src="images/energy.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                Hero Sightings Database
+            </a>
             <!--Hamburger button-->
             <button class="navbar-toggler" data-toggle="collapse" data-target='#navbar-menu'>
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <!--nav bar with centered mx-auto links-->
-                <ul class="navbar-nav mx-auto" style="padding-bottom: 4px; font-size: 1.2rem;">
+                <span class="navbar-text font-weight-bold">
+                    +
+                </span>
+                <ul class="navbar-nav" style=" font-size: 1 rem;">
                     <a class="nav-item nav-link" href="heroes">Hero/Villain</a>
                     <a class="nav-item nav-link" href="superpowers">Superpower</a>
-
                     <a class="nav-item nav-link" href="organizations">Organization</a>
                     <a class="nav-item nav-link" href="locations">Location</a>
                     <a class="nav-item nav-link" href="sightings">Sighting</a>
@@ -34,6 +91,10 @@
                 </ul>
             </div>
         </nav>
+        <div id="header-bar2" style = "background-color: white;"></div>
+        <div id="header-bar2"></div>
+
+
         <div class="col-12 m-1 text-center" 
              th:if="${!errors.isEmpty()}">
             <p class="alert alert-danger" th:each="error : ${errors}" 
