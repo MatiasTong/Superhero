@@ -7,7 +7,14 @@ package com.sms.superherosightings.model;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -38,14 +45,19 @@ public class Location {
 //    @Size(min=2,max = 2, message = "State must be less than 2 characters.")
     private String state;
 
-    @NotBlank(message = "Zip code must not be empty.")
-//    @Size(min=5, max = 5, message = "Zip code must be at least 5 characters.")
-    private int zip;
+    @NotNull
+    private Integer zip;
     
-        @NotBlank(message = "Zip code must not be empty.")
-    private double latitude;
-            @NotBlank(message = "Zip code must not be empty.")
-    private double longitude;
+    @NotNull
+    private Double latitude;
+    
+    @NotNull(message = "Is Null")
+    private Double longitude;
+    
+//     @NotBlank(message = "Is Blank")
+//    @Digits(integer=3, fraction=8, message = "Is Digits")
+//    @DecimalMin(value = "-180.000000", message = "Is Too Low")
+//    @DecimalMax(value = "180.000000", message = "Is Too High")
 
     public int getLocationId() {
         return locationId;
@@ -53,7 +65,6 @@ public class Location {
 
     public void setLocationId(int locationId) {
         this.locationId = locationId;
-
     }
 
     public String getName() {
@@ -62,7 +73,6 @@ public class Location {
 
     public void setName(String name) {
         this.name = name;
-
     }
 
     public String getDescription() {
@@ -71,7 +81,6 @@ public class Location {
 
     public void setDescription(String description) {
         this.description = description;
-
     }
 
     public String getAddress() {
@@ -80,7 +89,6 @@ public class Location {
 
     public void setAddress(String address) {
         this.address = address;
-
     }
 
     public String getCity() {
@@ -89,7 +97,6 @@ public class Location {
 
     public void setCity(String city) {
         this.city = city;
-
     }
 
     public String getState() {
@@ -98,31 +105,29 @@ public class Location {
 
     public void setState(String state) {
         this.state = state;
-
     }
 
-    public int getZip() {
+    public Integer getZip() {
         return zip;
     }
 
-    public void setZip(int zip) {
+    public void setZip(Integer zip) {
         this.zip = zip;
-
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
@@ -133,18 +138,16 @@ public class Location {
 
     @Override
     public int hashCode() {
-
-        int hash = 5;
-        hash = 97 * hash + this.locationId;
-        hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + Objects.hashCode(this.description);
-        hash = 97 * hash + Objects.hashCode(this.address);
-        hash = 97 * hash + Objects.hashCode(this.city);
-        hash = 97 * hash + Objects.hashCode(this.state);
-        hash = 97 * hash + this.zip;
-        hash = 97 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
-        hash = 97 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
-
+        int hash = 3;
+        hash = 29 * hash + this.locationId;
+        hash = 29 * hash + Objects.hashCode(this.name);
+        hash = 29 * hash + Objects.hashCode(this.description);
+        hash = 29 * hash + Objects.hashCode(this.address);
+        hash = 29 * hash + Objects.hashCode(this.city);
+        hash = 29 * hash + Objects.hashCode(this.state);
+        hash = 29 * hash + Objects.hashCode(this.zip);
+        hash = 29 * hash + Objects.hashCode(this.latitude);
+        hash = 29 * hash + Objects.hashCode(this.longitude);
         return hash;
     }
 
@@ -163,15 +166,6 @@ public class Location {
         if (this.locationId != other.locationId) {
             return false;
         }
-        if (this.zip != other.zip) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.latitude) != Double.doubleToLongBits(other.latitude)) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.longitude) != Double.doubleToLongBits(other.longitude)) {
-            return false;
-        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -187,7 +181,19 @@ public class Location {
         if (!Objects.equals(this.state, other.state)) {
             return false;
         }
+        if (!Objects.equals(this.zip, other.zip)) {
+            return false;
+        }
+        if (!Objects.equals(this.latitude, other.latitude)) {
+            return false;
+        }
+        if (!Objects.equals(this.longitude, other.longitude)) {
+            return false;
+        }
         return true;
     }
 
+   
+
+   
 }

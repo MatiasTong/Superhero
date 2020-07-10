@@ -56,11 +56,16 @@ specifically, each one will hold the message of a validation error it found.*/
         List<Location> locations = locationDao.readAll();
         model.addAttribute("locations", locations);
         model.addAttribute("errors", violations);
+        
+        //Clear errors
+        violations = new HashSet<>();
         return "locations";
     }
 
     @PostMapping("addLocation")
     public String addLocation(Location location) {
+       
+        
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(location);
 
@@ -81,7 +86,6 @@ specifically, each one will hold the message of a validation error it found.*/
     public String editSuperpower(Integer id, Model model) {
         Location location = locationDao.readById(id);
         model.addAttribute("location", location);
-        model.addAttribute("errors", violations);
 
         return "editLocation";
     }
