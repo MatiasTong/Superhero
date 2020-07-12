@@ -127,7 +127,7 @@ public class SightingDaoImplTest {
         location.setLongitude(73.928017);
         location.setName("test name");
         location.setState("NJ");
-        location.setZip(99999);
+        location.setZip("99999");
         location = locationDao.create(location);
 
         Sighting sighting = new Sighting();
@@ -159,7 +159,7 @@ public class SightingDaoImplTest {
         location.setLongitude(73.928017);
         location.setName("test name");
         location.setState("NJ");
-        location.setZip(99999);
+        location.setZip("99999");
         location = locationDao.create(location);
 
         Superpower superpower = new Superpower();
@@ -210,7 +210,7 @@ public class SightingDaoImplTest {
         location.setLongitude(73.928017);
         location.setName("test name");
         location.setState("NJ");
-        location.setZip(99999);
+        location.setZip("99999");
 
         location = locationDao.create(location);
 
@@ -277,7 +277,7 @@ public class SightingDaoImplTest {
         location.setLongitude(73.928017);
         location.setName("test name");
         location.setState("NJ");
-        location.setZip(99999);
+        location.setZip("99999");
 
         location = locationDao.create(location);
         

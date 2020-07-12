@@ -97,7 +97,7 @@ public class LocationDaoImpl implements Dao<Location> {
             location.setAddress(rs.getString("Address"));
             location.setCity(rs.getString("City"));
             location.setState(rs.getString("State"));
-            location.setZip(rs.getInt("ZipCode"));
+            location.setZip(rs.getString("ZipCode"));
             location.setLatitude(rs.getDouble("Lat"));
             location.setLongitude(rs.getDouble("Long"));
 

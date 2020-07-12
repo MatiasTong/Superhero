@@ -106,7 +106,7 @@ public class LocationDaoImplTest {
         location.setAddress("Address");
         location.setCity("City");
         location.setState("NY");
-        location.setZip(11323);
+        location.setZip("11323");
         location.setLatitude(90.45);
         location.setLongitude(123.45);
 
@@ -133,7 +133,7 @@ public class LocationDaoImplTest {
         location.setAddress("Address");
         location.setCity("City");
         location.setState("NY");
-        location.setZip(11323);
+        location.setZip("11323");
         location.setLatitude(90.45);
         location.setLongitude(123.45);
         location = locationDao.create(location);
@@ -144,7 +144,7 @@ public class LocationDaoImplTest {
         secondLocation.setAddress("Second  Address");
         secondLocation.setCity("Second City");
         secondLocation.setState("NY");
-        secondLocation.setZip(11323);
+        secondLocation.setZip("11323");
         secondLocation.setLatitude(90.45);
         secondLocation.setLongitude(123.45);
         secondLocation = locationDao.create(secondLocation);
@@ -173,7 +173,7 @@ public class LocationDaoImplTest {
         location.setAddress("Address");
         location.setCity("City");
         location.setState("NY");
-        location.setZip(11323);
+        location.setZip("11323");
         location.setLatitude(90.45);
         location.setLongitude(123.45);
         location = locationDao.create(location);
@@ -187,7 +187,7 @@ public class LocationDaoImplTest {
         location.setAddress("Address Updated");
         location.setCity("City Updated");
         location.setState("NY");
-        location.setZip(11323);
+        location.setZip("11323");
         location.setLatitude(90.45);
         location.setLongitude(123.45);
 
@@ -213,7 +213,7 @@ public class LocationDaoImplTest {
         location.setAddress("Address");
         location.setCity("City");
         location.setState("NY");
-        location.setZip(11323);
+        location.setZip("11323");
         location.setLatitude(90.45);
         location.setLongitude(123.45);
         location = locationDao.create(location);

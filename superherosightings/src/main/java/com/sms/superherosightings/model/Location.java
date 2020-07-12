@@ -15,6 +15,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -25,12 +26,12 @@ public class Location {
 
     private int locationId;
 
-    @NotBlank(message = "Name must not be empty.")
+    @NotBlank(message = "Location Name must not be empty.")
     @Size(max = 30, message = "Name must be less than 30 characters.")
     private String name;
 
     @NotBlank(message = "Description must not be empty.")
-    @Size(max = 30, message = "Description must be less than 30 characters.")
+    @Size(max = 50, message = "Description must be less than 50 characters.")
     private String description;
 
     @NotBlank(message = "Address must not be empty.")
@@ -42,22 +43,28 @@ public class Location {
     private String city;
 
     @NotBlank(message = "State must not be empty.")
-//    @Size(min=2,max = 2, message = "State must be less than 2 characters.")
+    @Size(max = 20, message = "State must be less than 20 characters.")
     private String state;
 
-    @NotNull
-    private Integer zip;
+//     @Size(min=5,max = 5, message = "Zipcode must be 5 characters.")
+    @NotBlank(message = "Zipcode must not be empty")
+    @Pattern(regexp = "^[0-9]{5}(?:-[0-9]{4})?$", message = "Not a valid U.S. zip code")
+    private String zip;
     
-    @NotNull
+    @NotNull(message = "latitude must not be empty")
+    @Digits(integer=2, fraction=6, message = "Enter latitude coordinates with up to 6 decimal places")
+    @DecimalMin(value = "-90.000000", message = "Latitude is out of range. Must be between -90.000000 and 90.000000")
+    @DecimalMax(value = "90.000000", message = "Latitude is out of range. Must be between -90.000000 and 90.000000")
     private Double latitude;
     
-    @NotNull(message = "Is Null")
+    @NotNull(message = "longitude must not be empty")
+    @Digits(integer=3, fraction=6, message = "Enter longitide coordinates with up to 6 decimal places")
+    @DecimalMin(value = "-180.000000", message = "Longitude is out of range. Must be between -180.000000 and 180.000000")
+    @DecimalMax(value = "180.000000", message = "Longitude is out of range. Must be between -180.000000 and 180.000000")
     private Double longitude;
     
 //     @NotBlank(message = "Is Blank")
 //    @Digits(integer=3, fraction=8, message = "Is Digits")
-//    @DecimalMin(value = "-180.000000", message = "Is Too Low")
-//    @DecimalMax(value = "180.000000", message = "Is Too High")
 
     public int getLocationId() {
         return locationId;
@@ -107,11 +114,11 @@ public class Location {
         this.state = state;
     }
 
-    public Integer getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(Integer zip) {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 
@@ -131,6 +138,8 @@ public class Location {
         this.longitude = longitude;
     }
 
+ 
+
     @Override
     public String toString() {
         return "Location{" + "locationId=" + locationId + ", name=" + name + ", description=" + description + ", address=" + address + ", city=" + city + ", state=" + state + ", zip=" + zip + ", latitude=" + latitude + ", longitude=" + longitude + '}';
@@ -138,16 +147,16 @@ public class Location {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + this.locationId;
-        hash = 29 * hash + Objects.hashCode(this.name);
-        hash = 29 * hash + Objects.hashCode(this.description);
-        hash = 29 * hash + Objects.hashCode(this.address);
-        hash = 29 * hash + Objects.hashCode(this.city);
-        hash = 29 * hash + Objects.hashCode(this.state);
-        hash = 29 * hash + Objects.hashCode(this.zip);
-        hash = 29 * hash + Objects.hashCode(this.latitude);
-        hash = 29 * hash + Objects.hashCode(this.longitude);
+        int hash = 5;
+        hash = 37 * hash + this.locationId;
+        hash = 37 * hash + Objects.hashCode(this.name);
+        hash = 37 * hash + Objects.hashCode(this.description);
+        hash = 37 * hash + Objects.hashCode(this.address);
+        hash = 37 * hash + Objects.hashCode(this.city);
+        hash = 37 * hash + Objects.hashCode(this.state);
+        hash = 37 * hash + Objects.hashCode(this.zip);
+        hash = 37 * hash + Objects.hashCode(this.latitude);
+        hash = 37 * hash + Objects.hashCode(this.longitude);
         return hash;
     }
 
@@ -193,7 +202,6 @@ public class Location {
         return true;
     }
 
-   
 
    
 }

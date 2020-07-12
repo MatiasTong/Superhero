@@ -5,77 +5,15 @@
 
         <title>My Webpage</title>
         <style>
-            #header-bar1 {
-                background-color: rgb(216, 22, 22);
-                padding: 10px;
-            }
 
-            #header-bar2 {
-                background-color: rgb(96, 160, 255);
-                padding: 3px;
-            }
-
-            h2,
-            h5 {
-                text-align: center;
-                margin: 20px auto;
-            }
-
-            p {
-                font-size: small;
-                ;
-            }
-
-            body {
-                background-color: #343a40;
-            }
-
-            .container-fluid {
-                background-color: #343a40;
-            }
-
-            .card {
-                margin-right: 2px;
-                margin-left: 2px;
-                margin-top: 5px;
-            }
-
-            footer {
-                background-color: #343a40;
-                padding: 10px;
-                color: white;
-                font-size: 1rem;
-                text-align: center;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-            }
-
-            #left-column,
-            #right-column {
-                color: white;
-            }
 
             .jumbotron {
                 background-image: url('images/maps2.jpg');
-                background-size: cover;
-                height: 320px;
-            }
-            .nav-link{
-                font-family: 'Press Start 2P', cursive;
-            }
-            .display-4{
-
-                font-family: 'Bangers', cursive;
-            }
-            #background{
-                background-image: url('https://thumbs.dreamstime.com/b/halftone-texture-comic-book-style-vector-background-high-quality-print-87246804.jpg');
-                background-size: cover;
 
             }
 
-            #addHeroForm{
-                background-color: #FFFFFF;
-            }
         </style>
+         <link href="css/pages.css" rel="stylesheet"> 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
@@ -86,9 +24,10 @@
     <body id = "background">
         <div id="header-bar1"></div>
 
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-            <a class="navbar-brand" href="/">
-                <img src="images/energy.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        <nav class="navbar navbar-expand-md navbar-dark py-3"
+             style="background-image: linear-gradient(to right, rgb(31, 40, 122), rgb(49, 54, 75), rgb(31, 40, 122))" ;>
+            <a class="navbar-brand" href="/" style="font-size: 1.4rem;">
+                <img src="images/energy.png" width="30" height="30" class="d-inline-block align-top mt-1" alt="">
                 Hero Sightings Database
             </a>
             <!--Hamburger button-->
@@ -97,21 +36,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <!--nav bar with centered mx-auto links-->
-                <span class="navbar-text font-weight-bold">
+                <span class="navbar-text font-weight-bold my-auto ml-2" style=" font-size: 1 rem;">
                     +
                 </span>
-                <ul class="navbar-nav" style=" font-size: 1 rem;">
-                    <a class="nav-item nav-link" href="heroes">Hero/Villain</a>
-                    <a class="nav-item nav-link" href="superpowers">Superpower</a>
-                    <a class="nav-item nav-link" href="organizations">Organization</a>
-                    <a class="nav-item nav-link" href="locations">Location</a>
-                    <a class="nav-item nav-link" href="sightings">Sighting</a>
-
+                <ul class="navbar-nav ml-2" style=" font-size: 1 rem;">
+                    <a class="nav-item nav-link mt-2" href="heroes">Hero/Villain</a>
+                    <a class="nav-item nav-link mt-2" href="superpowers">Superpower</a>
+                    <a class="nav-item nav-link mt-2" href="organizations">Organization</a>
+                    <a class="nav-item nav-link mt-2" href="locations">Location</a>
+                    <a class="nav-item nav-link mt-2" href="sightings">Sighting</a>
                 </ul>
             </div>
         </nav>
-        <div id="header-bar2" style = "background-color: white;"></div>
-        <div id="header-bar2"></div>
+
+        <div id="header-bar3"></div>
+
         <!-- jumbotron begins-->
         <div class="jumbotron jumbotron-fluid">
 
@@ -201,7 +140,7 @@
             </div>
         </div>
 
-        <div class="row m-4 border border-dark">
+        <div class="row m-4 border border-dark" id ="addHeroForm">
             <div class="col text-center m-3">
                 <table class="table table-striped">
                     <thead>

@@ -16,6 +16,7 @@ import com.sms.superherosightings.model.Superpower;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -83,22 +84,33 @@ specifically, each one will hold the message of a validation error it found.*/
     }
 
     @GetMapping("editLocation")
-    public String editSuperpower(Integer id, Model model) {
+    public String editLocation(Integer id, Model model) {
         Location location = locationDao.readById(id);
         model.addAttribute("location", location);
-
+        model.addAttribute("errors", violations);
+        
+        //Clear errors
+        violations = new HashSet<>();
         return "editLocation";
+        
     }
 
     @PostMapping("editLocation")
-    public String performEditLocation(Location location) {
+    public String performEditLocation(Location location, HttpServletRequest request, Model model) {
 
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(location);
-        if (violations.isEmpty()) {
-
-            locationDao.update(location);
+        
+        if(!violations.isEmpty()){
+           model.addAttribute("errors", violations);
+           model.addAttribute("location", location);
+           
+           violations = new HashSet<>();
+           return "editLocation";
         }
+        
+        locationDao.update(location);
+        
         return "redirect:/locations";
     }
 
