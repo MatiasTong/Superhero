@@ -71,7 +71,7 @@ specifically, each one will hold the message of a validation error it found.*/
     }
 
     @PostMapping("addOrganization")
-    public String addOrg(@Valid Organization organization, BindingResult result, HttpServletRequest request, Model model) {
+    public String addOrg(Organization organization, HttpServletRequest request) {
 
         String[] heroIds = request.getParameterValues("heroId");
         String locationId = request.getParameter("locationId");
