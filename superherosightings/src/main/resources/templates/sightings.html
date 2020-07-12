@@ -80,7 +80,7 @@
                             <input type="datetime-local" id="dateTime"
                                    name="dateTime" value=""
                                    min="1850-06-07T00:00" 
-                                   class="form-control"/>
+                                   class="form-control" required>
                         </div>   
                     </div>
 
@@ -89,7 +89,6 @@
                             Location</label>
                         <div class="col-9">
                             <select id ="location" name ="locationId" class="form-control">
-                                <option selected = "selected" value ="">- select -</option>
                                 <option th:each="location : ${locations}"
                                         th:value="${location.locationId}"
                                         th:text="${location.name + ' ' + location.address + ' ' 
@@ -103,7 +102,6 @@
                             Hero</label>
                         <div class="col-9">
                             <select id ="hero" name ="heroId" class="form-control">
-                                <option selected = "selected" value ="">- select -</option>
                                 <option th:each="hero : ${heroes}"
                                         th:value="${hero.heroId}"
                                         th:text="${hero.name}"> Location 

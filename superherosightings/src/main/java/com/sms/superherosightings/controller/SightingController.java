@@ -68,10 +68,11 @@ public class SightingController {
 
     @PostMapping("addSighting")
     public String addSighting(HttpServletRequest request) {
-      
+
         String locationId = request.getParameter("locationId");
         String heroId = request.getParameter("heroId");
         String dateTimeAsString = request.getParameter("dateTime");
+
         LocalDateTime dateTime = LocalDateTime.parse(dateTimeAsString);
 
         Sighting sighting = new Sighting();
@@ -83,9 +84,9 @@ public class SightingController {
         violations = validate.validate(sighting);
 
         if (violations.isEmpty()) {
-           sightingDao.create(sighting);
+            sightingDao.create(sighting);
         }
-        
+
         return "redirect:/sightings";
     }
 
@@ -104,11 +105,16 @@ public class SightingController {
         model.addAttribute(sighting);
         model.addAttribute("locations", locations);
         model.addAttribute("heroes", heroes);
+        model.addAttribute("errors", violations);
+        
+        //Clear errors
+        violations = new HashSet<>();
+  
         return "editSighting";
     }
 
     @PostMapping("editSighting")
-    public String submitEditSighting(HttpServletRequest request) {
+    public String submitEditSighting(HttpServletRequest request, Model model) {
         String locationId = request.getParameter("locationId");
         String heroId = request.getParameter("heroId");
         String sightingId = request.getParameter("sightingId");
@@ -121,15 +127,22 @@ public class SightingController {
         sighting.setSightingId(Integer.parseInt(sightingId));
         sighting.setLocation(locationDao.readById(Integer.parseInt(locationId)));
         sighting.setHero(heroDao.readById(Integer.parseInt(heroId)));
-        
-        
+
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
-        
+
         violations = validate.validate(sighting);
 
-        if (violations.isEmpty()) {
-           sightingDao.update(sighting);
+        if (!violations.isEmpty()) {
+            model.addAttribute("errors", violations);
+            model.addAttribute("sighting", sighting);
+            model.addAttribute("locations", locationDao.readAll());
+            model.addAttribute("heroes", heroDao.readAll());
+
+            violations = new HashSet<>();
+            return "editSighting";
         }
+
+        sightingDao.update(sighting);
 
         return "redirect:/sightings";
     }
