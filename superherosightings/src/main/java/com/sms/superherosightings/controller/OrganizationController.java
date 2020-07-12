@@ -71,20 +71,22 @@ specifically, each one will hold the message of a validation error it found.*/
     }
 
     @PostMapping("addOrganization")
-    public String addOrg(@Valid Organization organization, BindingResult result, HttpServletRequest request, Model model) {
+    public String addOrg(Organization organization, HttpServletRequest request) {
 
         String[] heroIds = request.getParameterValues("heroId");
         String locationId = request.getParameter("locationId");
 
-        organization.setLocation(locationDao.readById(Integer.parseInt(locationId)));
-
-        List<Hero> heroes = new ArrayList<>();
-        for (String heroId : heroIds) {
-            heroes.add(heroDao.readById(Integer.parseInt(heroId)));
+        if (locationId != null) {
+            organization.setLocation(locationDao.readById(Integer.parseInt(locationId)));
         }
+        if (heroIds != null) {
+            List<Hero> heroes = new ArrayList<>();
+            for (String heroId : heroIds) {
+                heroes.add(heroDao.readById(Integer.parseInt(heroId)));
+            }
 
-        organization.setHeroes(heroes);
-
+            organization.setHeroes(heroes);
+        }
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(organization);
 
@@ -97,20 +99,23 @@ specifically, each one will hold the message of a validation error it found.*/
     }
 
     @GetMapping("organizationDetail")
-    public String orgDetail(Integer id, Model model) {
+    public String orgDetail(Integer id, Model model
+    ) {
         Organization organization = organizationDao.readById(id);
         model.addAttribute("organization", organization);
         return "organizationDetail";
     }
 
     @GetMapping("deleteOrg")
-    public String deleteOrg(Integer id) {
+    public String deleteOrg(Integer id
+    ) {
         organizationDao.delete(id);
         return "redirect:/organizations";
     }
 
     @GetMapping("editOrganization")
-    public String editOrg(Integer id, Model model) {
+    public String editOrg(Integer id, Model model
+    ) {
         Organization org = organizationDao.readById(id);
         List<Hero> heroes = heroDao.readAll();
         List<Location> locations = locationDao.readAll();
@@ -123,7 +128,8 @@ specifically, each one will hold the message of a validation error it found.*/
     }
 
     @PostMapping("editOrganization")
-    public String performEditOrg(Organization organization, HttpServletRequest request) {
+    public String performEditOrg(Organization organization, HttpServletRequest request
+    ) {
         String locationId = request.getParameter("locationId");
         String[] heroIds = request.getParameterValues("heroId");
 
