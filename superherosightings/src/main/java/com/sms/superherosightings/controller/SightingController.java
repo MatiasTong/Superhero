@@ -102,7 +102,7 @@ public class SightingController {
         List<Location> locations = locationDao.readAll();
         List<Hero> heroes = heroDao.readAll();
 
-        model.addAttribute(sighting);
+        model.addAttribute("sighting", sighting);
         model.addAttribute("locations", locations);
         model.addAttribute("heroes", heroes);
         model.addAttribute("errors", violations);

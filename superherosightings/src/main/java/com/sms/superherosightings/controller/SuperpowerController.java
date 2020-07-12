@@ -55,6 +55,10 @@ specifically, each one will hold the message of a validation error it found.*/
         List<Superpower> superpowers = superpowerDao.readAll();
         model.addAttribute("superpowers", superpowers);
         model.addAttribute("errors", violations);
+        
+        //Clear errors
+        violations = new HashSet<>();
+        
         return "superpowers";
     }
 
@@ -87,17 +91,25 @@ specifically, each one will hold the message of a validation error it found.*/
         model.addAttribute("sp", sp);
         model.addAttribute("errors", violations);
 
+        violations = new HashSet<>();
         return "editSuperpower";
     }
 
     @PostMapping("editSuperpower")
-    public String performEditSuperpower(Superpower superpower) {
+    public String performEditSuperpower(Superpower superpower, Model model) {
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(superpower);
 
-        if (violations.isEmpty()) {
-            superpowerDao.update(superpower);
+         if (!violations.isEmpty()) {
+            model.addAttribute("errors", violations);
+            model.addAttribute("sp", superpower);
+
+            violations = new HashSet<>();
+            return "editSuperpower";
         }
+        
+            superpowerDao.update(superpower);
+        
         
         return "redirect:/superpowers";
     }
