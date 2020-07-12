@@ -11,18 +11,16 @@ CREATE TABLE Superpower(
 CREATE TABLE Hero(
 	HeroId INT PRIMARY KEY AUTO_INCREMENT,
     `Name` VARCHAR(30) NOT NULL,
-
     `Description` VARCHAR(30) NOT NULL,
     SuperpowerId INT NOT NULL,
     FOREIGN KEY fk_Hero_Superpower_SuperpowerId(SuperpowerId) references Superpower(SuperpowerId),
-
     `Type` VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE Location(
 	LocationId INT PRIMARY KEY AUTO_INCREMENT,
     `Name` VARCHAR(30) NOT NULL,
-    `Description` TEXT NOT NULL,
+    `Description` VARCHAR(30) NOT NULL,
 	Address VARCHAR(30) NOT NULL,
     City VARCHAR(30) NOT NULL,
     State CHAR(2) NOT NULL,
@@ -34,7 +32,7 @@ CREATE TABLE Location(
 CREATE TABLE Organization(
 	OrganizationId INT PRIMARY KEY AUTO_INCREMENT,
     `Name` VARCHAR(30) NOT NULL,
-    `Description` TEXT NOT NULL,
+    `Description` VARCHAR(30) NOT NULL,
      LocationId INT NOT NULL,
      FOREIGN KEY fk_Organization_Location_LocationId(LocationId) references Location(LocationId),
      Email VARCHAR(30) NOT NULL,
@@ -57,31 +55,16 @@ CREATE TABLE Sighting(
     FOREIGN KEY fk_Sighting_Location(LocationId) references Location(LocationId),
     FOREIGN KEY fk_Sighting5_Hero(HeroId) references Hero(HeroId)
 );
-
-insert into Superpower (Power,Description) values("strength", "test description");
-select * from superpower;
-insert into Hero (`Name`,`Description`,SuperpowerId,`Type`) values 
-("batman", "lurks in the dark", 1, "hero"),
-("superman", "flies in the light", 1, "hero");
-select * from hero;
 insert into Location(`Name`,`Description`,Address, City, State, ZipCode,
 Lat, `Long`) values
 ("MacDonalds","fast food restaurant", "142-14 26th Ave.", "Flushing","ny", "11111", -30.000000,145.000000 ),
 ("Burger King","fast food restaurant", "142-14 26th Ave.", "Flushing","ny", "99999", -50.000000,155.000000 );
 
-select * from location;
+insert into superpower(power,description) value ("flying","fast");
 
-insert into Sighting(Date, LocationId, HeroId) values
-("2020-07-30 07:33:20", 1, 1),
-("2020-06-30 06:22:20", 2, 2); 
+insert into hero(name,description,SuperpowerId,type) values("superman","classic hero",1,"hero");
 
-select * from sighting;
-
-
-
-
-
-
+select * from hero;
 
 
 

@@ -8,7 +8,6 @@
 
             .jumbotron {
                 background-image: url('images/marveldc.jpg');
-
             }
 
         </style>
@@ -60,12 +59,13 @@
                 <p class="lead">Time to add your organization!</p> </center>
         </div>
         <!-- jumbotron ends-->
-
+        <!-- Error div-->
         <div class="col-12 m-1 text-center" 
              th:if="${!errors.isEmpty()}">
             <p class="alert alert-danger" th:each="error : ${errors}" 
                th:text="${error.message}">Error message</p>
         </div>
+
         <div class="row m-4 border border-dark" id ="addHeroForm">
             <div class="col-3 text-center m-3">
                 <span class="h3">Add Organization</span>
@@ -100,6 +100,7 @@
                                         th:text="${location.name +' '+location.address +' '+ location.city +' '+ location.state+', '+ location.zip}">
                                     Location Name </option>
                             </select>
+
                         </div>
                     </div>
                     <!-- Location Display End -->
@@ -117,7 +118,9 @@
                             </select>
                         </div>
                     </div>
+
                     <!-- Hero Display Ends-->
+
                     <div class="form-group row">
                         <label for="email" class="col-3 col-form-label">
                             Email</label>
@@ -145,6 +148,11 @@
             </div>
         </div>
         <!-- Table with Additional thymeleaf starts here    -->
+
+        <div class="container">
+            <center> <h1 class="display-4">Organizations</h1>
+            </center>
+        </div>
         <div class="row m-4 border border-dark" id="addHeroForm">
             <div class="col text-center m-3">
                 <table class="table table-striped">
