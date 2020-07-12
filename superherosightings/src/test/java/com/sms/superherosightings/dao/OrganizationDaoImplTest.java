@@ -125,7 +125,7 @@ public class OrganizationDaoImplTest {
         location.setAddress("123 cashmoney street");
         location.setCity("NYC");
         location.setState("NY");
-        location.setZip(11104);
+        location.setZip("11104");
         location.setLatitude(0.01);
         location.setLongitude(0.01);
         location = locationDao.create(location);
@@ -173,7 +173,7 @@ public class OrganizationDaoImplTest {
         location.setAddress("123 cashmoney street");
         location.setCity("NYC");
         location.setState("NY");
-        location.setZip(11104);
+        location.setZip("11104");
         location.setLatitude(0.01);
         location.setLongitude(0.01);
         location = locationDao.create(location);
@@ -229,7 +229,7 @@ public class OrganizationDaoImplTest {
         location.setAddress("123 cashmoney street");
         location.setCity("NYC");
         location.setState("NY");
-        location.setZip(11104);
+        location.setZip("11104");
         location.setLatitude(0.01);
         location.setLongitude(0.01);
         location = locationDao.create(location);
@@ -282,7 +282,7 @@ public class OrganizationDaoImplTest {
         location.setAddress("123 cashmoney street");
         location.setCity("NYC");
         location.setState("NY");
-        location.setZip(11104);
+        location.setZip("11104");
         location.setLatitude(0.01);
         location.setLongitude(0.01);
         location = locationDao.create(location);

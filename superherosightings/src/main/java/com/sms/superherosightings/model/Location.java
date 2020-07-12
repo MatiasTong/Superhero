@@ -7,7 +7,15 @@ package com.sms.superherosightings.model;
 
 import java.math.BigDecimal;
 import java.util.Objects;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -18,12 +26,12 @@ public class Location {
 
     private int locationId;
 
-    @NotBlank(message = "Name must not be empty.")
+    @NotBlank(message = "Location Name must not be empty.")
     @Size(max = 30, message = "Name must be less than 30 characters.")
     private String name;
 
     @NotBlank(message = "Description must not be empty.")
-    @Size(max = 30, message = "Description must be less than 30 characters.")
+    @Size(max = 50, message = "Description must be less than 50 characters.")
     private String description;
 
     @NotBlank(message = "Address must not be empty.")
@@ -34,15 +42,29 @@ public class Location {
     @Size(max = 30, message = "City must be less than 30 characters.")
     private String city;
 
-//    @NotBlank(message = "State must not be empty.")
-//    @Size(min=2,max = 2, message = "State must be less than 2 characters.")
+    @NotBlank(message = "State must not be empty.")
+    @Size(max = 20, message = "State must be less than 20 characters.")
     private String state;
 
-//    @NotBlank(message = "Zip code must not be empty.")
-//    @Size(min=5, max = 5, message = "Zip code must be at least 5 characters.")
-    private int zip;
-    private double latitude;
-    private double longitude;
+//     @Size(min=5,max = 5, message = "Zipcode must be 5 characters.")
+    @NotBlank(message = "Zipcode must not be empty")
+    @Pattern(regexp = "^[0-9]{5}(?:-[0-9]{4})?$", message = "Not a valid U.S. zip code")
+    private String zip;
+    
+    @NotNull(message = "latitude must not be empty")
+    @Digits(integer=2, fraction=6, message = "Enter latitude coordinates with up to 6 decimal places")
+    @DecimalMin(value = "-90.000000", message = "Latitude is out of range. Must be between -90.000000 and 90.000000")
+    @DecimalMax(value = "90.000000", message = "Latitude is out of range. Must be between -90.000000 and 90.000000")
+    private Double latitude;
+    
+    @NotNull(message = "longitude must not be empty")
+    @Digits(integer=3, fraction=6, message = "Enter longitide coordinates with up to 6 decimal places")
+    @DecimalMin(value = "-180.000000", message = "Longitude is out of range. Must be between -180.000000 and 180.000000")
+    @DecimalMax(value = "180.000000", message = "Longitude is out of range. Must be between -180.000000 and 180.000000")
+    private Double longitude;
+    
+//     @NotBlank(message = "Is Blank")
+//    @Digits(integer=3, fraction=8, message = "Is Digits")
 
     public int getLocationId() {
         return locationId;
@@ -50,7 +72,6 @@ public class Location {
 
     public void setLocationId(int locationId) {
         this.locationId = locationId;
-
     }
 
     public String getName() {
@@ -59,7 +80,6 @@ public class Location {
 
     public void setName(String name) {
         this.name = name;
-
     }
 
     public String getDescription() {
@@ -68,7 +88,6 @@ public class Location {
 
     public void setDescription(String description) {
         this.description = description;
-
     }
 
     public String getAddress() {
@@ -77,7 +96,6 @@ public class Location {
 
     public void setAddress(String address) {
         this.address = address;
-
     }
 
     public String getCity() {
@@ -86,7 +104,6 @@ public class Location {
 
     public void setCity(String city) {
         this.city = city;
-
     }
 
     public String getState() {
@@ -95,33 +112,33 @@ public class Location {
 
     public void setState(String state) {
         this.state = state;
-
     }
 
-    public int getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(int zip) {
+    public void setZip(String zip) {
         this.zip = zip;
-
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
+
+ 
 
     @Override
     public String toString() {
@@ -130,18 +147,16 @@ public class Location {
 
     @Override
     public int hashCode() {
-
         int hash = 5;
-        hash = 97 * hash + this.locationId;
-        hash = 97 * hash + Objects.hashCode(this.name);
-        hash = 97 * hash + Objects.hashCode(this.description);
-        hash = 97 * hash + Objects.hashCode(this.address);
-        hash = 97 * hash + Objects.hashCode(this.city);
-        hash = 97 * hash + Objects.hashCode(this.state);
-        hash = 97 * hash + this.zip;
-        hash = 97 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) >>> 32));
-        hash = 97 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) >>> 32));
-
+        hash = 37 * hash + this.locationId;
+        hash = 37 * hash + Objects.hashCode(this.name);
+        hash = 37 * hash + Objects.hashCode(this.description);
+        hash = 37 * hash + Objects.hashCode(this.address);
+        hash = 37 * hash + Objects.hashCode(this.city);
+        hash = 37 * hash + Objects.hashCode(this.state);
+        hash = 37 * hash + Objects.hashCode(this.zip);
+        hash = 37 * hash + Objects.hashCode(this.latitude);
+        hash = 37 * hash + Objects.hashCode(this.longitude);
         return hash;
     }
 
@@ -160,15 +175,6 @@ public class Location {
         if (this.locationId != other.locationId) {
             return false;
         }
-        if (this.zip != other.zip) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.latitude) != Double.doubleToLongBits(other.latitude)) {
-            return false;
-        }
-        if (Double.doubleToLongBits(this.longitude) != Double.doubleToLongBits(other.longitude)) {
-            return false;
-        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -184,7 +190,18 @@ public class Location {
         if (!Objects.equals(this.state, other.state)) {
             return false;
         }
+        if (!Objects.equals(this.zip, other.zip)) {
+            return false;
+        }
+        if (!Objects.equals(this.latitude, other.latitude)) {
+            return false;
+        }
+        if (!Objects.equals(this.longitude, other.longitude)) {
+            return false;
+        }
         return true;
     }
 
+
+   
 }
