@@ -19,11 +19,13 @@ import java.util.List;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -69,7 +71,7 @@ specifically, each one will hold the message of a validation error it found.*/
     }
 
     @PostMapping("addOrganization")
-    public String addOrg(Organization organization, HttpServletRequest request) {
+    public String addOrg(@Valid Organization organization, BindingResult result, HttpServletRequest request, Model model) {
 
         String[] heroIds = request.getParameterValues("heroId");
         String locationId = request.getParameter("locationId");
@@ -132,7 +134,6 @@ specifically, each one will hold the message of a validation error it found.*/
             heroes.add(heroDao.readById(Integer.parseInt(heroId)));
         }
         organization.setHeroes(heroes);
-
 
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(organization);
