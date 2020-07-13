@@ -94,7 +94,9 @@
                             Location</label>
                         <div class="col-9">
                             <select id="location" name="locationId" class="form-control" >
-                       
+
+<!--                                <option selected = "selected" value ="">- select -</option>-->
+
                                 <option th:each="location : ${locations}" 
                                         th:value="${location.locationId}" 
                                         th:text="${location.name +' '+location.address +' '+ location.city +' '+ location.state+', '+ location.zip}">
@@ -111,6 +113,7 @@
                         <div class="col-9">
                             <select multiple id="heroes" name="heroId" 
                                     class="form-control">
+
                                 <option th:each="hero : ${heroes}" 
                                         th:value="${hero.heroId}" 
                                         th:text="${hero.name}">
@@ -135,7 +138,9 @@
                         <div class="col-9">
                             <select id="types" name="type" class="form-control">
 
-                             
+
+<!--                                <option value= "selected">- select -</option>   -->
+
                                 <option value="hero">Hero</option>
                                 <option value="villain">Villain</option>
 

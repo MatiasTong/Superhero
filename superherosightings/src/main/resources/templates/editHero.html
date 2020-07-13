@@ -60,11 +60,7 @@
                 <p class="lead">Make changes to your super hero villain!</p> </center>
         </div>
 
-        <div class="col-12 m-1 text-center" 
-             th:if="${!errors.isEmpty()}">
-            <p class="alert alert-danger" th:each="error : ${errors}" 
-               th:text="${error.message}">Error message</p>
-        </div>
+    
 
         <!-- error block begins -->
         <div class="col-12 m-1 text-center" 
@@ -108,7 +104,7 @@
                             <select id ="superpower" name ="superpowerId" class="form-control">
                                 <option th:each="superpower : ${superpowers}"
                                         th:value="${superpower.superpowerId}"
-                                        th:text="${superpower.superpower + ' ' + superpower.description}"
+                                        th:text="${superpower.superpower}"
                                         th:selected="${hero.superpower.superpowerId == superpower.superpowerId}"> Superpower </option></select>     
                         </div>
                     </div>

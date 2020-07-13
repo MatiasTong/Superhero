@@ -95,7 +95,7 @@
                             Superpower</label>
                         <div class="col-9">
                             <select id ="superpower" name ="superpowerId" class="form-control">
-                                <option selected = "selected" value ="">- select -</option>
+<!--                                <option selected = "selected" value ="">- select -</option>-->
                                 <option th:each="superpower : ${Superpowers}"
                                         th:value="${superpower.superpowerId}"
                                         th:text="${superpower.superpower}"> Superpower </option></select>     
@@ -107,7 +107,7 @@
 
                         <div class="col-9">
                             <select id ="type" name ="type" class="form-control">
-                                <option selected = "selected" value = "">- select -</option>
+                                <!--<option selected = "selected" value = "">- select -</option>-->
                                 <option value="Hero"> Hero </option>
                                 <option value="Villian">Villain</option>
                             </select>        
@@ -118,7 +118,7 @@
             </div>
         </div> <!--div closing row-->
         <div class="container">
-            <center> <h1 class="display-4">Creations</h1>
+            <center> <h1 class="display-4">Heroes</h1>
             </center>
         </div>
         <div class="row m-4 border border-dark" id="addHeroForm">

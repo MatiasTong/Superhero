@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.sms.superherosightings.controller;
+
 import com.sms.superherosightings.dao.HeroDaoImpl;
 import com.sms.superherosightings.dao.LocationDaoImpl;
 import com.sms.superherosightings.dao.OrganizationDaoImpl;
@@ -29,14 +30,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 /**
  *
  * @author matiastong
  */
 @Controller
 public class HeroController {
-   /*The ConstraintViolation object holds information about the error; 
+
+    /*The ConstraintViolation object holds information about the error; 
 specifically, each one will hold the message of a validation error it found.*/
     Set<ConstraintViolation<Hero>> violations = new HashSet<>();
 
@@ -54,9 +55,6 @@ specifically, each one will hold the message of a validation error it found.*/
 
     @Autowired
     SuperpowerDaoImpl superpowerDao;
-
- 
-  
 
     @GetMapping("heroes")
     public String displayHeroes(Model model) {
@@ -94,6 +92,7 @@ specifically, each one will hold the message of a validation error it found.*/
         if (violations.isEmpty()) {
             heroDao.create(hero);
         }
+        
         return "redirect:/heroes";
     }
 
@@ -113,11 +112,12 @@ specifically, each one will hold the message of a validation error it found.*/
         model.addAttribute("hero", hero);
         model.addAttribute("errors", violations);
 
+        violations = new HashSet<>();
         return "editHero";
     }
 
     @PostMapping("editHero")
-    public String performEditHero(Hero hero, Integer superpowerId) {
+    public String performEditHero(Hero hero, Integer superpowerId, Model model) {
 
         Superpower superpower = superpowerDao.readById(superpowerId);
         hero.setSuperpower(superpower);
@@ -125,9 +125,18 @@ specifically, each one will hold the message of a validation error it found.*/
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(hero);
 
-        if (violations.isEmpty()) {
-            heroDao.update(hero);
+        if (!violations.isEmpty()) {
+            List<Superpower> superpowers = superpowerDao.readAll();
+            model.addAttribute("superpowers", superpowers);
+            model.addAttribute("errors", violations);
+            model.addAttribute("hero", hero);
+
+            violations = new HashSet<>();
+            return "editHero";
         }
+
+        heroDao.update(hero);
+
         return "redirect:/heroes";
 
     }

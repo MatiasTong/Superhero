@@ -15,9 +15,7 @@ import javax.validation.constraints.Size;
  * @author Shirley Sosa, Sangay Yolmo, Matias Tong
  */
 public class Hero {
-    @NotBlank(message = "Name must not be empty.")
 
-    @NotNull(message = "Hero must not be empty.")
     private int heroId;
 
     @NotBlank(message = "Name must not be empty.")
